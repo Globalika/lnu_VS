@@ -23,14 +23,14 @@ void Database::UpdateTableContent(std::vector<std::vector<std::string>>& content
 	}
 	else
 	{
-		std::cout << "open file" << std::endl;
 		for (auto i : content)
 		{
-			for (auto it : i)
+			fout << i.at(0) << ',' << i.at(1) << ',' << i.at(2) << ',' << i.at(3) << ',' << i.at(4) << '\n';
+			/*for (auto it : i)
 			{
-				fout << it + ',';
+					fout << it + ',';
 			}
-			fout << '\n';
+			fout << '\n';*/
 		}
 	}
 	fout.close();
@@ -52,7 +52,6 @@ std::vector<std::vector<std::string>>* Database::GetTableContent(std::string tab
 	}
 	else
 	{
-		std::cout << "file open" << std::endl;
 		std::string str, token;
 		while (!fin.eof())
 		{

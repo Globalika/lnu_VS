@@ -4,20 +4,15 @@
 #include "Product.h"
 #include "basetable.h"
 #include "MedicinesProduct.h"
-#include "MedicinesTable.h"
-#include "TablesRepository.h"
-
+//#include "MedicinesTable.h"
+//#include "TablesRepository.h"
+#include "Menu.h"
 using namespace std;
 
 int main()
 {
-	TablesRepository* context = new TablesRepository;
-
-	context->GetMedicinesTable();
-	context->GetMedicinesTable()->Delete(1234);
-	context->GetMedicinesTable()->GetDatabase()->UpdateTableContent(*context->GetMedicinesTable()->GetContentFromProductsvector(*context->GetMedicinesTable()->products),"medicinesTable");
-
-
+	Menu menu;
+	menu.ShowMainMenu();
 	system("pause");
 	return 0;
 }

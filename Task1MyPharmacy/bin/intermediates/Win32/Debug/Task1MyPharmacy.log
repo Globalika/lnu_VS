@@ -1,8 +1,4 @@
-﻿  MedicinesTable.cpp
+﻿  Database.cpp
   Menu.cpp
-  TablesRepository.cpp
-  main.cpp
-C:\Users\volod\source\lnu\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\main.cpp(18,155): error C2248: 'MedicinesTable::products': cannot access private member declared in class 'MedicinesTable'
-C:\Users\volod\source\lnu\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\MedicinesTable.h(26): message : see declaration of 'MedicinesTable::products'
-C:\Users\volod\source\lnu\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\MedicinesTable.h(9): message : see declaration of 'MedicinesTable'
   Generating Code...
+  Task1MyPharmacy.vcxproj -> C:\Users\volod\source\lnu_VS\Task1MyPharmacy\bin\Win32\Debug\Task1MyPharmacy.exe

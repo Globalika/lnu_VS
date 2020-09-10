@@ -17,12 +17,14 @@ public:
 	std::vector<MedicinesProduct> GetAll();
 	void Delete(int id);
 	void Save();
-
+	void MoveProbuctByIdUp();
+	void MoveProbuctByIdDown();
 	std::vector<std::vector<std::string>>* GetContentFromProductsvector(std::vector<MedicinesProduct>& products);
 
 	const static std::string tableName;
 	Database* GetDatabase();
 private:
+	int currentId;
 	std::vector<MedicinesProduct>* products;
 	Database* database;
 };

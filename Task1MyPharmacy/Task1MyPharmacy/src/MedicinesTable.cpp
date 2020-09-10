@@ -11,6 +11,7 @@
 MedicinesTable::MedicinesTable()
 {
 	database = new Database();
+	currentId = this->products->at(0).id;
 	std::vector<std::vector<std::string>> stringvector = *database->GetTableContent(tableName);
 
 	products = new std::vector<MedicinesProduct>;
@@ -72,6 +73,19 @@ void MedicinesTable::Delete(int id)
 void MedicinesTable::Save()
 {
 	database->UpdateTableContent(*GetContentFromProductsvector(*products), tableName);
+}
+
+void MedicinesTable::MoveProbuctByIdDown()
+{
+	int k = this->currentId;
+	auto i = std::find_if(this->products->begin(), products->end(), [k](const MedicinesProduct& m) {////////////
+		return m.id == k;
+		});
+	i++;
+}
+
+void MedicinesTable::MoveProbuctByIdDown()
+{
 }
 
 std::vector<std::vector<std::string>>* MedicinesTable::GetContentFromProductsvector(std::vector<MedicinesProduct>& products)

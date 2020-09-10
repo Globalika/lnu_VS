@@ -14,26 +14,38 @@ public:
 	//void PrintProductInfo();
 
 
-	enum Commands {
-		Waiting,
+	enum MainMenuCommands {
 		Quit,
 		ChooseTable,
-		Back,
-		ChangeProductInfo,
+		MainMenuWaiting,
+	};
+	enum TableMenuCommands {
+		TableMenuBack,
 		Up,
 		Down,
 		SelectProduct,
+		TableMenuWaiting,
 	};
-	Commands GetState()
+	enum ProductMenuCommands {
+		ProductMenuBack,
+		ChangeProductInfo,
+		ProductMenuWaiting,
+	};
+	void SetState(MainMenuCommands state)
 	{
-		return state;
+		this->mState = state;
 	}
-	void SetState(Commands state)
+	void SetState(TableMenuCommands state)
 	{
-		this->state = state;
+		this->tState = state;
 	}
-
+	void SetState(ProductMenuCommands state)
+	{
+		this->pState = state;
+	}
 private:
-	Commands state;
+	MainMenuCommands mState;
+	TableMenuCommands tState;
+	ProductMenuCommands pState;
 	TablesRepository* repository;
 };
