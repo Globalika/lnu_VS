@@ -1,5 +1,6 @@
 #include "MedicinesProduct.h"
 #include <sstream>
+
 std::vector<std::string> MedicinesProduct::GetvectorStringFromProduct(MedicinesProduct& product)
 {
 	std::vector<std::string> vector;

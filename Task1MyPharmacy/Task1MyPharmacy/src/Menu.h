@@ -11,7 +11,14 @@ public:
 	void PrintTable();
 	void PrintPharmacyWellcome();
 	void PrintPharmacyGetWellSoon();
-	//void PrintProductInfo();
+	void PrintProduct();
+
+	void PrintTableTemplate();
+	void PrintMenuTemplate();
+
+
+	void MoveProbuctByIdUp();
+	void MoveProbuctByIdDown();
 
 
 	enum MainMenuCommands {
@@ -21,14 +28,19 @@ public:
 	};
 	enum TableMenuCommands {
 		TableMenuBack,
-		Up,
-		Down,
-		SelectProduct,
+		TableUp,
+		TableDown,
+		SelectCurrentProduct,
+		SortTableById,
+		CreateNewProduct,//
+		DeletCurrentProduct,//
 		TableMenuWaiting,
 	};
 	enum ProductMenuCommands {
 		ProductMenuBack,
-		ChangeProductInfo,
+		ProductFieldUp,
+		ProductFieldDown,
+		ChangeCurrentField,
 		ProductMenuWaiting,
 	};
 	void SetState(MainMenuCommands state)
@@ -44,6 +56,8 @@ public:
 		this->pState = state;
 	}
 private:
+	int currentId;
+	std::vector<MedicinesProduct> products;
 	MainMenuCommands mState;
 	TableMenuCommands tState;
 	ProductMenuCommands pState;

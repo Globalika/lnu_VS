@@ -6,22 +6,17 @@
 
 #include "MedicinesTable.h"
 #include "MedicinesProduct.h"
-//#include "Database.h"
 
 MedicinesTable::MedicinesTable()
 {
 	database = new Database();
-	currentId = this->products->at(0).id;
 	std::vector<std::vector<std::string>> stringvector = *database->GetTableContent(tableName);
 
 	products = new std::vector<MedicinesProduct>;
 	for (auto it : stringvector)
 	{
-		//product = product->GetProductByStringvector(&it);
 		auto var = MedicinesProduct::GetProductByStringvector(it);
-		////////
 		Create(var);
-		//products->push_back(var);
 	}
 }
 
@@ -75,18 +70,7 @@ void MedicinesTable::Save()
 	database->UpdateTableContent(*GetContentFromProductsvector(*products), tableName);
 }
 
-void MedicinesTable::MoveProbuctByIdDown()
-{
-	int k = this->currentId;
-	auto i = std::find_if(this->products->begin(), products->end(), [k](const MedicinesProduct& m) {////////////
-		return m.id == k;
-		});
-	i++;
-}
 
-void MedicinesTable::MoveProbuctByIdDown()
-{
-}
 
 std::vector<std::vector<std::string>>* MedicinesTable::GetContentFromProductsvector(std::vector<MedicinesProduct>& products)
 {
@@ -105,7 +89,7 @@ std::vector<std::vector<std::string>>* MedicinesTable::GetContentFromProductsvec
 
 Database* MedicinesTable::GetDatabase()
 {
-	return database;
+	return this->database;
 }
 
 const std::string MedicinesTable::tableName = "medicinesTable";
