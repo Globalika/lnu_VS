@@ -15,7 +15,7 @@ public:
 
 	void PrintTableTemplate();
 	void PrintMenuTemplate();
-
+	void PrintProductTemplate();
 
 	void MoveProbuctByIdUp();
 	void MoveProbuctByIdDown();
@@ -56,6 +56,7 @@ public:
 		this->pState = state;
 	}
 private:
+	int currentProductFieldId = 1;
 	int currentId;
 	std::vector<MedicinesProduct> products;
 	MainMenuCommands mState;

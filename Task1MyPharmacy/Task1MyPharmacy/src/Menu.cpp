@@ -140,19 +140,93 @@ void Menu::ShowTableMenu()
 
 void Menu::ShowProductMenu()
 {
-	std::system("cls");
-	std::cout << "0 : Back | 1 : ChangeCurrentField";
-	SetState(ProductMenuWaiting);
-	PrintProduct();
+	PrintProductTemplate();
 	std::string str;
 	int n;
 	int i;
 	do
 	{
-		//cout table
 		i = _getch()-48;
 		switch (i)
 		{
+		case ProductMenuCommands::ProductFieldUp:
+		{
+			if(currentProductFieldId != 1)currentProductFieldId--;
+			PrintProductTemplate();
+			break;
+		}
+		case ProductMenuCommands::ProductFieldDown:
+		{
+			if (currentProductFieldId != 4)currentProductFieldId++;
+			PrintProductTemplate();
+			break;
+		}
+		case ProductMenuCommands::ChangeCurrentField:
+		{
+			MedicinesProduct product = *repository->GetMedicinesTable()->GetById(currentId);
+			switch (currentProductFieldId)
+			{
+				case 1:
+				{
+					std::cout << "Input new Expiration Date? | 0 : No | 1 : Yes" << std::endl;
+					int i = _getch();
+					if (i - 48 == 1)
+					{
+					std::cout << "New Date : ";
+					std::cin >> str;
+					product.expirationDate = str;
+					}
+					break;
+				}
+				case 2:
+				{
+					std::cout << "Input new Name? | 0 : No | 1 : Yes" << std::endl;
+					int i = _getch();
+					if (i - 48 == 1)
+					{
+						std::cout << "New Name : ";
+						std::cin >> str;
+						product.name = str;
+					}
+					break;
+				}
+				case 3:
+				{
+					std::cout << "Input new Storage Tepmrature? | 0 : No | 1 : Yes" << std::endl;
+					int i = _getch();
+					if (i - 48 == 1)
+					{
+						std::cout << "New Tepmrature : ";
+						std::cin >> str;
+						product.storageTemperature = str;
+					}
+					break;
+				}
+				case 4:
+				{
+					std::cout << "Input new Amount? | 0 : No | 1 : Yes" << std::endl;
+					int i = _getch();
+					if (i - 48 == 1)
+					{
+						std::cout << "New Amount : ";
+						std::cin >> n;
+						product.amount = n;
+					}
+					break;
+				}
+				default:
+				{
+					continue;
+				}
+			}
+			repository->GetMedicinesTable()->Update(product);
+			repository->GetMedicinesTable()->Save();
+			products = repository->GetMedicinesTable()->GetAll();
+			currentProductFieldId = 1;
+			PrintProductTemplate();
+			break;
+		}
+
 		/*case ProductMenuCommands::ChangeCurrentField:
 		{
 			std::cout << "Input new field : ";
@@ -216,10 +290,10 @@ void Menu::PrintProduct()
 	}
 	
 	std::cout << "\n\n";
-	std::cout << "Id : " << product.id << std::endl;
-	std::cout << "Expiration Date : " << product.expirationDate << std::endl;
-	std::cout << "Name : " << product.name << std::endl;
-	std::cout << "Storage Temperature : " << product.storageTemperature << std::endl;
+	std::cout << "Id : " << product.id << std::endl << std::endl; if (currentProductFieldId == 1) std::cout << " ->  ";
+	std::cout << "Expiration Date : " << product.expirationDate << std::endl;  if (currentProductFieldId == 2) std::cout << " ->  ";
+	std::cout << "Name : " << product.name << std::endl;  if (currentProductFieldId == 3) std::cout << " ->  ";
+	std::cout << "Storage Temperature : " << product.storageTemperature << std::endl;  if (currentProductFieldId == 4) std::cout << " ->  ";
 	std::cout << "Amount : " << product.amount << std::endl;
 	std::cout << "\n\n";
 }
@@ -239,6 +313,14 @@ void Menu::PrintMenuTemplate()
 	std::cout << "0 : Quit | 1 : Choose Medicines Table" << std::endl;
 	PrintPharmacyWellcome();
 	SetState(MainMenuWaiting);
+}
+
+void Menu::PrintProductTemplate()
+{
+	std::system("cls");
+	std::cout << "0 : Back | 1 : Move Current Field Up | 2 : Move Current Field Down | 3 : ChangeCurrentField";
+	SetState(ProductMenuWaiting);
+	PrintProduct();
 }
 
 void Menu::PrintTable()

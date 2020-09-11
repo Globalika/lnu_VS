@@ -6,6 +6,7 @@
 class MedicinesProduct /*: public Product*/
 {
 public:
+	MedicinesProduct& operator=(const MedicinesProduct& other);
 	static std::vector<std::string> GetvectorStringFromProduct(MedicinesProduct& product);
 	static MedicinesProduct GetProductByStringvector(std::vector<std::string>& stringvector);
 public:

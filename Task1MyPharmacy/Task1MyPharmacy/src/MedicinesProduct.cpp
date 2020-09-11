@@ -1,6 +1,16 @@
 #include "MedicinesProduct.h"
 #include <sstream>
 
+MedicinesProduct& MedicinesProduct::operator=(const MedicinesProduct& other)
+{
+	this->id = other.id;
+	this->expirationDate = other.expirationDate;
+	this->name = other.name;
+	this->storageTemperature = other.storageTemperature;
+	this->amount = other.amount;
+	return *this;
+}
+
 std::vector<std::string> MedicinesProduct::GetvectorStringFromProduct(MedicinesProduct& product)
 {
 	std::vector<std::string> vector;
