@@ -1,7 +1,7 @@
 #pragma once
 //#include "BaseTable.h"
-//#ifdef _DATABASE_
-//#define _DATABASE_
+#ifndef _DATABASE_
+#define _DATABASE_
 #include <string>
 #include <vector>
 class Database
@@ -17,4 +17,4 @@ private:
 
 };
 
-//#endif _DATABASE_
+#endif _DATABASE_

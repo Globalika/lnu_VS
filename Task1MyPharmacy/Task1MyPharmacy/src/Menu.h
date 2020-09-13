@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _MENU_
+#define _MENU_
 #include "TablesRepository.h"
 
 class Menu {
@@ -13,13 +15,17 @@ public:
 	void PrintPharmacyGetWellSoon();
 	void PrintProduct();
 
-	void PrintTableTemplate();
-	void PrintMenuTemplate();
-	void PrintProductTemplate();
+	void PrintTableForm();
+	void PrintMenuForm();
+	void PrintProductForm();
 
-	void MoveProbuctByIdUp();
-	void MoveProbuctByIdDown();
+	void MoveProbuctById(int n);
 
+	bool CatchProductName(std::string str);
+	bool CatchProductDate(std::string str);
+	bool CatchProductAmountOrTempreture(std::string str);
+
+	MedicinesProduct* ChangeCurrentFieldById(int Id);
 
 	enum MainMenuCommands {
 		Quit,
@@ -33,7 +39,7 @@ public:
 		SelectCurrentProduct,
 		SortTableById,
 		CreateNewProduct,//
-		DeletCurrentProduct,//
+		DeleteCurrentProduct,//
 		TableMenuWaiting,
 	};
 	enum ProductMenuCommands {
@@ -64,3 +70,4 @@ private:
 	ProductMenuCommands pState;
 	TablesRepository* repository;
 };
+#endif _MENU_

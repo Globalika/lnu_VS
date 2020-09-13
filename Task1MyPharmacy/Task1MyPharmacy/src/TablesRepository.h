@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _TABLES_REPOSITORY_
+#define _TABLES_REPOSITORY_
 //#include "BaseTable.h"
 #include "MedicinesTable.h"
 //#ifdef _DATABASE_
@@ -16,4 +18,4 @@ private:
 
 
 
-//#endif _DATABASE_
+#endif _TABLES_REPOSITORY_

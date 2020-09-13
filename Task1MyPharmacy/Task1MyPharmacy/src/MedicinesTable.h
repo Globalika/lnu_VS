@@ -1,15 +1,16 @@
 #pragma once
+#ifndef _MEDICINES_TABLE_
+#define _MEDICINES_TABLE_
 #include <string>
 #include <vector>
-
 #include "Database.h"
 #include "MedicinesProduct.h"
 
-class MedicinesTable /*: public Table*/
+class MedicinesTable /*public Table*/
 {
 public:
 	MedicinesTable();
-	bool IsProductExist(MedicinesProduct& product);////////////////////////
+	bool IsProductExist(MedicinesProduct& product);
 	void Create(MedicinesProduct product);
 	void Update(MedicinesProduct& product);
 	MedicinesProduct* GetById(int id);
@@ -24,3 +25,4 @@ private:
 	std::vector<MedicinesProduct>* products;
 	Database* database;
 };
+#endif _MEDICINES_TABLE_

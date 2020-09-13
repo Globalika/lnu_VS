@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <algorithm>
 #include "Menu.h"
+#include <exception>
 Menu::Menu()
 {
 	this->repository = new TablesRepository;
@@ -11,7 +12,7 @@ Menu::Menu()
 
 void Menu::ShowMainMenu()
 {
-	PrintMenuTemplate();
+	PrintMenuForm();
 	int i;
 	do
 	{
@@ -22,7 +23,19 @@ void Menu::ShowMainMenu()
 		case MainMenuCommands::ChooseTable:
 		{
 			ShowTableMenu();
-			PrintMenuTemplate();
+			PrintMenuForm();
+			break;
+		}
+		case MainMenuCommands::Quit:
+		{
+			std::cout << "Quit Pharmacy? | 0 : No | 1 : Yes" << std::endl;
+			int j = _getch();
+			if (j - 48 == 0)
+			{
+				i = -1;
+			}
+			PrintMenuForm();
+			break;
 		}
 		default:
 		{
@@ -38,7 +51,7 @@ void Menu::ShowTableMenu()
 {
 	products = repository->GetMedicinesTable()->GetAll();
 	this->currentId = products.at(0).id;
-	PrintTableTemplate();
+	PrintTableForm();
 	int i;
 	do
 	{
@@ -49,19 +62,19 @@ void Menu::ShowTableMenu()
 			{
 				ShowProductMenu();
 				currentId = products.at(0).id;
-				PrintTableTemplate();
+				PrintTableForm();
 				break;
 			}
 			case TableMenuCommands::TableUp:
 			{
-				MoveProbuctByIdUp();//
-				PrintTableTemplate();
+				MoveProbuctById(-1);
+				PrintTableForm();
 				break;
 			}
 			case TableMenuCommands::TableDown:
 			{
-				MoveProbuctByIdDown();//
-				PrintTableTemplate();
+				MoveProbuctById(1);
+				PrintTableForm();
 				break;
 			}
 			case TableMenuCommands::SortTableById:
@@ -81,7 +94,7 @@ void Menu::ShowTableMenu()
 							return p1.id > p2.id;
 						});
 				}
-				PrintTableTemplate();
+				PrintTableForm();
 				break;
 			}
 			case TableMenuCommands::CreateNewProduct:
@@ -109,25 +122,23 @@ void Menu::ShowTableMenu()
 					product.amount = k; std::cout << '\n';
 
 					repository->GetMedicinesTable()->Create(product);
-					repository->GetMedicinesTable()->Save();
 					products = repository->GetMedicinesTable()->GetAll();
 					currentId = products.at(0).id;
 				}
-				PrintTableTemplate();
+				PrintTableForm();
 				break;
 			}
-			case TableMenuCommands::DeletCurrentProduct:
+			case TableMenuCommands::DeleteCurrentProduct:
 			{
 				std::cout << "Delete current product? | 0 : No | 1 : Yes" << std::endl;
 				int i = _getch();
 				if (i-48 == 1)
 				{
 					repository->GetMedicinesTable()->Delete(currentId);
-					repository->GetMedicinesTable()->Save();
 					products = repository->GetMedicinesTable()->GetAll();
 					currentId = products.at(0).id;
 				}
-				PrintTableTemplate();
+				PrintTableForm();
 				break;
 			}
 			default:
@@ -138,148 +149,44 @@ void Menu::ShowTableMenu()
 	} while (i != TableMenuCommands::TableMenuBack);
 }
 
+
+
 void Menu::ShowProductMenu()
 {
-	PrintProductTemplate();
+	PrintProductForm();
 	std::string str;
-	int n;
 	int i;
 	do
 	{
 		i = _getch()-48;
 		switch (i)
 		{
-		case ProductMenuCommands::ProductFieldUp:
-		{
-			if(currentProductFieldId != 1)currentProductFieldId--;
-			PrintProductTemplate();
-			break;
-		}
-		case ProductMenuCommands::ProductFieldDown:
-		{
-			if (currentProductFieldId != 4)currentProductFieldId++;
-			PrintProductTemplate();
-			break;
-		}
-		case ProductMenuCommands::ChangeCurrentField:
-		{
-			MedicinesProduct product = *repository->GetMedicinesTable()->GetById(currentId);
-			switch (currentProductFieldId)
+			case ProductMenuCommands::ProductFieldUp:
 			{
-				case 1:
-				{
-					std::cout << "Input new Expiration Date? | 0 : No | 1 : Yes" << std::endl;
-					int i = _getch();
-					if (i - 48 == 1)
-					{
-					std::cout << "New Date : ";
-					std::cin >> str;
-					product.expirationDate = str;
-					}
-					break;
-				}
-				case 2:
-				{
-					std::cout << "Input new Name? | 0 : No | 1 : Yes" << std::endl;
-					int i = _getch();
-					if (i - 48 == 1)
-					{
-						std::cout << "New Name : ";
-						std::cin >> str;
-						product.name = str;
-					}
-					break;
-				}
-				case 3:
-				{
-					std::cout << "Input new Storage Tepmrature? | 0 : No | 1 : Yes" << std::endl;
-					int i = _getch();
-					if (i - 48 == 1)
-					{
-						std::cout << "New Tepmrature : ";
-						std::cin >> str;
-						product.storageTemperature = str;
-					}
-					break;
-				}
-				case 4:
-				{
-					std::cout << "Input new Amount? | 0 : No | 1 : Yes" << std::endl;
-					int i = _getch();
-					if (i - 48 == 1)
-					{
-						std::cout << "New Amount : ";
-						std::cin >> n;
-						product.amount = n;
-					}
-					break;
-				}
-				default:
-				{
-					continue;
-				}
+				if (currentProductFieldId != 1) { currentProductFieldId--; }
+				PrintProductForm();
+				break;
 			}
-			repository->GetMedicinesTable()->Update(product);
-			repository->GetMedicinesTable()->Save();
-			products = repository->GetMedicinesTable()->GetAll();
-			currentProductFieldId = 1;
-			PrintProductTemplate();
-			break;
-		}
-
-		/*case ProductMenuCommands::ChangeCurrentField:
-		{
-			std::cout << "Input new field : ";
-			std::cin >> str;
-			repository->GetMedicinesTable()->GetById(repository->GetMedicinesTable()->GetCurrentId())->SetProductExpirationDate(str);
-			std::system("cls");
-			std::cout << "0 : Back | 1 : ChangeProductName | 2 : ChangeProductExpiredDate | 3 : ChangeProductStorageTempreture | 4 : ChangeProductAmount";
-			SetState(ProductMenuWaiting);
-			PrintProduct();
-			break;
-		}*/
-		/*case ProductMenuCommands::ChangeProductName:
-		{
-			std::cout << "Input new name : ";
-			std::cin >> str;
-			repository->GetMedicinesTable()->GetById(repository->GetMedicinesTable()->GetCurrentId())->SetProductName(str);
-			std::system("cls");
-			std::cout << "0 : Back | 1 : ChangeProductName | 2 : ChangeProductExpiredDate | 3 : ChangeProductStorageTempreture | 4 : ChangeProductAmount";
-			SetState(ProductMenuWaiting);
-			PrintProduct();
-			break;
-		}
-		case ProductMenuCommands::ChangeProductStorageTemperature: 
-		{
-			std::cout << "Input new tempreture : ";
-			std::cin >> str;
-			repository->GetMedicinesTable()->GetById(repository->GetMedicinesTable()->GetCurrentId())->SetProductStorageTemperature(str);
-			std::system("cls");
-			std::cout << "0 : Back | 1 : ChangeProductName | 2 : ChangeProductExpiredDate | 3 : ChangeProductStorageTempreture | 4 : ChangeProductAmount";
-			SetState(ProductMenuWaiting);
-			PrintProduct();
-			break;
-		}*/
-		/*case ProductMenuCommands::ChangeProductAmount:
-		{
-			std::cout << "Input new amount : ";
-			std::cin >> n;
-			repository->GetMedicinesTable()->GetById(repository->GetMedicinesTable()->GetCurrentId())->SetProductAmount(n);
-			std::system("cls");
-			std::cout << "0 : Back | 1 : ChangeProductName | 2 : ChangeProductExpiredDate | 3 : ChangeProductStorageTempreture | 4 : ChangeProductAmount";
-			SetState(ProductMenuWaiting);
-			PrintProduct();
-			break;
-		}*/
-		default:
-		{
-			//??
-			continue;
-		}
+			case ProductMenuCommands::ProductFieldDown:
+			{
+				if (currentProductFieldId != 4) { currentProductFieldId++; }
+				PrintProductForm();
+				break;
+			}
+			case ProductMenuCommands::ChangeCurrentField:
+			{
+				repository->GetMedicinesTable()->Update(*ChangeCurrentFieldById(currentProductFieldId));
+				products = repository->GetMedicinesTable()->GetAll();
+				currentProductFieldId = 1;
+				PrintProductForm();
+				break;
+			}
+			default:
+			{
+				continue;
+			}
 		}
 	} while (i != ProductMenuCommands::ProductMenuBack);
-	///return
-	///
 }
 void Menu::PrintProduct() 
 {
@@ -290,35 +197,52 @@ void Menu::PrintProduct()
 	}
 	
 	std::cout << "\n\n";
-	std::cout << "Id : " << product.id << std::endl << std::endl; if (currentProductFieldId == 1) std::cout << " ->  ";
-	std::cout << "Expiration Date : " << product.expirationDate << std::endl;  if (currentProductFieldId == 2) std::cout << " ->  ";
-	std::cout << "Name : " << product.name << std::endl;  if (currentProductFieldId == 3) std::cout << " ->  ";
-	std::cout << "Storage Temperature : " << product.storageTemperature << std::endl;  if (currentProductFieldId == 4) std::cout << " ->  ";
+	std::cout << "Id : " << product.id << std::endl << std::endl;
+
+	if (currentProductFieldId == 1) { std::cout << " ->  "; }
+	std::cout << "Expiration Date : " << product.expirationDate << std::endl;
+
+	if (currentProductFieldId == 2) { std::cout << " ->  "; }
+	std::cout << "Name : " << product.name << std::endl; 
+
+	if (currentProductFieldId == 3) { std::cout << " ->  "; }
+	std::cout << "Storage Temperature : " << product.storageTemperature << std::endl; 
+
+	if (currentProductFieldId == 4) { std::cout << " ->  "; }
 	std::cout << "Amount : " << product.amount << std::endl;
 	std::cout << "\n\n";
 }
 
-void Menu::PrintTableTemplate()
+void Menu::PrintTableForm()
 {
 	std::system("cls");
-	std::cout << "0 : Back | 1 : Up | 2 : Down | 3 : Select Current Product" <<'\n';
-	std::cout << "4 : Sort Table By Id | 5 : Create NewProduct | 6 : Delete Current Product";
+	std::cout << TableMenuCommands::TableMenuBack << " : Back | "
+		<< TableMenuCommands::TableUp << " : Up | "
+		<< TableMenuCommands::TableDown << " : Down | "
+		<< TableMenuCommands::SelectCurrentProduct << " : Select Current Product\n"
+		<< TableMenuCommands::SortTableById << " : Sort Table By Id | "
+		<< TableMenuCommands::CreateNewProduct << " : Create NewProduct | "
+		<< TableMenuCommands::DeleteCurrentProduct << " : Delete Current Product";
 	SetState(TableMenuWaiting);
 	PrintTable();
 }
 
-void Menu::PrintMenuTemplate()
+void Menu::PrintMenuForm()
 {
 	std::system("cls");
-	std::cout << "0 : Quit | 1 : Choose Medicines Table" << std::endl;
+	std::cout << MainMenuCommands::Quit << " : Quit | "
+		<< MainMenuCommands::ChooseTable << " : Choose Medicines Table" << std::endl;
 	PrintPharmacyWellcome();
 	SetState(MainMenuWaiting);
 }
 
-void Menu::PrintProductTemplate()
+void Menu::PrintProductForm()
 {
 	std::system("cls");
-	std::cout << "0 : Back | 1 : Move Current Field Up | 2 : Move Current Field Down | 3 : ChangeCurrentField";
+	std::cout << ProductMenuCommands::ProductMenuBack << " : Back | "
+		<< ProductMenuCommands::ProductFieldUp << " : Move Current Field Up | "
+		<< ProductMenuCommands::ProductFieldDown << " : Move Current Field Down | "
+		<< ProductMenuCommands::ChangeCurrentField << " : ChangeCurrentField";
 	SetState(ProductMenuWaiting);
 	PrintProduct();
 }
@@ -331,9 +255,15 @@ void Menu::PrintTable()
 	for (auto it : this->products)
 	{
 		if (it.id == this->currentId)
+		{
 			std::cout << " ->  ";
-		std::cout << std::to_string(it.id) << " | " << it.expirationDate << " | " << it.name << " | "
-			<< it.storageTemperature << " | " << std::to_string(it.amount) << std::endl;
+		}
+		std::cout << std::to_string(it.id) << " | "
+			<< it.expirationDate << " | " 
+			<< it.name << " | "
+			<< it.storageTemperature << " | " 
+			<< std::to_string(it.amount) 
+			<< std::endl;
 	}
 	std::cout << "\n\n";
 }
@@ -343,7 +273,7 @@ void Menu::PrintPharmacyWellcome()
 	std::cout << "\n\n\n";
 	std::cout << "________________________________________________________" << std::endl;
 	std::cout << "\n\n\n";
-	std::cout << "Pharmacy +" << std::endl;
+	std::cout << "\t\t\tPharmacy +" << std::endl;
 	std::cout << "\n\n\n";
 	std::cout << "________________________________________________________" << std::endl;
 	std::cout << "\n\n\n";
@@ -355,27 +285,208 @@ void Menu::PrintPharmacyGetWellSoon()
 	std::cout << "\n\n\n";
 	std::cout << "________________________________________________________" << std::endl;
 	std::cout << "\n\n\n";
-	std::cout << "GetWellSoon !" << std::endl;
+	std::cout << "\t\t\tGetWellSoon !" << std::endl;
 	std::cout << "\n\n\n";
 	std::cout << "________________________________________________________" << std::endl;
 	std::cout << "\n\n\n";
+	
 }
 
 
-void Menu::MoveProbuctByIdDown()
+void Menu::MoveProbuctById(int n)
 {
-	if (currentId == products.at(products.size() - 1).id)
-		return;
+	if (n == 1)
+	{
+		if (currentId == products.at(products.size() - 1).id)
+		{
+			return;
+		}
+	}
+	else
+	{
+		if (currentId == products.at(0).id)
+		{
+			return;
+		}
+	}
 	int i = 0;
-	while (products.at(i).id != currentId) { i++; }
-	currentId = products.at(i + 1).id;
+	while (products.at(i).id != currentId) 
+	{ 
+		i++;
+	}
+	currentId = products.at(i + n).id;
 }
 
-void Menu::MoveProbuctByIdUp()
+bool Menu::CatchProductName(std::string str)
 {
-	if (currentId == products.at(0).id)
-		return;
-	int i = 0;
-	while (products.at(i).id != currentId) { i++; }
-	currentId = products.at(i - 1).id;
+	for (auto i : str)
+	{
+		if (!((i >= 65 && i <= 90) || (i >= 97 && i <= 122)))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Menu::CatchProductDate(std::string str)
+{
+	if (!(str.at(2) == 46 && str.at(5) == 46 && str.size() == 10))
+	{
+		return true;//
+	}
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (i == 2 || i == 5)
+		{
+			continue;
+		}
+		else if(!(str[i] >= 48 && str[i] <= 58))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Menu::CatchProductAmountOrTempreture(std::string str)
+{
+	for (auto i : str)
+	{
+		if (!(i >= 48 && i <= 58))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+MedicinesProduct* Menu::ChangeCurrentFieldById(int Id)
+{
+	std::string str;
+	MedicinesProduct* product = (repository->GetMedicinesTable()->GetById(currentId));
+	bool isTrue = true;
+	switch (Id)
+	{
+		case 1:
+		{
+			std::cout << "Input new Expiration Date? | 0 : No | 1 : Yes" << std::endl;
+			int i = _getch();
+			if (i - 48 == 1)
+			{
+				while (isTrue)
+				{
+					try
+					{
+						std::cout << "New Date : ";
+						std::cin >> str;
+						if (CatchProductDate(str))
+						{
+							throw std::exception();
+						}
+						isTrue = false;
+					}
+					catch (const std::exception& err)
+					{
+						PrintProductForm();
+						std::cout << "Wrong form! Please, type date like this example: dd.mm.yyyy" << std::endl;
+					}
+				}
+				product->expirationDate = str;
+			}
+			break;
+		}
+		case 2:
+		{
+			std::cout << "Input new Name? | 0 : No | 1 : Yes" << std::endl;
+			int i = _getch();
+			if (i - 48 == 1)
+			{
+				while (isTrue)
+				{
+					try
+					{
+						std::cout << "New Name : ";
+						std::cin >> str;
+						if (CatchProductName(str))
+						{
+							throw std::exception();
+						}
+						isTrue = false;
+					}
+					catch (const std::exception& err)
+					{
+						PrintProductForm();
+						std::cout << "Wrong name! Please, try again." << std::endl;
+					}
+				}
+				product->name = str;
+			}
+			break;
+		}
+		case 3:
+		{
+			std::cout << "Input new Storage Tepmreture? | 0 : No | 1 : Yes" << std::endl;
+			int i = _getch();
+			if (i - 48 == 1)
+			{
+				while (isTrue)
+				{
+					try
+					{
+						std::cout << "New Tepmreture : ";
+						std::cin >> str;
+						if (CatchProductAmountOrTempreture(str))
+						{
+							throw std::exception();
+						}
+						isTrue = false;
+					}
+					catch (const std::exception& err)
+					{
+						PrintProductForm();
+						std::cout << "Wrong format! Please, use only numbers." << std::endl;
+					}
+				}
+				product->storageTemperature = str;
+			}
+			break;
+		}
+		case 4:
+		{
+			std::cout << "Input new Amount? | 0 : No | 1 : Yes" << std::endl;
+			int i = _getch();
+			if (i - 48 == 1)
+			{
+				while (isTrue)
+				{
+					try
+					{
+						std::cout << "New Amount : ";
+						std::cin >> str;
+						if (CatchProductAmountOrTempreture(str))
+						{
+							throw std::exception();
+						}
+						isTrue = false;
+					}
+					catch (const std::exception& err)
+					{
+						PrintProductForm();
+						std::cout << "Wrong format! Please, use only numbers." << std::endl;
+					}
+				}
+				std::stringstream ss;
+				ss << str;
+				ss >> product->amount;
+				ss.clear();
+			}
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+	return product;
 }

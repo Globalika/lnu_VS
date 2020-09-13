@@ -32,6 +32,7 @@ bool MedicinesTable::IsProductExist(MedicinesProduct& product)
 void MedicinesTable::Create(MedicinesProduct product)
 {
 	products->push_back(product);
+	Save();
 }
 
 void MedicinesTable::Update(MedicinesProduct& product)
@@ -40,6 +41,7 @@ void MedicinesTable::Update(MedicinesProduct& product)
 	{
 		return (p.id == product.id);
 	}, product);
+	Save();
 }
 
 std::vector<MedicinesProduct> MedicinesTable::GetAll()
@@ -63,6 +65,7 @@ void MedicinesTable::Delete(int id)
 				return product.id == id;
 		});
 	products->erase(result, products->end());
+	Save();
 }
 
 void MedicinesTable::Save()

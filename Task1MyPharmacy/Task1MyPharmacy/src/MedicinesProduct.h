@@ -1,5 +1,6 @@
 #pragma once
-#include "Product.h"
+#ifndef _MEDICINES_PRODUCT_
+#define _MEDICINES_PRODUCT_
 #include <vector>
 #include <sstream>
 
@@ -16,3 +17,4 @@ public:
 	std::string storageTemperature;
 	int amount;
 };
+#endif _MEDICINES_PRODUCT_

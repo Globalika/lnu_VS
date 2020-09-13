@@ -38,16 +38,10 @@
     <ClInclude Include="src\Database.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Product.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\MedicinesTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\MedicinesProduct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BaseTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\TablesRepository.h">

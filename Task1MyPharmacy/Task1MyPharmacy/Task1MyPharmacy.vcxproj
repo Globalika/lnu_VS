@@ -149,12 +149,10 @@
     <ClCompile Include="src\TablesRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\BaseTable.h" />
     <ClInclude Include="src\Database.h" />
     <ClInclude Include="src\MedicinesProduct.h" />
     <ClInclude Include="src\MedicinesTable.h" />
     <ClInclude Include="src\Menu.h" />
-    <ClInclude Include="src\Product.h" />
     <ClInclude Include="src\TablesRepository.h" />
   </ItemGroup>
   <ItemGroup>
