@@ -1,11 +1,7 @@
-﻿  MedicinesTable.cpp
-  Menu.cpp
-C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(338,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(389,35): warning C4101: 'err': unreferenced local variable
-C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(417,35): warning C4101: 'err': unreferenced local variable
-C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(445,35): warning C4101: 'err': unreferenced local variable
-C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(473,35): warning C4101: 'err': unreferenced local variable
-  TablesRepository.cpp
-  main.cpp
-  Generating Code...
+﻿  Menu.cpp
+C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(339,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(390,35): warning C4101: 'err': unreferenced local variable
+C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(418,35): warning C4101: 'err': unreferenced local variable
+C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(446,35): warning C4101: 'err': unreferenced local variable
+C:\Users\volod\source\lnu_VS\Task1MyPharmacy\Task1MyPharmacy\src\Menu.cpp(474,35): warning C4101: 'err': unreferenced local variable
   Task1MyPharmacy.vcxproj -> C:\Users\volod\source\lnu_VS\Task1MyPharmacy\bin\Win32\Debug\Task1MyPharmacy.exe

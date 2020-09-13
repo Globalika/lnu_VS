@@ -3,8 +3,9 @@
 #include <fstream>
 #include <conio.h>
 #include <algorithm>
-#include "Menu.h"
 #include <exception>
+
+#include "Menu.h"
 Menu::Menu()
 {
 	this->repository = new TablesRepository;
@@ -106,19 +107,19 @@ void Menu::ShowTableMenu()
 					MedicinesProduct product;
 					std::string str; int k;
 
-					std::cout << "Id : "; std::cin >> k;
+					std::cout << "Id (Example : 9999) : "; std::cin >> k;
 					product.id = k; std::cout << '\n';
 
-					std::cout << "Expiration Date : "; std::cin >> str;
+					std::cout << "Expiration Date (Example : 12.12.2012) : "; std::cin >> str;
 					product.expirationDate = str; std::cout << '\n';
 
-					std::cout << "Name : "; std::cin >> str;
+					std::cout << "Name (Example : Kfehjvre) : "; std::cin >> str;
 					product.name = str; std::cout << '\n';
 
-					std::cout << "Storage Temprature : "; std::cin >> str;
+					std::cout << "Storage Temprature (Example : 23) : "; std::cin >> str;
 					product.storageTemperature = str; std::cout << '\n';
 
-					std::cout << "Amount : "; std::cin >> k;
+					std::cout << "Amount (Example : 44) : "; std::cin >> k;
 					product.amount = k; std::cout << '\n';
 
 					repository->GetMedicinesTable()->Create(product);

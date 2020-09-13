@@ -2,8 +2,6 @@
 #include "Database.h"
 #include <fstream>
 #include <sstream>
-#include <string>
-#include <vector>
 //
 std::ostream& operator<<(std::ostream& os, std::vector<std::string>& productVec)
 {
