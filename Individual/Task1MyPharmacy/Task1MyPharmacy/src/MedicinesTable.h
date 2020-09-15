@@ -21,6 +21,7 @@ public:
 
 	const static std::string tableName;
 	Database* GetDatabase();
+	~MedicinesTable();
 private:
 	std::vector<MedicinesProduct>* products;
 	Database* database;

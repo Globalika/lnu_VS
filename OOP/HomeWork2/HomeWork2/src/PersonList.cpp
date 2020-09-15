@@ -20,12 +20,10 @@ PersonList::PersonList(const PersonList& other)
 	this->maxLen = other.maxLen;
 	
 	this->persons = new Person[maxLen];
-	for (int i = 0;)
+	for (int i = 0; i < maxLen; i++)
 	{
-
+		persons[i] = other.persons[i];
 	}
-
-	this->persons[0] = other.persons[0];
 }
 //-------------------------------------------------------
 

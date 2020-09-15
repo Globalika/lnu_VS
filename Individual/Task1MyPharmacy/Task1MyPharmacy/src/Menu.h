@@ -27,6 +27,8 @@ public:
 
 	MedicinesProduct* ChangeCurrentFieldById(int Id);
 
+	~Menu();
+
 	enum MainMenuCommands {
 		Quit,
 		ChooseTable,

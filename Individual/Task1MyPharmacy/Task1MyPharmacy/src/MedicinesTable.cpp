@@ -95,4 +95,9 @@ Database* MedicinesTable::GetDatabase()
 	return this->database;
 }
 
+MedicinesTable::~MedicinesTable()
+{
+	delete database;
+}
+
 const std::string MedicinesTable::tableName = "medicinesTable";

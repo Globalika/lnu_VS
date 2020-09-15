@@ -51,6 +51,7 @@ int main()
 	pl.Add(p4);
 	pl.Write();
 
+	PersonList pl2 = pl;
 	//HW:
 	//test how it works without created ctor
 	//PersonList pl2 = pl; // copy ctor!!
@@ -58,6 +59,7 @@ int main()
 
 	//* [*], pl.Add(p) => [p], pl.Add(p) => 1. allocate memory [p], [* *]; 2. copy data [p], [p *]; 3. delete memory: null, [p, *] => [p p * *]
 	//* add 1
+	system("pause");
 }
 
 //assignment problem

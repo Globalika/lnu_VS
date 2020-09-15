@@ -6,18 +6,15 @@
 using namespace std;
 
 
-void Person::Init(string firstName, string lastName, const char* middleName, int age)
+void Person::Init(string firstName, string lastName, string middleName, int age)
 {
 	this->firstName = firstName;
 	this->lastName = lastName;
+	this->middleName = middleName;
 	this->age = age;
-
-	int mnLen = strlen(middleName);
-	this->middleName = new char[mnLen + 1]; //add '\0'
-	strcpy_s(this->middleName, mnLen + 1, middleName);
 }
 
-Person::Person(string firstName, string lastName, const char* middleName, int age)
+Person::Person(string firstName, string lastName, string middleName, int age)
 {
 	cout << "Usual ctor" << endl;
 	Init(firstName, lastName, middleName, age);
@@ -35,7 +32,6 @@ Person& Person::operator= (const Person& other)
 	if (this == &other)
 		return *this;
 
-	delete[]middleName;
 	Init(other.firstName, other.lastName, other.middleName, other.age);
 
 	return *this;
@@ -74,6 +70,5 @@ string Person::getReverseFullName()
 
 Person::~Person()
 {
-	delete[]middleName;
 	cout << "Person: " << GetFullName() << " destroied!" << endl;
 }

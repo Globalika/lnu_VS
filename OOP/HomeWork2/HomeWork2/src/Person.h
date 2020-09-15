@@ -9,7 +9,7 @@ class Person
 {
 public:
 	//constructor
-	Person(string firstName = "", string = "", const char* middleName = "", int = 0);
+	Person(string firstName = "", string = "", string middleName = "", int = 0);
 	Person(const Person& other);
 
 	//assignment operator
@@ -25,11 +25,11 @@ public:
 private:
 	string firstName;
 	string lastName;
-	char* middleName;
+	string middleName;
 	int age;
 
 	string getReverseFullName();
-	void Init(string firstName, string, const char*, int);
+	void Init(string firstName, string, string, int);
 };
 
 #endif _PERSON_H_

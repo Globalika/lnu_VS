@@ -491,3 +491,8 @@ MedicinesProduct* Menu::ChangeCurrentFieldById(int Id)
 	}
 	return product;
 }
+
+Menu::~Menu()
+{
+	delete repository;
+}
