@@ -1,0 +1,12 @@
+91234,02.04.2300,Biafine,tube,43,333
+65536,21.11.2099,Januvia,tube,22,54
+32044,14.11.2023,Ativan,box,20,365
+27534,15.03.2022,Cephalexin,tuba,20,43
+87633,01.03.2024,Lexapro,box,20,43
+23414,30.04.2023,Metoprolol,bank,20,45
+13356,04.12.2023,Jardiance,bottle,10,22
+64350,14.03.2025,Caudalie,spray,20,1
+34556,30.09.2060,Hydrochlorothiazide,spray,56,56
+35404,05.03.2040,Onpattro,bottle,44,76
+64656,04.10.2221,Wellbutrin,bottle,33,65
+43431,11.10.2222,Imbruvica,tuba,77,65

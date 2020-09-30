@@ -2,13 +2,23 @@
 
 TablesRepository::TablesRepository()
 {
-	this->medicinesTable = nullptr;
+	medicinesTable = nullptr;
+	cosmeticsTable = nullptr;
 }
 
 MedicinesTable* TablesRepository::GetMedicinesTable() {
-	if (this->medicinesTable == nullptr) {
+	if (medicinesTable == nullptr) {
 		
 		medicinesTable = new MedicinesTable();
 	}
 	return medicinesTable;
+}
+
+CosmeticsTable* TablesRepository::GetCosmeticsTable()
+{
+	if (cosmeticsTable == nullptr) {
+
+		cosmeticsTable = new CosmeticsTable();
+	}
+	return cosmeticsTable;
 }

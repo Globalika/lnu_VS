@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{925d1498-fa0a-42ee-9ccb-98a02e761f56}</ProjectGuid>
-    <RootNamespace>Task1MyPharmacy</RootNamespace>
+    <ProjectGuid>{001bcd82-b2d5-4b99-a678-b8c405253544}</ProjectGuid>
+    <RootNamespace>HomeWork3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,8 +72,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -141,34 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\menus\ProductMenu.cpp" />
-    <ClCompile Include="src\menus\TableMenu.cpp" />
-    <ClCompile Include="src\products\CosmeticsProduct.cpp" />
-    <ClCompile Include="src\tables\CosmeticsTable.cpp" />
-    <ClCompile Include="src\Database.cpp" />
-    <ClCompile Include="src\products\MedicinesProduct.cpp" />
-    <ClCompile Include="src\tables\MedicinesTable.cpp" />
+    <ClCompile Include="src\Circle.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\menus\MainMenu.cpp" />
-    <ClCompile Include="src\TablesRepository.cpp" />
+    <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Square.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\menus\BaseMenu.h" />
-    <ClInclude Include="src\menus\ProductMenu.h" />
-    <ClInclude Include="src\menus\TableMenu.h" />
-    <ClInclude Include="src\tables\BaseTable.h" />
-    <ClInclude Include="src\products\CosmeticsProduct.h" />
-    <ClInclude Include="src\tables\CosmeticsTable.h" />
-    <ClInclude Include="src\Database.h" />
-    <ClInclude Include="src\products\MedicinesProduct.h" />
-    <ClInclude Include="src\tables\MedicinesTable.h" />
-    <ClInclude Include="src\menus\MainMenu.h" />
-    <ClInclude Include="src\products\BaseProduct.h" />
-    <ClInclude Include="src\TablesRepository.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="tablefiles\cosmeticsTable.txt" />
-    <Text Include="tablefiles\medicinesTable.txt" />
+    <ClInclude Include="src\Circle.h" />
+    <ClInclude Include="src\GeometryFigure.h" />
+    <ClInclude Include="src\Rectangle.h" />
+    <ClInclude Include="src\Square.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

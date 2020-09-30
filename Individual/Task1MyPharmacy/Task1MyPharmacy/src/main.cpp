@@ -1,8 +1,7 @@
-#include "Menu.h"
-
+#include "menus/MainMenu.h"
 int main()
 {
-	Menu menu;
+	MainMenu menu;
 	menu.ShowMainMenu();
 	system("pause");
 	return 0;

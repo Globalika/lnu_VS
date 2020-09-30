@@ -5,8 +5,18 @@
 //
 std::ostream& operator<<(std::ostream& os, std::vector<std::string>& productVec)
 {
-	os << productVec.at(0) << ',' << productVec.at(1) << ',' 
-	   << productVec.at(2) << ',' << productVec.at(3) << ',' << productVec.at(4);
+	if (productVec.size() == 5)
+	{
+		os << productVec.at(0) << ',' << productVec.at(1) << ','
+			<< productVec.at(2) << ',' << productVec.at(3) << ',' << productVec.at(4);
+	}
+	else if (productVec.size() == 6)
+	{
+		os << productVec.at(0) << ',' << productVec.at(1) << ','
+			<< productVec.at(2) << ',' << productVec.at(3) << ',' 
+			<< productVec.at(4) << ',' << productVec.at(5);
+	}
+	
 	return os;
 }
 //
@@ -47,17 +57,6 @@ std::vector<std::vector<std::string>>* Database::GetTableContent(std::string tab
 	std::vector<std::string> stringOfContent;//
 	std::ifstream fin;
 	fin.open(filePath);
-
-	/*try
-	{
-		fin.open(filePath);
-	}
-	catch (const std::ifstream::failure& ex)
-	{
-		std::cout << ex.what() << std::endl;
-		std::cout << ex.code() << std::endl;
-		std::cout << "cannot open file" << std::endl;
-	}*/
 
 	if (!fin.is_open())
 	{
