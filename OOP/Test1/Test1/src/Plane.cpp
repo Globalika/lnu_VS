@@ -54,5 +54,6 @@ double Plane::GetCapacity()
 
 Plane::~Plane()
 {
-	delete[] this;
+	this->capacity = 0;
+	this->weight = 0;
 }

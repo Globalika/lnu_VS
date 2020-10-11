@@ -1,17 +1,26 @@
 #include "Hangar.h"
-
+//#include <string>;
 Hangar::Hangar(int capacity)
 {
-	planeList = new Plane[capacity];
+	planeList = new Plane*[capacity];
+	for (int i = 0; i < capacity; i++)
+	{
+		planeList[i] = new Plane;
+	}
 	this->capacity = capacity;
 	this->lastPlaneId = -1;
 }
 
 Hangar::Hangar(const Hangar& other)
 {
-	planeList = new Plane[capacity];
-	this->capacity = other.capacity;
 	for (int i = 0; i <= capacity; i++)
+	{
+		delete& planeList[i];
+	}
+	delete planeList;
+
+	planeList = new Plane*[other.capacity];
+	for (int i = 0; i < capacity; i++)
 	{
 		planeList[i] = other.planeList[i];
 	}
@@ -26,23 +35,26 @@ Hangar& Hangar::operator=(const Hangar& other)
 	return *this;
 }
 
-Hangar& Hangar::operator+(Plane& plane)
+Hangar& Hangar::operator+(Plane* plane)
 {
 	this->planeList[++lastPlaneId] = plane;
 	return *this;
 }
 
-Hangar& Hangar::operator-(Plane& plane)
+Hangar& Hangar::operator-(int i)
 {
-	delete &planeList[lastPlaneId--];
+	delete planeList[i];
 	return *this;
 }
 
 void Hangar::GetHangerInfo()
 {
-	for (int i = 0; i <= lastPlaneId - 1; i++)
+	for (int i = 0; i <= lastPlaneId; i++)
 	{
-		std::cout << Plane::GetInfo(this->planeList[i]) << std::endl;
+		if (planeList[i]->GetCapacity() > 0 || planeList[i]->GetWeight() > 0)
+		{
+			std::cout << Plane::GetInfo(*planeList[i]) << std::endl;
+		}
 	}
 }
 

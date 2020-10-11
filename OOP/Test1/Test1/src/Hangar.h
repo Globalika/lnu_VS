@@ -8,13 +8,15 @@ class Hangar
 public:
 	Hangar(int capacity);
 	Hangar(const Hangar& other);
+
 	Hangar& operator=(const Hangar& other);
-	Hangar& operator+(Plane& plane);
-	Hangar& operator-(Plane& plane);
+	Hangar& operator+(Plane* plane);
+	Hangar& operator-(int i);
+
 	void GetHangerInfo();
 	~Hangar();
 private:
-	Plane* planeList;
+	Plane** planeList;
 	int lastPlaneId;
 	int capacity;
 };
