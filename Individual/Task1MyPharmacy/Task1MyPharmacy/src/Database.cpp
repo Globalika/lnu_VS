@@ -16,13 +16,16 @@ std::ostream& operator<<(std::ostream& os, std::vector<std::string>& productVec)
 			<< productVec.at(2) << ',' << productVec.at(3) << ',' 
 			<< productVec.at(4) << ',' << productVec.at(5);
 	}
-	
+	else if (productVec.size() == 3)
+	{
+		os << productVec.at(0) << ',' << productVec.at(1) << ',' << productVec.at(2);
+	}
 	return os;
 }
 //
 std::string Database::CreateTableFilePath(std::string tableName)
 {
-	return "tablefiles/" + tableName + ".txt";
+	return "C:/Users/volod/source/lnu_VS/Individual/Task1MyPharmacy/Task1MyPharmacy/tablefiles/" + tableName + ".txt";
 }
 
 
@@ -56,7 +59,7 @@ std::vector<std::vector<std::string>>* Database::GetTableContent(std::string tab
 	std::vector<std::vector<std::string>>* content = new std::vector<std::vector<std::string>>();
 	std::vector<std::string> stringOfContent;//
 	std::ifstream fin;
-	fin.open(filePath);
+	fin.open(filePath);///
 
 	if (!fin.is_open())
 	{

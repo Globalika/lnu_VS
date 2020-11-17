@@ -1,9 +1,8 @@
 #pragma once
 #ifndef _TABLES_REPOSITORY_
 #define _TABLES_REPOSITORY_
-//#include "tables/BaseTable.h"
-#include "tables/MedicinesTable.h"
-#include "tables/CosmeticsTable.h"
+#include "MyPharmacy.h"
+#include <string>
 
 class TablesRepository
 {
@@ -11,9 +10,12 @@ public:
 	TablesRepository();
 	MedicinesTable* GetMedicinesTable();
 	CosmeticsTable* GetCosmeticsTable();
+	CartTable* GetCartTable();
+	~TablesRepository() {}
 private:
 	MedicinesTable* medicinesTable;
 	CosmeticsTable* cosmeticsTable;
+	CartTable* cartTable;
 };
 
 #endif _TABLES_REPOSITORY_

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="menus">
+      <UniqueIdentifier>{CDB4EC0F-39C9-14C1-024B-B8206E1E11F2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\menus\BaseMenu.cpp" />
+    <ClCompile Include="src\menus\CosmeticsMenu.cpp" />
+    <ClCompile Include="src\menus\MainMenu.cpp" />
+    <ClCompile Include="src\menus\MedicinesMenu.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\menus\BaseMenu.h" />
+    <ClInclude Include="src\menus\CosmeticsMenu.h" />
+    <ClInclude Include="src\menus\MainMenu.h" />
+    <ClInclude Include="src\menus\MedicinesMenu.h" />
+  </ItemGroup>
+</Project>

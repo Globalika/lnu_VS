@@ -1,4 +1,5 @@
 #include "menus/MainMenu.h"
+#include <iostream>//
 int main()
 {
 	MainMenu menu;

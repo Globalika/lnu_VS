@@ -1,17 +1,27 @@
 #pragma once
 #ifndef _MAIN_MENU_
 #define _MAIN_MENU_
-#include "BaseMenu.h"
-#include "TableMenu.h"
-class MainMenu : public Menu
+#include "MyPharmacy.h"
+//#include "BaseMenu.h"
+#include "MedicinesMenu.h"
+#include "CosmeticsMenu.h"
+class MainMenu
 {
 public:
-	MainMenu() {}
+	MainMenu()
+	{
+		m = new MedicinesMenu;
+		c = new CosmeticsMenu;
+	}
 	void ShowMainMenu();
 	void PrintPharmacyWellcome();
 	void PrintPharmacyGetWellSoon();
 	void PrintMenuForm();
-	~MainMenu() {}
+	~MainMenu()
+	{
+		delete m;
+		delete c;
+	}
 
 	enum MainMenuCommands {
 		Quit,
@@ -24,7 +34,9 @@ public:
 		this->mState = state;
 	}
 private:
-	TableMenu tableMenu;
 	MainMenuCommands mState;
+	MedicinesMenu* m;
+	CosmeticsMenu* c;
+
 };
 #endif _MAIN_MENU_

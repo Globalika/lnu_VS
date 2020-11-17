@@ -11,21 +11,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{640CDE8E-D097-4B53-D9A8-CE4745B3A753}</ProjectGuid>
+    <ProjectGuid>{C36C4036-2F2D-BC6C-F867-05EA64E70049}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Task1MyPharmacy</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <RootNamespace>AdminPharmacy</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
@@ -41,29 +40,30 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\bin\Debug-windows-x86_64\Task1MyPharmacy\</OutDir>
-    <IntDir>..\bin-int\Debug-windows-x86_64\Task1MyPharmacy\</IntDir>
-    <TargetName>Task1MyPharmacy</TargetName>
-    <TargetExt>.lib</TargetExt>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Debug-windows-x86_64\AdminPharmacy\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\AdminPharmacy\</IntDir>
+    <TargetName>AdminPharmacy</TargetName>
+    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\bin\Release-windows-x86_64\Task1MyPharmacy\</OutDir>
-    <IntDir>..\bin-int\Release-windows-x86_64\Task1MyPharmacy\</IntDir>
-    <TargetName>Task1MyPharmacy</TargetName>
-    <TargetExt>.lib</TargetExt>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Release-windows-x86_64\AdminPharmacy\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\AdminPharmacy\</IntDir>
+    <TargetName>AdminPharmacy</TargetName>
+    <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Task1MyPharmacy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -71,51 +71,37 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Task1MyPharmacy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Database.h" />
-    <ClInclude Include="src\MyPharmacy.h" />
-    <ClInclude Include="src\products\CartProduct.h" />
-    <ClInclude Include="src\products\BaseProduct.h" />
-    <ClInclude Include="src\products\CosmeticsProduct.h" />
-    <ClInclude Include="src\products\MedicinesProduct.h" />
-    <ClInclude Include="src\TablesRepository.h" />
-    <ClInclude Include="src\tables\BaseTable.h" />
-    <ClInclude Include="src\tables\CartTable.h" />
-    <ClInclude Include="src\tables\CosmeticsTable.h" />
-    <ClInclude Include="src\tables\MedicinesTable.h" />
+    <ProjectReference Include="..\Task1MyPharmacy\Task1MyPharmacy.vcxproj">
+      <Project>{640CDE8E-D097-4B53-D9A8-CE4745B3A753}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Database.cpp" />
-    <ClCompile Include="src\products\CartProduct.cpp" />
-    <ClCompile Include="src\TablesRepository.cpp" />
-    <ClCompile Include="src\products\CosmeticsProduct.cpp" />
-    <ClCompile Include="src\products\MedicinesProduct.cpp" />
-    <ClCompile Include="src\tables\BaseTable.cpp" />
-    <ClCompile Include="src\tables\CartTable.cpp" />
-    <ClCompile Include="src\tables\CosmeticsTable.cpp" />
-    <ClCompile Include="src\tables\MedicinesTable.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\menus\BaseMenu.cpp" />
+    <ClCompile Include="src\menus\CosmeticsMenu.cpp" />
+    <ClCompile Include="src\menus\MainMenu.cpp" />
+    <ClCompile Include="src\menus\MedicinesMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="tablefiles\cosmeticsTable.txt" />
-    <None Include="tablefiles\medicinesTable.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="tablefiles\cartTable.txt" />
+    <ClInclude Include="src\menus\BaseMenu.h" />
+    <ClInclude Include="src\menus\CosmeticsMenu.h" />
+    <ClInclude Include="src\menus\MainMenu.h" />
+    <ClInclude Include="src\menus\MedicinesMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
