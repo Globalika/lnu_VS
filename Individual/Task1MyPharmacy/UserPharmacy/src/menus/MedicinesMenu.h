@@ -75,6 +75,6 @@ private:
 	int currentProductFieldId = 1;
 	TableMenuCommands tState;
 	ProductMenuCommands pState;
-	std::vector<CartProduct*>* cart;
+	std::vector<CartProduct*> cart;
 };
 #endif _MED_MENU_

@@ -3,6 +3,7 @@
 #define _TABLE_
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "..\Database.h"
 #include "..\products/BaseProduct.h"
 template <class T>
@@ -35,7 +36,14 @@ bool Table<T>::IsProductExist(T& product)
 		{
 			return p->id == product.id;
 		});
-	return it == products->end();
+	if (it == products->end())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 template<class T>

@@ -71,14 +71,19 @@ std::vector<std::vector<std::string>>* Database::GetTableContent(std::string tab
 		while (!fin.eof())
 		{
 			str = "";
-			while (str == "")
+			/*while (str == "")
 			{
 				getline(fin, str);
-			}
+			}*/
+			getline(fin, str);
 			std::istringstream ss(str);
 			while (std::getline(ss, token, ','))
 			{
 				stringOfContent.push_back(token);		
+			}
+			if (stringOfContent.size() == 0)
+			{
+				break;
 			}
 			content->push_back(stringOfContent);
 			stringOfContent.clear();

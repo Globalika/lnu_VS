@@ -6,16 +6,32 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\menus\BaseMenu.cpp" />
-    <ClCompile Include="src\menus\CosmeticsMenu.cpp" />
-    <ClCompile Include="src\menus\MainMenu.cpp" />
-    <ClCompile Include="src\menus\MedicinesMenu.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClInclude Include="src\menus\BaseMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menus\CosmeticsMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menus\MainMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menus\MedicinesMenu.h">
+      <Filter>menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\menus\BaseMenu.h" />
-    <ClInclude Include="src\menus\CosmeticsMenu.h" />
-    <ClInclude Include="src\menus\MainMenu.h" />
-    <ClInclude Include="src\menus\MedicinesMenu.h" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\menus\BaseMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menus\CosmeticsMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menus\MainMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menus\MedicinesMenu.cpp">
+      <Filter>menus</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

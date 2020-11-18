@@ -457,10 +457,25 @@ void MedicinesMenu::OrderProduct()
 	std::cin >> amount;
 	CartProduct* p = new CartProduct;
 	*p = GetCurrentProductAmount(amount);
-	cart->push_back(p);
+	bool state = true;
+	for (auto it : cart)
+	{
+		if (it->id == p->id)
+		{
+			it->amount += amount;
+			state = false;
+		}
+	}
+	if (state)
+	{
+		cart.push_back(p);//
+	}
+
+	repository->GetMedicinesTable()->Save();
 
 	if (repository->GetCartTable()->IsProductExist(*p))
 	{
+		p->amount += amount;
 		repository->GetCartTable()->Update(*p);
 	}
 	else
@@ -497,14 +512,14 @@ void MedicinesMenu::OpenCard()
 		PrintTableForm();
 		std::cout << "\t\t\t" << "My Cart" << std::endl;
 		std::cout << "Product Id || Name || Amount" << "\n\n";
-		if (cart->size() == 0)
+		if (cart.size() == 0)
 		{
 			std::cout << "||  " << "Cart is Emply" << std::endl;
 			std::cout << "\n\n" << "|| 1 : Back " << std::endl;
 		}
 		else
 		{
-			for (auto it : *cart)
+			for (auto it : cart)
 			{
 				std::cout << "||  " << it->id << "|| " << it->name << "|| " << it->amount << std::endl;
 			}
@@ -517,7 +532,7 @@ void MedicinesMenu::OpenCard()
 		}
 		else if (g == 2)
 		{
-			for (auto it : *cart)
+			for (auto it : cart)
 			{
 				ReturnProductAmount(*it);
 			}
@@ -537,7 +552,8 @@ CartProduct& MedicinesMenu::GetCurrentProductAmount(int amount)
 		{
 			p->id = it->id;
 			p->name = it->name;
-			p->amount = it->amount;
+			p->amount = amount;
+			it->amount = it->amount - amount;
 		}
 	}
 	return *p;
@@ -548,7 +564,8 @@ void MedicinesMenu::ReturnProductAmount(CartProduct& p)
 	products = repository->GetMedicinesTable()->GetAll();
 	for (auto it : *products)
 	{
-		if (it->id == p.id)
+		bool state = (it->id == p.id);
+		if (true)
 		{
 			it->amount + p.amount;
 		}

@@ -86,9 +86,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Task1MyPharmacy\Task1MyPharmacy.vcxproj">
-      <Project>{640CDE8E-D097-4B53-D9A8-CE4745B3A753}</Project>
-    </ProjectReference>
+    <ClInclude Include="src\menus\BaseMenu.h" />
+    <ClInclude Include="src\menus\CosmeticsMenu.h" />
+    <ClInclude Include="src\menus\MainMenu.h" />
+    <ClInclude Include="src\menus\MedicinesMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -98,10 +99,9 @@
     <ClCompile Include="src\menus\MedicinesMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\menus\BaseMenu.h" />
-    <ClInclude Include="src\menus\CosmeticsMenu.h" />
-    <ClInclude Include="src\menus\MainMenu.h" />
-    <ClInclude Include="src\menus\MedicinesMenu.h" />
+    <ProjectReference Include="..\Task1MyPharmacy\Task1MyPharmacy.vcxproj">
+      <Project>{640CDE8E-D097-4B53-D9A8-CE4745B3A753}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

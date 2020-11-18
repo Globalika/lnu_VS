@@ -1,7 +1,9 @@
 #pragma once
 #ifndef _TABLES_REPOSITORY_
 #define _TABLES_REPOSITORY_
-#include "MyPharmacy.h"
+#include "tables/CosmeticsTable.h"
+#include "tables/MedicinesTable.h"
+#include "tables/CartTable.h"
 #include <string>
 
 class TablesRepository

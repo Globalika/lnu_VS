@@ -1,6 +1,6 @@
 workspace "Task1MyPharmacy"
     architecture "x64"
-    startproject "AdminPharmacy"
+    startproject "UserPharmacy"
     configurations
     {
         "Debug",
