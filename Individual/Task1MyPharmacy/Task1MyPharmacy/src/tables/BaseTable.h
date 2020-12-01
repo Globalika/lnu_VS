@@ -5,7 +5,6 @@
 #include <vector>
 #include <algorithm>
 #include "..\Database.h"
-#include "..\products/BaseProduct.h"
 template <class T>
 class Table
 {
@@ -13,7 +12,7 @@ public:
 	virtual bool IsProductExist(T& product);
 	virtual void Create(T& product);
 	virtual void Update(T& product);
-	virtual Product* GetById(int id);
+	virtual T* GetById(int id);
 	virtual std::vector<T*>* GetAll();
 	virtual void Delete(int id);
 	virtual void Save() {}
@@ -27,7 +26,7 @@ protected:
 #endif _TABLE_
 
 
-#include "BaseTable.h"
+
 
 template<class T>
 bool Table<T>::IsProductExist(T& product)
@@ -66,7 +65,7 @@ void Table<T>::Update(T& product)
 }
 
 template<class T>
-Product* Table<T>::GetById(int id)
+T* Table<T>::GetById(int id)
 {
 	auto result = std::find_if(products->begin(), products->end(), [id](const T* product)
 		{
@@ -97,11 +96,6 @@ void Table<T>::Delete(int id)
 	products->erase(result, products->end());
 	Save();
 }
-
-//template<class T>
-//void Table<T>::Save()
-//{
-//}
 
 template<class T>
 Database* Table<T>::GetDatabase()

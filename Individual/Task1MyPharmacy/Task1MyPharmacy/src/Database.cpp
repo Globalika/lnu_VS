@@ -42,12 +42,15 @@ void Database::UpdateTableContent(std::vector<std::vector<std::string>>& content
 	}
 	else
 	{
-		int i = 0;
-		for (;i < content.size()-1;i++)
+		if (content.size() != 0)
 		{
-			fout << content.at(i) << '\n';
+			int i = 0;
+			for (; i < content.size() - 1; i++)
+			{
+				fout << content.at(i) << '\n';
+			}
+			fout << content.at(i);
 		}
-		fout << content.at(i);
 	}
 	fout.close();
 

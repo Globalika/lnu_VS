@@ -21,9 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\menus\BaseMenu.cpp">
-      <Filter>menus</Filter>
-    </ClCompile>
     <ClCompile Include="src\menus\CosmeticsMenu.cpp">
       <Filter>menus</Filter>
     </ClCompile>

@@ -93,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\menus\BaseMenu.cpp" />
     <ClCompile Include="src\menus\CosmeticsMenu.cpp" />
     <ClCompile Include="src\menus\MainMenu.cpp" />
     <ClCompile Include="src\menus\MedicinesMenu.cpp" />

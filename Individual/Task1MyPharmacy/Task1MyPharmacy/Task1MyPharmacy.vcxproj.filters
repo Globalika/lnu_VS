@@ -27,9 +27,6 @@
     <ClInclude Include="src\products\BaseProduct.h">
       <Filter>src\products</Filter>
     </ClInclude>
-    <ClInclude Include="src\products\CartProduct.h">
-      <Filter>src\products</Filter>
-    </ClInclude>
     <ClInclude Include="src\products\CosmeticsProduct.h">
       <Filter>src\products</Filter>
     </ClInclude>
@@ -39,15 +36,20 @@
     <ClInclude Include="src\tables\BaseTable.h">
       <Filter>src\tables</Filter>
     </ClInclude>
-    <ClInclude Include="src\tables\CartTable.h">
-      <Filter>src\tables</Filter>
-    </ClInclude>
     <ClInclude Include="src\tables\CosmeticsTable.h">
       <Filter>src\tables</Filter>
     </ClInclude>
     <ClInclude Include="src\tables\MedicinesTable.h">
       <Filter>src\tables</Filter>
     </ClInclude>
+    <ClInclude Include="src\tables\CartTable.h">
+      <Filter>src\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="src\products\FlyweightProduct.h">
+      <Filter>src\products</Filter>
+    </ClInclude>
+    <ClInclude Include="src\products\CartProduct.h" />
+    <ClInclude Include="src\tables\FlyweightFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Database.cpp">
@@ -56,17 +58,11 @@
     <ClCompile Include="src\TablesRepository.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\products\CartProduct.cpp">
-      <Filter>src\products</Filter>
-    </ClCompile>
     <ClCompile Include="src\products\CosmeticsProduct.cpp">
       <Filter>src\products</Filter>
     </ClCompile>
     <ClCompile Include="src\products\MedicinesProduct.cpp">
       <Filter>src\products</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tables\CartTable.cpp">
-      <Filter>src\tables</Filter>
     </ClCompile>
     <ClCompile Include="src\tables\CosmeticsTable.cpp">
       <Filter>src\tables</Filter>
@@ -74,6 +70,14 @@
     <ClCompile Include="src\tables\MedicinesTable.cpp">
       <Filter>src\tables</Filter>
     </ClCompile>
+    <ClCompile Include="src\tables\CartTable.cpp">
+      <Filter>src\tables</Filter>
+    </ClCompile>
+    <ClCompile Include="src\products\FlyweightProduct.cpp">
+      <Filter>src\products</Filter>
+    </ClCompile>
+    <ClCompile Include="src\products\CartProduct.cpp" />
+    <ClCompile Include="src\tables\FlyweightFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="tablefiles\cartTable.txt">

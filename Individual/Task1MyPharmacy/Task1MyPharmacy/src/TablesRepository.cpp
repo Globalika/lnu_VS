@@ -1,6 +1,4 @@
 #include "TablesRepository.h"
-//#include <algorithm>
-//#include <sstream>
 
 TablesRepository::TablesRepository()
 {

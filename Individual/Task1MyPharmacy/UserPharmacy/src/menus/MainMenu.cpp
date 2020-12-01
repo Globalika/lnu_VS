@@ -1,9 +1,5 @@
 #include <iostream>
 #include "MainMenu.h"
-//#include "BaseMenu.h"
-//#include "MyPharmacy.h"
-//#include "MedicinesMenu.h"
-//#include "CosmeticsMenu.h"
 void MainMenu::ShowMainMenu()
 {
 	PrintMenuForm();

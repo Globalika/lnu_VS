@@ -12,7 +12,8 @@ public:
 	static std::vector<std::string> GetvectorStringFromProduct(CosmeticsProduct& product);
 	static CosmeticsProduct* GetProductByStringVector(std::vector<std::string>& stringvector);
 	~CosmeticsProduct() {}
-
+	std::string expirationDate;
+	int amount;
 	std::string storageFormType;
 	int capacity;
 };

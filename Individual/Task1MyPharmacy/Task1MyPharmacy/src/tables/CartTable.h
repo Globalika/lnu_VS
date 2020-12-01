@@ -4,30 +4,15 @@
 #include <string>
 #include <vector>
 #include "BaseTable.h"
-#include "..\products\CartProduct.h"
+#include "products/FlyweightProduct.h"
 
-class CartTable : public Table <CartProduct>
+class CartTable : public Table <FlyweightProduct>
 {
 public:
 	CartTable();
-
-	//bool IsProductExist(CartProduct& product) override;
-	//void Create(CartProduct& product) override;
-	//void Update(CartProduct& product) override;
-	//CartProduct* GetById(int id) override;
-	//std::vector<CartProduct*>* GetAll() override;
-	//void Delete(int id) override;
 	void DeleteAll();
-	void Save() override;
-	//Database* GetDatabase() override;
-
+	void Save() /*override*/;
 	~CartTable();
-
-
 	const static std::string cartTableName;
-private:
-	//std::vector<std::vector<std::string>>* GetContentFromProductsVector(std::vector<CartProduct*>& products);
-	//std::vector<CartProduct*>* products;
-	//Database* database;
 };
 #endif _CART_TABLE_

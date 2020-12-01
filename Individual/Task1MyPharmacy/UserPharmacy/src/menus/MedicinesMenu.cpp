@@ -140,38 +140,6 @@ void MedicinesMenu::PrintSortTable()
 	}
 }
 
-void MedicinesMenu::UpdateDataForTableMenu()
-{
-	delete products;
-	delete[] repository;
-	repository = new TablesRepository;
-	products = repository->GetMedicinesTable()->GetAll();
-}
-
-void MedicinesMenu::MoveCursorByProductId(int n)
-{
-	if (n == 1)
-	{
-		if (currentId == products->at(products->size() - 1)->id)
-		{
-			return;
-		}
-	}
-	else
-	{
-		if (currentId == products->at(0)->id)
-		{
-			return;
-		}
-	}
-	int i = 0;
-	while (products->at(i)->id != currentId)
-	{
-		i++;
-	}
-	currentId = products->at(i + n)->id;
-}
-
 void MedicinesMenu::CreateNewProductForm()
 {
 	MedicinesProduct* product = new MedicinesProduct;
@@ -236,8 +204,6 @@ MedicinesProduct* MedicinesMenu::ChangeCurrentFieldById(int Id)
 	}
 	return product;
 }
-
-
 
 void MedicinesMenu::ShowProductMenu(int Id)
 {
@@ -326,161 +292,27 @@ void MedicinesMenu::PrintProductForm()
 }
 
 
-void MedicinesMenu::CheckProductString(std::string str)
-{
-	for (auto i : str)
-	{
-		if (!((i >= 65 && i <= 90) || (i >= 97 && i <= 122)))
-		{
-			throw std::exception();
-		}
-	}
-}
-
-void MedicinesMenu::CheckProductDate(std::string str)
-{
-	if (!(str.at(2) == 46 && str.at(5) == 46 && str.size() == 10))
-	{
-		throw std::exception();
-	}
-	for (int i = 0; i < str.size(); i++)
-	{
-		if (i == 2 || i == 5)
-		{
-			continue;
-		}
-		else if (!(str[i] >= 48 && str[i] <= 58))
-		{
-			throw std::exception();
-		}
-	}
-	if ((str.at(0) - 48) * 10 + (str.at(1) - 48) < 1 || ((str.at(0) - 48) * 10 + (str.at(1) - 48)) > 31)
-	{
-		throw std::exception();
-	}
-	if ((str.at(3) - 48) * 10 + (str.at(4) - 48) < 1 || ((str.at(3) - 48) * 10 + (str.at(4) - 48)) > 12)
-	{
-		throw std::exception();
-	}
-	if (((str.at(6) - 48) * 1000 + (str.at(7) - 48) * 100 + (str.at(8) - 48) * 10 + (str.at(9) - 48)) < 2020 || ((str.at(6) - 48) * 1000 + (str.at(7) - 48) * 100 + (str.at(8) - 48) * 10 + (str.at(9) - 48)) > 2300)
-	{
-		throw std::exception();
-	}
-}
-
-void MedicinesMenu::CheckProductInt(std::string str)
-{
-	for (auto i : str)
-	{
-		if (!(i >= 48 && i <= 58))
-		{
-			throw std::exception();
-		}
-	}
-}
-
-std::string MedicinesMenu::CreateNewDate()
-{
-	std::string str;
-	bool isTrue = true;
-	while (isTrue)
-	{
-		try
-		{
-			isTrue = false;
-			std::cout << "New Date : ";
-			std::cin >> str;
-			CheckProductDate(str);
-		}
-		catch (const std::exception& err)
-		{
-			PrintProductForm();
-			std::cout << "Wrong form! Please, type date like this example: dd.mm.yyyy" << std::endl;
-			isTrue = true;
-		}
-	}
-	return str;
-}
-
-std::string MedicinesMenu::CreateNewString()
-{
-	std::string str;
-	bool isTrue = true;
-	while (isTrue)
-	{
-		try
-		{
-			isTrue = false;
-			std::cout << "New Line : ";
-			std::cin >> str;
-			CheckProductString(str);
-		}
-		catch (const std::exception& err)
-		{
-			PrintProductForm();
-			std::cout << "Wrong! Please, try again." << std::endl;
-			isTrue = true;
-		}
-	}
-	return str;
-}
-
-std::string MedicinesMenu::CreateNewInt()
-{
-	std::string str;
-	bool isTrue = true;
-	while (isTrue)
-	{
-		try
-		{
-			isTrue = false;
-			std::cout << "New Line : ";
-			std::cin >> str;
-			CheckProductInt(str);
-		}
-		catch (const std::exception& err)
-		{
-			PrintProductForm();
-			std::cout << "Wrong format! Please, use only numbers." << std::endl;
-			isTrue = true;
-		}
-	}
-	return str;
-}
-
-
-
 void MedicinesMenu::OrderProduct()
 {
 	std::cout << "\n\n" << "choose amount: ";
 	int amount;
 	std::cin >> amount;
-	CartProduct* p = new CartProduct;
-	*p = GetCurrentProductAmount(amount);
-	bool state = true;
-	for (auto it : cart)
-	{
-		if (it->id == p->id)
-		{
-			it->amount += amount;
-			state = false;
-		}
-	}
-	if (state)
-	{
-		cart.push_back(p);//
-	}
+	CartProduct cartProduct = TakeAmountFromCurrentProduct(amount);
 
 	repository->GetMedicinesTable()->Save();
-
-	if (repository->GetCartTable()->IsProductExist(*p))
+	if (repository->GetCartTable()->IsProductExist(*factory.GetCartFlyweight(cartProduct, amount)))///////////////////////////////////
 	{
-		p->amount += amount;
-		repository->GetCartTable()->Update(*p);
+		factory.GetCartFlyweight(cartProduct, amount)->amount += amount;/////
+		repository->GetCartTable()->Update(*factory.GetCartFlyweight(cartProduct, amount));
+	}
+	else if ((factory.GetCartFlyweight(cartProduct, amount))->amount == 0)
+	{
+		factory.GetCartFlyweight(cartProduct, amount)->amount += amount;
+		repository->GetCartTable()->Create(*factory.GetCartFlyweight(cartProduct, amount));
 	}
 	else
 	{
-		repository->GetCartTable()->Create(*p);
+		repository->GetCartTable()->Create(*factory.GetCartFlyweight(cartProduct, amount));
 	}
 	
 	std::cout << "\n" << "product successfully added to cart" << std::endl;
@@ -512,14 +344,14 @@ void MedicinesMenu::OpenCard()
 		PrintTableForm();
 		std::cout << "\t\t\t" << "My Cart" << std::endl;
 		std::cout << "Product Id || Name || Amount" << "\n\n";
-		if (cart.size() == 0)
+		if ((*repository->GetCartTable()->GetAll()).size() == 0)
 		{
 			std::cout << "||  " << "Cart is Emply" << std::endl;
 			std::cout << "\n\n" << "|| 1 : Back " << std::endl;
 		}
 		else
 		{
-			for (auto it : cart)
+			for (auto it : *repository->GetCartTable()->GetAll())
 			{
 				std::cout << "||  " << it->id << "|| " << it->name << "|| " << it->amount << std::endl;
 			}
@@ -532,17 +364,26 @@ void MedicinesMenu::OpenCard()
 		}
 		else if (g == 2)
 		{
-			for (auto it : cart)
+			for (auto it : *repository->GetCartTable()->GetAll())
 			{
-				ReturnProductAmount(*it);
+				ReturnProductAmount(it->id, it->name, it->amount);
+
+				//
+				CartProduct c;
+				c.id = it->id;
+				c.name = it->name;
+				factory.GetCartFlyweight(c, 0)->amount = 0;
+				//
 			}
 			repository->GetCartTable()->DeleteAll();
 			PrintTableForm();
+			w = false;
+			(*repository->GetCartTable()->GetAll()).clear();
 		}
 	}
 }
 
-CartProduct& MedicinesMenu::GetCurrentProductAmount(int amount)
+CartProduct& MedicinesMenu::TakeAmountFromCurrentProduct(int amount)
 {
 	CartProduct* p = new CartProduct;
 	products = repository->GetMedicinesTable()->GetAll();
@@ -552,22 +393,21 @@ CartProduct& MedicinesMenu::GetCurrentProductAmount(int amount)
 		{
 			p->id = it->id;
 			p->name = it->name;
-			p->amount = amount;
 			it->amount = it->amount - amount;
 		}
 	}
 	return *p;
 }
 
-void MedicinesMenu::ReturnProductAmount(CartProduct& p)
+void MedicinesMenu::ReturnProductAmount(int id, std::string name, int amount)
 {
 	products = repository->GetMedicinesTable()->GetAll();
 	for (auto it : *products)
 	{
-		bool state = (it->id == p.id);
-		if (true)
+		if (it->id == id)
 		{
-			it->amount + p.amount;
+			it->amount += amount;
 		}
 	}
+	repository->GetMedicinesTable()->Save();
 }
