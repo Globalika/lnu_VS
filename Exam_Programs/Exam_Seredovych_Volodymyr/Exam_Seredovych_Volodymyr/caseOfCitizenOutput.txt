@@ -1,0 +1,5 @@
+1875,grantingBenefits,Abdulai,Gerasym
+3422,paymentOfTaxes,Verfe,Esgkjnero
+7854,issuanceOfLicenses,Ofdbn,Egkerln
+5733,utilities,Ldkjner,Frtugre
+3121,housingIssues,Admvreo,Uvuber
