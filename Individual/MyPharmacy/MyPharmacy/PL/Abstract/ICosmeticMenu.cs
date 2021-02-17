@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AdminConsole.PL.Impl
+namespace MyPharmacy.PL.Abstract
 {
-    public class MedicineMenu
+    interface ICosmeticMenu
     {
     }
 }

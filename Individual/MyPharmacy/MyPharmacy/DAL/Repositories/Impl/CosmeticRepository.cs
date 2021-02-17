@@ -16,14 +16,11 @@ namespace MyPharmacy.DAL.Repositories.Impl
         public override Cosmetic GetById(int id)
         {
             return entities.Single(r => r.id == id);
-
-            //throw new System.NotImplementedException();
         }
 
         public override List<Cosmetic> GetAll()
         {
             return entities;
-            //throw new System.NotImplementedException();
         }
     }
 }

@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace AdminConsole.PL.Impl
+namespace MyPharmacy.PL.Impl
 {
-    public class BaseMenu<TableType, ProductType>
+    public class BaseMenu<TableType, ProductType> /*: IBaseMenu*/
 	{
+		//readonly bool level;
+		public BaseMenu() { }
+		//public BaseMenu(bool level)
+  //      {
+		//	this.level = level;
+  //      }
 		public enum TableMenuCommands
 		{
 			TableMenuBack,
@@ -13,8 +18,10 @@ namespace AdminConsole.PL.Impl
 			Down,
 			SelectCurrentProduct,
 			SortTableById,
-			OrderCurrentProduct,
-			TableOpenCard,
+			CreateNewProduct,//admin
+			DeleteCurrentProduct,//admin
+			OrderCurrentProduct,//user
+			TableOpenCard,//user
 			TableMenuWaiting,
 		};
 		public enum ProductMenuCommands
@@ -31,36 +38,13 @@ namespace AdminConsole.PL.Impl
 		public ProductMenuCommands pState;
 		public int currentProductFieldId = 1;
 
-		public virtual void ShowTableMenu() { }
+		public virtual void ShowTableMenu(bool level) { }
 		public virtual void PrintTable() { }
-		public virtual void PrintTableForm() { }
-		public virtual void PrintSortTable() { }
+		public virtual void PrintTableForm(bool level) { }
+		public virtual void PrintSortTable(bool level) { }
 		public virtual void UpdateDataForTableMenu() { }
-		public void MoveCursorByProductId(int n)
-		{
-            //if (n == 1)
-            //{
-            //    if (currentId == products[products.Count - 1].id)
-            //    {
-            //        return;
-            //    }
-            //}
-            //else
-            //{
-            //    if (currentId == products->at(0)->id)
-            //    {
-            //        return;
-            //    }
-            //}
-            //int i = 0;
-            //while (products->at(i)->id != currentId)
-            //{
-            //    i++;
-            //}
-            //currentId = products->at(i + n)->id;
-        }
+		public virtual void MoveCursorByProductId(int n) { }
 		public virtual void CreateNewProductForm() { }
-		//public virtual ~BaseMenu() { }
 		public void SetState(TableMenuCommands state)
 		{
 			this.tState = state;
@@ -131,7 +115,7 @@ namespace AdminConsole.PL.Impl
 					str = Console.ReadLine();
 					CheckProductDate(str);
 				}
-				catch (Exception err)
+				catch 
 				{
 					PrintProductForm();
 					Console.WriteLine("Wrong form! Please, type date like this example: dd.mm.yyyy");
@@ -153,7 +137,7 @@ namespace AdminConsole.PL.Impl
 					str = Console.ReadLine();
 					CheckProductString(str);
                 }
-                catch (Exception err)
+                catch
 				{
                     PrintProductForm();
 					Console.WriteLine("Wrong! Please, try again.");
@@ -175,7 +159,7 @@ namespace AdminConsole.PL.Impl
 					str = Console.ReadLine();
 					CheckProductInt(str);
                 }
-                catch (Exception err)
+                catch
 					{
                     PrintProductForm();
 					Console.WriteLine("Wrong format! Please, use only numbers.");
@@ -184,40 +168,9 @@ namespace AdminConsole.PL.Impl
             }
             return str;
         }
-		//public ProductType ChangeCurrentFieldById(int Id) { }
 		public void SetState(ProductMenuCommands state)
 		{
 			this.pState = state;
 		}
-		//public TablesRepository repository;
-		//public FlyweightFactory factory;
 	}
 }
-
-
-
-
-
-//void BaseMenu<TableType, ProductType>::MoveCursorByProductId(int n)
-//{
-//	if (n == 1)
-//	{
-//		if (currentId == products->at(products->size() - 1)->id)
-//		{
-//			return;
-//		}
-//	}
-//	else
-//	{
-//		if (currentId == products->at(0)->id)
-//		{
-//			return;
-//		}
-//	}
-//	int i = 0;
-//	while (products->at(i)->id != currentId)
-//	{
-//		i++;
-//	}
-//	currentId = products->at(i + n)->id;
-//}

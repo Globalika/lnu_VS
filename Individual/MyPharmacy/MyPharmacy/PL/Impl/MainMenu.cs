@@ -1,9 +1,14 @@
 ﻿using System;
 
-namespace AdminConsole.PL.Impl
+namespace MyPharmacy.PL.Impl
 {
     public class MainMenu
     {
+		public MainMenu()
+		{
+			m = new MedicineMenu();
+			c = new CosmeticMenu();
+		}
 		public enum MainMenuCommands
 		{
 			Quit,
@@ -15,47 +20,43 @@ namespace AdminConsole.PL.Impl
 		private MedicineMenu m;
 		private CosmeticMenu c;
 
-		public MainMenu()
+		//public MainMenu()
+		//{
+		//}
+		public void ShowMainMenu(bool level) 
 		{
-			m = new MedicineMenu();
-			c = new CosmeticMenu();
-		}
-		public void ShowMainMenu() 
-		{
-			PrintMenuForm();
-			//char i = Console.ReadKey().KeyChar;
+			PrintMenuForm(level);
 			MainMenuCommands command;
 			do
 			{
-				//char ch = Console.ReadKey(true).KeyChar;
-				//command = (MainMenuCommands)Convert.ToInt32(ch-48);
-				//command = (MainMenuCommands)(int.Parse(Console.ReadKey(true).KeyChar));
-				//int i;
 				command = (MainMenuCommands)((int)(Console.ReadKey(true).KeyChar)-48);
 				switch (command)
 				{
-					case MainMenuCommands.ShowMedicinesTable :
+					case MainMenuCommands.ShowMedicinesTable:
 					{
-						//m.ShowTableMenu();
-						PrintMenuForm();
+						m.ShowTableMenu(level);
+						PrintMenuForm(level);
 						break;
 					}
 					case MainMenuCommands.ShowCosmeticsTable:
 					{
-						c.ShowTableMenu();
-						PrintMenuForm();
+						c.ShowTableMenu(level);
+						PrintMenuForm(level);
 						break;
 					}
 					case MainMenuCommands.Quit:
 					{
 						Console.WriteLine("Quit Pharmacy? | 0 : No | 1 : Yes");
-						//int j = GETCH;
 						if (Console.ReadKey(true).KeyChar == '1')
 						{
 							command = MainMenuCommands.Quit;
-							//Console.Clear();
-							PrintMenuForm();
+							break;
 						}
+                        else
+                        {
+							command = MainMenuCommands.MainMenuWaiting;
+						}
+						PrintMenuForm(level);
 						break;
 					}
 					default:
@@ -67,12 +68,12 @@ namespace AdminConsole.PL.Impl
 			Console.Clear();
 			PrintPharmacyGetWellSoon();
 		}
-		public void PrintPharmacyWellcome() 
+		public void PrintPharmacyWellcome(bool level) 
 		{
 			Console.WriteLine("\n\n\n");
 			Console.WriteLine("________________________________________________________");
 			Console.WriteLine("\n\n\n");
-			Console.WriteLine("\t\t\tPharmacy +");
+			Console.Write("\t\t\tPharmacy +"); if (level) { Console.WriteLine("\t Admin"); }
 			Console.WriteLine("\n\n\n");
 			Console.WriteLine("________________________________________________________");
 			Console.WriteLine("\n\n\n");
@@ -87,13 +88,13 @@ namespace AdminConsole.PL.Impl
 			Console.WriteLine("________________________________________________________");
 			Console.WriteLine("\n\n\n");
 		}
-		public void PrintMenuForm() 
+		public void PrintMenuForm(bool level) 
 		{
 			Console.Clear();
 			Console.Write($"{(int)MainMenuCommands.Quit } : Quit | ");
 			Console.Write($"{(int)MainMenuCommands.ShowMedicinesTable} : Choose Medicines Table | ");
 			Console.WriteLine($"{(int)MainMenuCommands.ShowCosmeticsTable} : Choose Cosmetics Table");
-			PrintPharmacyWellcome();
+			PrintPharmacyWellcome(level);
 			SetState(MainMenuCommands.MainMenuWaiting);
 		}
 		public void SetState(MainMenuCommands state)

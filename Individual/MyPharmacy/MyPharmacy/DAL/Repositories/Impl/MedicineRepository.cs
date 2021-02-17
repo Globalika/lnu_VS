@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MyPharmacy.DAL.Repositories.Impl
 {
-    public class MedisineRepository : BaseRepository<Medicine>, IMedicineRepository
+    public class MedicineRepository : BaseRepository<Medicine>, IMedicineRepository
     {
 
         public override void Delete(int id)
