@@ -295,10 +295,10 @@ namespace MyPharmacy.PL.Impl
             Console.WriteLine("\t\t\t Cosmetics Product \t\t\t \n\n");
             Console.WriteLine
                 (
-                $"{ProductMenuCommands.ProductMenuBack} : Back | " +
-                $"{ProductMenuCommands.ProductFieldUp} : Move Up | " +
-                $"{ProductMenuCommands.ProductFieldDown} : Move Down | " +
-                $"{ProductMenuCommands.ChangeCurrentField}  : ChangeCurrentField "
+                $"{(int)ProductMenuCommands.ProductMenuBack} : Back | " +
+                $"{(int)ProductMenuCommands.ProductFieldUp} : Move Up | " +
+                $"{(int)ProductMenuCommands.ProductFieldDown} : Move Down | " +
+                $"{(int)ProductMenuCommands.ChangeCurrentField}  : ChangeCurrentField "
                 );
             SetState(ProductMenuCommands.ProductMenuWaiting);
             PrintProduct();
