@@ -1,5 +1,7 @@
 ﻿using MyPharmacy.DAL.Repositories.Abstract;
 using MyPharmacy.DAL.Modules.Impl;
+using System.Collections.Generic;
+
 namespace MyPharmacy.DAL.Repositories.Impl
 {
     public class CartRepository : BaseRepository<Flyweight>,ICartRepositoty
@@ -19,6 +21,10 @@ namespace MyPharmacy.DAL.Repositories.Impl
 			{
 				return true;
 			}
+		}
+		public override List<Flyweight> GetAll()
+        {
+			return entities;
 		}
 	}
 }

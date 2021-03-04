@@ -318,7 +318,6 @@ void FindInverseMatrix(std::string filePath)
 	{
 		float* column = GetMatrixColumn(rightMatrix, dimension, i);
 		float* resultColumn = GetResultColumn(leftMatrix, column, dimension, dimension);
-		float k1 = resultColumn[0], k2 = resultColumn[1], k3 = resultColumn[2];
 		for (size_t j = 0; j < dimension; j++)
 		{
 			resultMatrix[j][i] = resultColumn[j];

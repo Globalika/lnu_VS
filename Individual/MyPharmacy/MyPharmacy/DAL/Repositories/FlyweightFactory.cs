@@ -19,6 +19,6 @@ namespace MyPharmacy.DAL.Repositories
 			flyweightsArr.Add(flyw);
 			return flyw;
 		}
-	    public List<Flyweight> flyweightsArr;
+	    public List<Flyweight> flyweightsArr = new List<Flyweight>();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyPharmacy.PL.Impl
+namespace MyPharmacy.PL.AdminMenu.Impl
 {
     public class MainMenu
     {
@@ -23,9 +23,9 @@ namespace MyPharmacy.PL.Impl
 		//public MainMenu()
 		//{
 		//}
-		public void ShowMainMenu(bool level) 
+		public void ShowMainMenu() 
 		{
-			PrintMenuForm(level);
+			PrintMenuForm();
 			MainMenuCommands command;
 			do
 			{
@@ -34,14 +34,14 @@ namespace MyPharmacy.PL.Impl
 				{
 					case MainMenuCommands.ShowMedicinesTable:
 					{
-						m.ShowTableMenu(level);
-						PrintMenuForm(level);
+						m.ShowTableMenu();
+						PrintMenuForm();
 						break;
 					}
 					case MainMenuCommands.ShowCosmeticsTable:
 					{
-						c.ShowTableMenu(level);
-						PrintMenuForm(level);
+						c.ShowTableMenu();
+						PrintMenuForm();
 						break;
 					}
 					case MainMenuCommands.Quit:
@@ -56,7 +56,7 @@ namespace MyPharmacy.PL.Impl
                         {
 							command = MainMenuCommands.MainMenuWaiting;
 						}
-						PrintMenuForm(level);
+						PrintMenuForm();
 						break;
 					}
 					default:
@@ -68,12 +68,12 @@ namespace MyPharmacy.PL.Impl
 			Console.Clear();
 			PrintPharmacyGetWellSoon();
 		}
-		public void PrintPharmacyWellcome(bool level) 
+		public void PrintPharmacyWellcome() 
 		{
 			Console.WriteLine("\n\n\n");
 			Console.WriteLine("________________________________________________________");
 			Console.WriteLine("\n\n\n");
-			Console.Write("\t\t\tPharmacy +"); if (level) { Console.WriteLine("\t Admin"); }
+			Console.Write("\t\t\tPharmacy +\t Admin");
 			Console.WriteLine("\n\n\n");
 			Console.WriteLine("________________________________________________________");
 			Console.WriteLine("\n\n\n");
@@ -83,18 +83,18 @@ namespace MyPharmacy.PL.Impl
 			Console.WriteLine("\n\n\n");
 			Console.WriteLine("________________________________________________________");
 			Console.WriteLine("\n\n\n");
-			Console.WriteLine("\t\t\tGetWellSoon +");
+			Console.WriteLine("\t\t\tGetWellSoon +\t Admin");
 			Console.WriteLine("\n\n\n");
 			Console.WriteLine("________________________________________________________");
 			Console.WriteLine("\n\n\n");
 		}
-		public void PrintMenuForm(bool level) 
+		public void PrintMenuForm() 
 		{
 			Console.Clear();
 			Console.Write($"{(int)MainMenuCommands.Quit } : Quit | ");
 			Console.Write($"{(int)MainMenuCommands.ShowMedicinesTable} : Choose Medicines Table | ");
 			Console.WriteLine($"{(int)MainMenuCommands.ShowCosmeticsTable} : Choose Cosmetics Table");
-			PrintPharmacyWellcome(level);
+			PrintPharmacyWellcome();
 			SetState(MainMenuCommands.MainMenuWaiting);
 		}
 		public void SetState(MainMenuCommands state)

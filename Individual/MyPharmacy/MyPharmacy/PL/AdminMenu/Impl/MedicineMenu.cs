@@ -3,54 +3,25 @@ using System.Collections.Generic;
 using MyPharmacy.DAL.Modules.Impl;
 using MyPharmacy.DAL.Repositories.Impl;
 using System.Linq;
-using MyPharmacy.DAL.Repositories;
 
-namespace MyPharmacy.PL.Impl
+namespace MyPharmacy.PL.AdminMenu.Impl
 {
     public class MedicineMenu : BaseMenu<MedicineRepository, Medicine>
     {
-        public MedicineMenu()
+        public MedicineMenu() /*: base()*/
         {
-            cart = new CartRepository();
             medRepos = new MedicineRepository()
             { };
-            medRepos.Create(new Medicine()
-            {
-                id = 3444,
-                name = "wgykue",
-                amount = 43,
-                expirationDate = "21.10.1999",
-                storageTemperature = 42
-            });
-            medRepos.Create(new Medicine()
-            {
-                id = 3885,
-                name = "ftytuur",
-                amount = 22,
-                expirationDate = "18.07.2200",
-                storageTemperature = 453
-            });
-            medRepos.Create(new Medicine()
-            {
-                id = 3454,
-                name = "twferjsr",
-                amount = 3,
-                expirationDate = "01.03.2030",
-                storageTemperature = 12
-            });
-
         }
         MedicineRepository medRepos;
-        CartRepository cart;
-        FlyweightFactory factory;
-        public void ShowTableMenu(bool level)
+        public override void ShowTableMenu()
         {
             products = medRepos.GetAll() ?? new List<Medicine>();
             if (products.Count() != 0)
             {
                 this.currentId = products[0].id;
             }
-            PrintTableForm(level);
+            PrintTableForm();
             TableMenuCommands catcher;
             do
             {
@@ -60,72 +31,37 @@ namespace MyPharmacy.PL.Impl
                     case TableMenuCommands.Up:
                         {
                             MoveCursorByProductId(-1);
-                            PrintTableForm(level);
+                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.Down:
                         {
                             MoveCursorByProductId(1);
-                            PrintTableForm(level);
+                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.SelectCurrentProduct:
                         {
                             ShowProductMenu(this.currentId);
-                            PrintTableForm(level);
+                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.SortTableById:
                         {
-                            PrintSortTable(level);
+                            SortTable();
+                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.CreateNewProduct:
                         {
-                            if (level)
-                            {
-                                Console.WriteLine("Create new product? | 0 : No | 1 : Yes");
-                                if (Console.ReadKey().KeyChar == '1')
-                                {
-
-                                    CreateNewProductForm();
-                                    currentId = products[0].id;
-                                }
-                                PrintTableForm(level);
-                            }
+                            CreateNewProduct();
+                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.DeleteCurrentProduct:
                         {
-                            if (level)
-                            {
-                                Console.WriteLine("Delete current product? | 0 : No | 1 : Yes");
-                                if (Console.ReadKey().KeyChar == '1')
-                                {
-                                    medRepos.Delete(currentId);
-                                    products = medRepos.GetAll();
-                                    currentId = products[0].id;
-                                }
-                                PrintTableForm(level);
-                            }
-                            break;
-                        }
-                    case TableMenuCommands.OrderCurrentProduct:
-                        {
-                            if (!level)
-                            {
-                                OrderProduct(level);
-                                PrintTableForm(level);
-                            }
-                            break;
-                        }
-                    case TableMenuCommands.TableOpenCard:
-                        {
-                            if (!level)
-                            {
-                                OpenCard(level);
-                                PrintTableForm(level);
-                            }
+                            DeleteCurrentProduct();
+                            PrintTableForm();
                             break;
                         }
                     default:
@@ -135,7 +71,7 @@ namespace MyPharmacy.PL.Impl
                 }
             } while (catcher != TableMenuCommands.TableMenuBack);
         }
-        public void PrintTable()
+        public override void PrintTable()
         {
             Console.WriteLine("\n\n");
             Console.WriteLine("ID | expirationDate | Name | storageFormType | Capacity | Amount");
@@ -152,7 +88,7 @@ namespace MyPharmacy.PL.Impl
             }
             Console.WriteLine("\n\n");
         }
-        public override void PrintTableForm(bool level)
+        public override void PrintTableForm()
         {
             Console.Clear();
             Console.WriteLine("\t\t\t Medicine Table \t\t\t \n\n");
@@ -161,29 +97,37 @@ namespace MyPharmacy.PL.Impl
                 $" {(int)TableMenuCommands.Up}" + $" : Up |" +
                 $" {(int)TableMenuCommands.Down} : Down |\n" +
                 $" {(int)TableMenuCommands.SelectCurrentProduct} : Select Current Product |" +
-                $" {(int)TableMenuCommands.SortTableById}: Sort Table By Id | "
+                $" {(int)TableMenuCommands.SortTableById}: Sort Table By Id | " +
+                $" {(int)TableMenuCommands.CreateNewProduct} : Create new product | " +
+                $" {(int)TableMenuCommands.DeleteCurrentProduct}  : Delete current product | "
+                
                 );
-            if (level)
-            {
-                Console.WriteLine(
-                    $" {(int)TableMenuCommands.CreateNewProduct} : Create new product | " +
-                    $" {(int)TableMenuCommands.DeleteCurrentProduct}  : Delete current product | ")
-                    ;
-            }
-            else
-            {
-                Console.WriteLine(
-                    $" {(int)TableMenuCommands.OrderCurrentProduct}  : Order current product | " +
-                    $" {(int)TableMenuCommands.TableOpenCard} : Table open card | "
-                    );
-            }
             SetState(TableMenuCommands.TableMenuWaiting);
             PrintTable();
         }
-        public override void PrintSortTable(bool level)
+        public void CreateNewProduct()
+        {
+            Console.WriteLine("Create new product? | 0 : No | 1 : Yes");
+            if (Console.ReadKey().KeyChar == '1')
+            {
+
+                CreateNewProductForm();
+                currentId = products[0].id;
+            }
+        }
+        public void DeleteCurrentProduct()
+        {
+            Console.WriteLine("Delete current product? | 0 : No | 1 : Yes");
+            if (Console.ReadKey().KeyChar == '1')
+            {
+                medRepos.Delete(currentId);
+                products = medRepos.GetAll();
+                currentId = products[0].id;
+            }
+        }
+        public override void SortTable()
         {
             Console.Clear();
-
             if (products[0].id > products[1].id)
             {
                 products.Sort((x, y) => x.id.CompareTo(y.id));
@@ -192,7 +136,6 @@ namespace MyPharmacy.PL.Impl
             {
                 products.Sort((y, x) => x.id.CompareTo(y.id));
             }
-            PrintTableForm(level);
         }
         public override void MoveCursorByProductId(int n)
         {
@@ -236,7 +179,7 @@ namespace MyPharmacy.PL.Impl
                         }
                     case ProductMenuCommands.ProductFieldDown:
                         {
-                            if (currentProductFieldId != 5) { currentProductFieldId++; }
+                            if (currentProductFieldId != 4) { currentProductFieldId++; }
                             PrintProductForm();
                             break;
                         }
@@ -292,7 +235,7 @@ namespace MyPharmacy.PL.Impl
         public void PrintProductForm()
         {
             Console.Clear();
-            Console.WriteLine("\t\t\t Cosmetics Product \t\t\t \n\n");
+            Console.WriteLine("\t\t\t Medicine Product \t\t\t \n\n");
             Console.WriteLine
                 (
                 $"{(int)ProductMenuCommands.ProductMenuBack} : Back | " +
@@ -309,7 +252,7 @@ namespace MyPharmacy.PL.Impl
             string str; int k;
 
             Console.WriteLine("Id (Example : 9999) : ");
-            k = Console.Read();
+            k = int.Parse(Console.ReadLine());
             product.id = k;
             Console.WriteLine();
 
@@ -324,12 +267,12 @@ namespace MyPharmacy.PL.Impl
             Console.WriteLine();
 
             Console.WriteLine("Storage Temperature (Example : 23) : ");
-            k = Console.Read();
+            k = int.Parse(Console.ReadLine());
             product.storageTemperature = k;
             Console.WriteLine();
 
             Console.WriteLine("Amount (Example : 44) : ");
-            k = Console.Read();
+            k = int.Parse(Console.ReadLine());
             product.amount = k;
             Console.WriteLine();
 
@@ -368,118 +311,6 @@ namespace MyPharmacy.PL.Impl
             }
             return product;
         }
-
-        public void OrderProduct(bool level)
-        {
-            Console.WriteLine("\n\n choose amount: ");
-            int amount = int.Parse(Console.ReadLine());
-            CartEntity cartProduct = TakeAmountFromCurrentProduct(amount);
-
-            if (cart.IsProductExist(factory.GetCartFlyweight(cartProduct, amount)))///////////////////////////////////
-            {
-                factory.GetCartFlyweight(cartProduct, amount).amount += amount;/////
-            }
-            else if ((factory.GetCartFlyweight(cartProduct, amount)).amount == 0)
-            {
-                factory.GetCartFlyweight(cartProduct, amount).amount += amount;
-                cart.Create(factory.GetCartFlyweight(cartProduct, amount));
-            }
-            else
-            {
-                cart.Create(factory.GetCartFlyweight(cartProduct, amount));
-            }
-
-            Console.WriteLine("\n product successfully added to cart");
-            Console.WriteLine("1 : back to table | 2 : open cart");
-
-            bool w = true;
-            while (w)
-            {
-                int k = ((int)Console.ReadKey().KeyChar) - 48;
-                if (k == 1)
-                {
-                    w = false;
-                }
-                else if (k == 2)
-                {
-                    PrintTableForm(level);
-                    OpenCard(level);
-                    w = false;
-                }
-            }
-
-        }
-
-        public void OpenCard(bool level)
-        {
-            bool w = true;
-            while (w)
-            {
-                PrintTableForm(level);
-                Console.WriteLine("\t\t\t My Cart");
-                Console.WriteLine("Product Id || Name || Amount \n\n");
-                if (cart.GetAll() == null)
-                {
-                    Console.WriteLine("||  Cart is Emply");
-                    Console.WriteLine("\n\n || 1 : Back ");
-                }
-                else
-                {
-                    foreach (var it in cart.entities)
-                    {
-                        Console.WriteLine(it.ToString());
-                    }
-                    Console.WriteLine("\n\n || 1 : Back | 2 : Clear Cart");
-                }
-                int g = ((int)(Console.ReadKey().KeyChar)) - 48;
-                if (g == 1)
-                {
-                    w = false;
-                }
-                else if (g == 2)
-                {
-                    foreach (var it in cart.entities)
-                    {
-                        ReturnProductAmount(it.id, it.name, it.amount);
-                        //
-                        CartEntity c = new CartEntity();
-                        c.id = it.id;
-                        c.name = it.name;
-                        factory.GetCartFlyweight(c, 0).amount = 0;
-                        //
-                    }
-                    PrintTableForm(level);
-                    w = false;
-                }
-            }
-        }
-
-        public CartEntity TakeAmountFromCurrentProduct(int amount)
-        {
-            CartEntity p = new CartEntity();
-            products = medRepos.GetAll();
-            foreach (var it in products)
-            {
-                if (it.id == currentId)
-                {
-                    p.id = it.id;
-                    p.name = it.name;
-                    it.amount = it.amount - amount;
-                }
-            }
-            return p;
-        }
-
-        public void ReturnProductAmount(int id, string name, int amount)
-        {
-            products = medRepos.GetAll();
-            foreach (var it in products)
-            {
-                if (it.id == id)
-                {
-                    it.amount += amount;
-                }
-            }
-        }
     }
 }
+

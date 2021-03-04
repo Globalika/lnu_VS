@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MyPharmacy.PL.Impl
+namespace MyPharmacy.PL.UserMenu.Impl
 {
-    public class BaseMenu<TableType, ProductType> /*: IBaseMenu*/
+	public class BaseMenu<TableType, ProductType> /*: IBaseMenu*/
 	{
 		//readonly bool level;
 		public BaseMenu() { }
@@ -18,8 +18,6 @@ namespace MyPharmacy.PL.Impl
 			Down,
 			SelectCurrentProduct,
 			SortTableById,
-			CreateNewProduct,//admin
-			DeleteCurrentProduct,//admin
 			OrderCurrentProduct,//user
 			TableOpenCard,//user
 			TableMenuWaiting,
@@ -38,10 +36,10 @@ namespace MyPharmacy.PL.Impl
 		public ProductMenuCommands pState;
 		public int currentProductFieldId = 1;
 
-		public virtual void ShowTableMenu(bool level) { }
+		public virtual void ShowTableMenu() { }
 		public virtual void PrintTable() { }
-		public virtual void PrintTableForm(bool level) { }
-		public virtual void PrintSortTable(bool level) { }
+		public virtual void PrintTableForm() { }
+		public virtual void SortTable() { }
 		public virtual void UpdateDataForTableMenu() { }
 		public virtual void MoveCursorByProductId(int n) { }
 		public virtual void CreateNewProductForm() { }

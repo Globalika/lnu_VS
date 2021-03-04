@@ -9,7 +9,7 @@ int main()
 		m4Path = "src/matrixFolder/matrix4x4.txt",
 		m5Path = "src/matrixFolder/matrix5x5Det0.txt";
 
-	FindInverseMatrix(m2Path);
+	FindInverseMatrix(m3Path);
 
 	return 0;
 }

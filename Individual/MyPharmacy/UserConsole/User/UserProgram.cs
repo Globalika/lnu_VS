@@ -1,4 +1,4 @@
-﻿using MyPharmacy.PL.Impl;
+﻿using MyPharmacy.PL.UserMenu.Impl;
 
 namespace UserConsole.Admin
 {
@@ -7,7 +7,7 @@ namespace UserConsole.Admin
         static void Main(string[] args)
         {
             MainMenu menu = new MainMenu();
-            menu.ShowMainMenu(false);
+            menu.ShowMainMenu();
         }
     }
 }

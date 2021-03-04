@@ -1,4 +1,4 @@
-﻿namespace MyPharmacy.PL.Abstract
+﻿namespace MyPharmacy.PL.UserMenu.Abstract
 {
     public interface IBaseMenu
     {

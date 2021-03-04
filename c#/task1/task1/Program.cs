@@ -370,8 +370,26 @@ namespace task1
                 count++;
             return count;
         }
+        static bool isNearlyEqualZero(float num)
+        {
+            const float epsilonZ = 1e-6f;
+            return num <= epsilonZ;
+        }
+        static bool isNearlyEqualInfinity(float num)
+        {
+            const float epsilonInf = 1.5e30f;
+            return (num >= -epsilonInf) || (num <= epsilonInf);
+        }
         static int ToBinary6(float num)
         {
+            if (isNearlyEqualZero(num))//float.IsNaN(num)
+            {
+                throw new DivideByZeroException("Infinity!");
+            }
+            if (isNearlyEqualInfinity(num))//float.IsInfinity(num)
+            {
+                //
+            }
             int count = 0;
             int numInt = (int)num;
             float numFract = num - numInt;
@@ -399,16 +417,31 @@ namespace task1
             //
             return count;
         }
+        static string ToBinaryString(float value)
+        {
+
+            int bitCount = sizeof(float) * 8; // never rely on your knowledge of the size
+            char[] result = new char[bitCount]; // better not use string, to avoid ineffective string concatenation repeated in a loop
+
+            // now, most important thing: (int)value would be "semantic" cast of the same
+            // mathematical value (with possible rounding), something we don't want; so:
+            int intValue = System.BitConverter.ToInt32(BitConverter.GetBytes(value), 0);
+
+            for (int bit = 0; bit < bitCount; ++bit)
+            {
+                int maskedValue = intValue & (1 << bit); // this is how shift and mask is done.
+                if (maskedValue > 0)
+                    maskedValue = 1;
+                // at this point, masked value is either int 0 or 1
+                result[bitCount - bit - 1] = maskedValue.ToString()[0]; // bits go right-to-left in usual Western Arabic-based notation
+            }
+
+            return new string(result); // string from character array
+        }
         static void Main(string[] args)
         {
-            //DigitCount d = new DigitCount();
-            //int k = d.Get(23.0f);
-            //Console.WriteLine(k);
-            //Console.WriteLine(ToBinary4(3));
-            //Console.Read();
-
-
-            Console.WriteLine(DoubleConverter.ToExactString(34.33f));
+            Console.WriteLine(ToBinary4(23));
+            Console.WriteLine(ToBinary6(23));
         }
 
         
