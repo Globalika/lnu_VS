@@ -14,7 +14,6 @@ namespace MyPharmacy.DAL.Repositories
 					return it;
 				}
 			}
-
 			Flyweight flyw = new Flyweight(product, amount);
 			flyweightsArr.Add(flyw);
 			return flyw;

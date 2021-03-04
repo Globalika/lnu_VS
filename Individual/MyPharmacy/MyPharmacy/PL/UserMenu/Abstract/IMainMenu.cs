@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPharmacy.PL.UserMenu.Abstract
+﻿namespace MyPharmacy.PL.UserMenu.Abstract
 {
     interface IMainMenu
     {

@@ -8,7 +8,6 @@ namespace MyPharmacy.DAL.Repositories.Impl
     {
         public CartRepository()
         {
-
         }
 		public bool IsProductExist(Flyweight product)
 		{

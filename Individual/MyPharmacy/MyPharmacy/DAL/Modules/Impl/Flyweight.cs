@@ -20,7 +20,7 @@
         }
 		public override string ToString()
 		{
-			return $"{id}'|'{name}'|'{amount}";
+			return $"{id} | {name} | {amount}";
 		}
 	}
 }

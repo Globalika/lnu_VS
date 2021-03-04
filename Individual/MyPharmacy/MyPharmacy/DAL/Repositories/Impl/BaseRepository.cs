@@ -1,10 +1,20 @@
 ﻿using MyPharmacy.DAL.Repositories.Abstract;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MyPharmacy.DAL.Repositories.Impl
 {
-    public class BaseRepository<T> : IBaseRepository<T>
+    //public class MyEnumerator<T> : IEnumerable<T>
+    //{
+    //    public IEnumerator<T> GetEnumerator()
+    //    {
+    //        return new MyInfEnumerator();
+    //    }
+    //    //public Get
+    //}
+    //T[] entitties;
+    //var entTT = entities.GetEnumerator();
+
+    public abstract class BaseRepository<T> : IBaseRepository<T>
     {
         public List<T> entities = new List<T>();
         public virtual void Create(T product) 

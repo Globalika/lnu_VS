@@ -43,14 +43,11 @@ namespace MyPharmacy.DAL.Repositories.Impl
         public override Medicine GetById(int id)
         {
             return entities.Single(r => r.id == id);
-
-            //throw new System.NotImplementedException();
         }
 
         public override List<Medicine> GetAll()
         {
             return entities;
-            //throw new System.NotImplementedException();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MyPharmacy.DAL.Modules.Impl
 
         public override string ToString()
         {
-            return $"{id} {name} {expirationDate} {amount} {storageTemperature}";
+            return $"{id} | {expirationDate} | {name} | {storageTemperature} | {amount}";
         }
     }
 }

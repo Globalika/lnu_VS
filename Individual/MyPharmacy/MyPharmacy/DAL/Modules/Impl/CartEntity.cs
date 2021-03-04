@@ -8,7 +8,7 @@ namespace MyPharmacy.DAL.Modules.Impl
         public string name;
         public override string ToString()
         {
-            return $"{id}'|'{name}";
+            return $"{id} | {name}";
         }
     }
 }

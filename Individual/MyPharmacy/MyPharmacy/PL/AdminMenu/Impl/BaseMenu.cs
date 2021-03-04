@@ -1,54 +1,46 @@
-﻿using System;
+﻿using MyPharmacy.PL.AdminMenu.Abstract;
+using System;
 using System.Collections.Generic;
 namespace MyPharmacy.PL.AdminMenu.Impl
 {
-    public class BaseMenu<TableType, ProductType> /*: IBaseMenu*/
+    public abstract class BaseMenu<TableType, ProductType> : IBaseMenu
 	{
-		//readonly bool level;
 		public BaseMenu() { }
-		//public BaseMenu(bool level)
-  //      {
-		//	this.level = level;
-  //      }
-		public enum TableMenuCommands
-		{
-			TableMenuBack,
-			Up,
-			Down,
-			SelectCurrentProduct,
-			SortTableById,
-			CreateNewProduct,//admin
-			DeleteCurrentProduct,//admin
-			TableMenuWaiting,
-		};
-		public enum ProductMenuCommands
-		{
-			ProductMenuBack,
-			ProductFieldUp,
-			ProductFieldDown,
-			ChangeCurrentField,
-			ProductMenuWaiting,
-		};
 		public int currentId;
 		public List<ProductType> products;
-		public TableMenuCommands tState;
-		public ProductMenuCommands pState;
 		public int currentProductFieldId = 1;
+        public TableMenuCommands tState;
+        public ProductMenuCommands pState;
+        public enum TableMenuCommands
+        {
+            TableMenuBack,
+            Up,
+            Down,
+            SelectCurrentProduct,
+            SortTableById,
+            CreateNewProduct,//admin
+            DeleteCurrentProduct,//admin
+            TableMenuWaiting,
+        };
+        public enum ProductMenuCommands
+        {
+            ProductMenuBack,
+            ProductFieldUp,
+            ProductFieldDown,
+            ChangeCurrentField,
+            ProductMenuWaiting,
+        };
+        public void SetState(TableMenuCommands state)
+        {
+            this.tState = state;
+        }
 
-		public virtual void ShowTableMenu() { }
-		public virtual void PrintTable() { }
-		public virtual void PrintTableForm() { }
-		public virtual void SortTable() { }
-		public virtual void UpdateDataForTableMenu() { }
-		public virtual void MoveCursorByProductId(int n) { }
-		public virtual void CreateNewProductForm() { }
-		public void SetState(TableMenuCommands state)
-		{
-			this.tState = state;
-		}
-		public void ShowProductMenu(int Id) { }
-		public virtual void PrintProduct() { }
-		public virtual void PrintProductForm() { }
+        public void SetState(ProductMenuCommands state)
+        {
+            this.pState = state;
+        }
+        public virtual void PrintProductForm() { }
+
 		public void CheckProductString(string str)
 		{
 			foreach (var i in str)
@@ -108,7 +100,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
 				try
 				{
 					isTrue = false;
-					Console.WriteLine("New Date : ");
+					Console.Write("New Date : ");
 					str = Console.ReadLine();
 					CheckProductDate(str);
 				}
@@ -130,7 +122,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                 try
                 {
                     isTrue = false;
-					Console.WriteLine("New Line : ");
+					Console.Write("New Line : ");
 					str = Console.ReadLine();
 					CheckProductString(str);
                 }
@@ -152,7 +144,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                 try
                 {
                     isTrue = false;
-					Console.WriteLine("New Line : ");
+					Console.Write("New Line : ");
 					str = Console.ReadLine();
 					CheckProductInt(str);
                 }
@@ -165,9 +157,5 @@ namespace MyPharmacy.PL.AdminMenu.Impl
             }
             return str;
         }
-		public void SetState(ProductMenuCommands state)
-		{
-			this.pState = state;
-		}
 	}
 }

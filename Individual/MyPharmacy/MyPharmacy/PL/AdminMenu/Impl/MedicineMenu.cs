@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using MyPharmacy.DAL.Modules.Impl;
 using MyPharmacy.DAL.Repositories.Impl;
 using System.Linq;
+using MyPharmacy.PL.AdminMenu.Abstract;
 
 namespace MyPharmacy.PL.AdminMenu.Impl
 {
-    public class MedicineMenu : BaseMenu<MedicineRepository, Medicine>
+    public class MedicineMenu : BaseMenu<MedicineRepository, Medicine>, IMedicineMenu
     {
-        public MedicineMenu() /*: base()*/
+        public MedicineMenu()
         {
             medRepos = new MedicineRepository()
             { };
         }
         MedicineRepository medRepos;
-        public override void ShowTableMenu()
+        public void ShowTableMenu()
         {
             products = medRepos.GetAll() ?? new List<Medicine>();
             if (products.Count() != 0)
@@ -31,37 +32,31 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                     case TableMenuCommands.Up:
                         {
                             MoveCursorByProductId(-1);
-                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.Down:
                         {
                             MoveCursorByProductId(1);
-                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.SelectCurrentProduct:
                         {
                             ShowProductMenu(this.currentId);
-                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.SortTableById:
                         {
                             SortTable();
-                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.CreateNewProduct:
                         {
                             CreateNewProduct();
-                            PrintTableForm();
                             break;
                         }
                     case TableMenuCommands.DeleteCurrentProduct:
                         {
                             DeleteCurrentProduct();
-                            PrintTableForm();
                             break;
                         }
                     default:
@@ -69,13 +64,12 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                             continue;
                         }
                 }
+                PrintTableForm();
             } while (catcher != TableMenuCommands.TableMenuBack);
         }
-        public override void PrintTable()
+        public void PrintTable()
         {
-            Console.WriteLine("\n\n");
-            Console.WriteLine("ID | expirationDate | Name | storageFormType | Capacity | Amount");
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\nID | Expiration Date | Name | Storage Temperature | Amount\n");
             foreach (var it in products)
             {
                 Medicine p = it;
@@ -83,31 +77,29 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                 {
                     Console.Write(" ->  ");
                 }
-                Console.WriteLine($"{ p.id} | {p.expirationDate} | {p.name}" +
-                    $" | {p.storageTemperature} | {p.amount}");
+                Console.WriteLine(it.ToString());
             }
             Console.WriteLine("\n\n");
         }
-        public override void PrintTableForm()
+        public void PrintTableForm()
         {
             Console.Clear();
-            Console.WriteLine("\t\t\t Medicine Table \t\t\t \n\n");
             Console.WriteLine(
-                $" {(int)TableMenuCommands.TableMenuBack} : Back |" +
-                $" {(int)TableMenuCommands.Up}" + $" : Up |" +
-                $" {(int)TableMenuCommands.Down} : Down |\n" +
-                $" {(int)TableMenuCommands.SelectCurrentProduct} : Select Current Product |" +
-                $" {(int)TableMenuCommands.SortTableById}: Sort Table By Id | " +
-                $" {(int)TableMenuCommands.CreateNewProduct} : Create new product | " +
-                $" {(int)TableMenuCommands.DeleteCurrentProduct}  : Delete current product | "
-                
+                $"\t\t\t Medicine Table \t\t\t \n\n" +
+                $"{(int)TableMenuCommands.TableMenuBack} : Back | " +
+                $"{(int)TableMenuCommands.Up}" + $" : Up | " +
+                $"{(int)TableMenuCommands.Down} : Down | " +
+                $"{(int)TableMenuCommands.SelectCurrentProduct} : Select Current Product \n" +
+                $"{(int)TableMenuCommands.SortTableById}: Sort Table By Id | " +
+                $"{(int)TableMenuCommands.CreateNewProduct} : Create new product | " +
+                $"{(int)TableMenuCommands.DeleteCurrentProduct}  : Delete current product"
                 );
             SetState(TableMenuCommands.TableMenuWaiting);
             PrintTable();
         }
         public void CreateNewProduct()
         {
-            Console.WriteLine("Create new product? | 0 : No | 1 : Yes");
+            Console.WriteLine("Create new product? | 1 : Yes | 0 : No");
             if (Console.ReadKey().KeyChar == '1')
             {
 
@@ -117,7 +109,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
         }
         public void DeleteCurrentProduct()
         {
-            Console.WriteLine("Delete current product? | 0 : No | 1 : Yes");
+            Console.WriteLine("Delete current product? | 1 : Yes | 0 : No");
             if (Console.ReadKey().KeyChar == '1')
             {
                 medRepos.Delete(currentId);
@@ -125,7 +117,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                 currentId = products[0].id;
             }
         }
-        public override void SortTable()
+        public void SortTable()
         {
             Console.Clear();
             if (products[0].id > products[1].id)
@@ -137,7 +129,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                 products.Sort((y, x) => x.id.CompareTo(y.id));
             }
         }
-        public override void MoveCursorByProductId(int n)
+        public void MoveCursorByProductId(int n)
         {
             if (n == 1)
             {
@@ -174,19 +166,17 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                     case ProductMenuCommands.ProductFieldUp:
                         {
                             if (currentProductFieldId != 1) { currentProductFieldId--; }
-                            PrintProductForm();
                             break;
                         }
                     case ProductMenuCommands.ProductFieldDown:
                         {
                             if (currentProductFieldId != 4) { currentProductFieldId++; }
-                            PrintProductForm();
                             break;
                         }
                     case ProductMenuCommands.ChangeCurrentField:
                         {
                             //
-                            Console.WriteLine("Change this field ? | 0 : No | 1 : Yes");
+                            Console.WriteLine("Change this field ? | 1 : Yes | 0 : No");
                             if (Console.ReadKey().KeyChar == '1')
                             {
                                 ChangeCurrentFieldById(currentProductFieldId);
@@ -194,7 +184,6 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                             }
                             //
                             currentProductFieldId = 1;
-                            PrintProductForm();
                             break;
                         }
                     default:
@@ -202,6 +191,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                             continue;
                         }
                 }
+                PrintProductForm();
             } while (command != ProductMenuCommands.ProductMenuBack);
         }
         public void PrintProduct()
@@ -215,8 +205,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                     product = it;
                 }
             }
-            Console.WriteLine("\n\n");
-            Console.WriteLine($"Id : { product.id} \n\n");
+            Console.WriteLine($"\nId : { product.id}\n");
 
             if (currentProductFieldId == 1) { Console.Write(" ->  "); }
             Console.WriteLine($"Expiration Date : {product.expirationDate}");
@@ -228,20 +217,18 @@ namespace MyPharmacy.PL.AdminMenu.Impl
             Console.WriteLine($"Storage Form Type : {product.storageTemperature}");
 
             if (currentProductFieldId == 4) { Console.Write(" ->  "); }
-            Console.WriteLine($"Amount : {product.amount}");
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine($"Amount : {product.amount}\n\n");
         }
         public void PrintProductForm()
         {
             Console.Clear();
-            Console.WriteLine("\t\t\t Medicine Product \t\t\t \n\n");
             Console.WriteLine
                 (
+                $"\t\t\t Medicine Product \t\t\t \n\n" +
                 $"{(int)ProductMenuCommands.ProductMenuBack} : Back | " +
                 $"{(int)ProductMenuCommands.ProductFieldUp} : Move Up | " +
                 $"{(int)ProductMenuCommands.ProductFieldDown} : Move Down | " +
-                $"{(int)ProductMenuCommands.ChangeCurrentField}  : ChangeCurrentField "
+                $"{(int)ProductMenuCommands.ChangeCurrentField} : ChangeCurrentField "
                 );
             SetState(ProductMenuCommands.ProductMenuWaiting);
             PrintProduct();
@@ -251,27 +238,27 @@ namespace MyPharmacy.PL.AdminMenu.Impl
             Medicine product = new Medicine();
             string str; int k;
 
-            Console.WriteLine("Id (Example : 9999) : ");
+            Console.Write("Id (Example : 9999) : ");
             k = int.Parse(Console.ReadLine());
             product.id = k;
             Console.WriteLine();
 
-            Console.WriteLine("Expiration Date (Example : 12.12.2012) : ");
+            Console.Write("Expiration Date (Example : 12.12.2012) : ");
             str = Console.ReadLine();
             product.expirationDate = str;
             Console.WriteLine();
 
-            Console.WriteLine("Name (Example : Kfehjvre) : ");
+            Console.Write("Name (Example : Kfehjvre) : ");
             str = Console.ReadLine();
             product.name = str;
             Console.WriteLine();
 
-            Console.WriteLine("Storage Temperature (Example : 23) : ");
+            Console.Write("Storage Temperature (Example : 23) : ");
             k = int.Parse(Console.ReadLine());
             product.storageTemperature = k;
             Console.WriteLine();
 
-            Console.WriteLine("Amount (Example : 44) : ");
+            Console.Write("Amount (Example : 44) : ");
             k = int.Parse(Console.ReadLine());
             product.amount = k;
             Console.WriteLine();

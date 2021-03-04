@@ -7,7 +7,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
 {
     public class CosmeticRepository : BaseRepository<Cosmetic>, ICosmeticRepository
     {
-        public CosmeticRepository()
+        public CosmeticRepository()//
         {
             entities.Add( new Cosmetic()
             {
@@ -36,7 +36,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
                 expirationDate = "01.03.2030",
                 storageTemperature = 12
             });
-        }
+        }//
         public override void Delete(int id)
         {
             var itemToRemove = entities.Single(r => r.id == id);

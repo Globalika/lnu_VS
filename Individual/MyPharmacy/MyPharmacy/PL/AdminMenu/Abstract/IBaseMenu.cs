@@ -2,12 +2,11 @@
 {
     public interface IBaseMenu
     {
-		//public void ShowTableMenu();
-		//public void PrintTable();
-		//public void PrintTableForm();
-		//public void PrintSortTable();
-		//public void UpdateDataForTableMenu();
-		//public void MoveCursorByProductId(int n);
-		//public void CreateNewProductForm();
-	}
+        public void CheckProductString(string str);
+        public void CheckProductDate(string str);
+        public void CheckProductInt(string str);
+        public string CreateNewDate();
+        public string CreateNewString();
+        public string CreateNewInt();       
+    }
 }

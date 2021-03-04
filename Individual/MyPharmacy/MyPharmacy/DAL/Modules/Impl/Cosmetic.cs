@@ -11,10 +11,9 @@ namespace MyPharmacy.DAL.Modules.Impl
         public int capacity;
         public int storageTemperature;
 
-
         public override string ToString()
         {
-            return $"{id}'|'{name}'|'{expirationDate}'|'{amount}'|'{capacity}'|'{storageTemperature}";
+            return $"{id} | {expirationDate} | {name} | {storageTemperature} | {capacity} | {amount}";
         }
     }
 }

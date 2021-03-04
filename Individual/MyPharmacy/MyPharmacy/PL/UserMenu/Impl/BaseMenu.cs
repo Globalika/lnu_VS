@@ -1,16 +1,12 @@
-﻿using System;
+﻿using MyPharmacy.PL.UserMenu.Abstract;
+using System;
 using System.Collections.Generic;
 
 namespace MyPharmacy.PL.UserMenu.Impl
 {
-	public class BaseMenu<TableType, ProductType> /*: IBaseMenu*/
+	public class BaseMenu<TableType, ProductType> : IBaseMenu
 	{
-		//readonly bool level;
 		public BaseMenu() { }
-		//public BaseMenu(bool level)
-  //      {
-		//	this.level = level;
-  //      }
 		public enum TableMenuCommands
 		{
 			TableMenuBack,
@@ -35,20 +31,14 @@ namespace MyPharmacy.PL.UserMenu.Impl
 		public TableMenuCommands tState;
 		public ProductMenuCommands pState;
 		public int currentProductFieldId = 1;
-
-		public virtual void ShowTableMenu() { }
-		public virtual void PrintTable() { }
-		public virtual void PrintTableForm() { }
-		public virtual void SortTable() { }
-		public virtual void UpdateDataForTableMenu() { }
-		public virtual void MoveCursorByProductId(int n) { }
-		public virtual void CreateNewProductForm() { }
 		public void SetState(TableMenuCommands state)
 		{
 			this.tState = state;
 		}
-		public void ShowProductMenu(int Id) { }
-		public virtual void PrintProduct() { }
+		public void SetState(ProductMenuCommands state)
+		{
+			this.pState = state;
+		}
 		public virtual void PrintProductForm() { }
 		public void CheckProductString(string str)
 		{
@@ -109,7 +99,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
 				try
 				{
 					isTrue = false;
-					Console.WriteLine("New Date : ");
+					Console.Write("New Date : ");
 					str = Console.ReadLine();
 					CheckProductDate(str);
 				}
@@ -131,7 +121,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 try
                 {
                     isTrue = false;
-					Console.WriteLine("New Line : ");
+					Console.Write("New Line : ");
 					str = Console.ReadLine();
 					CheckProductString(str);
                 }
@@ -153,7 +143,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 try
                 {
                     isTrue = false;
-					Console.WriteLine("New Line : ");
+					Console.Write("New Line : ");
 					str = Console.ReadLine();
 					CheckProductInt(str);
                 }
@@ -166,9 +156,5 @@ namespace MyPharmacy.PL.UserMenu.Impl
             }
             return str;
         }
-		public void SetState(ProductMenuCommands state)
-		{
-			this.pState = state;
-		}
 	}
 }

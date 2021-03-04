@@ -4,12 +4,13 @@ using MyPharmacy.DAL.Modules.Impl;
 using MyPharmacy.DAL.Repositories.Impl;
 using System.Linq;
 using MyPharmacy.DAL.Repositories;
+using MyPharmacy.PL.UserMenu.Abstract;
 
 namespace MyPharmacy.PL.UserMenu.Impl
 {
-    public class CosmeticMenu : BaseMenu<CosmeticRepository, Cosmetic>
+    public class CosmeticMenu : BaseMenu<CosmeticRepository, Cosmetic>, ICosmeticMenu
     {
-        public CosmeticMenu() /*: base()*/
+        public CosmeticMenu()
         {
             cart = new CartRepository();
             cosRepos = new CosmeticRepository();
@@ -18,7 +19,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
         CartRepository cart;
         CosmeticRepository cosRepos;
         FlyweightFactory factory;
-        public override void ShowTableMenu()
+        public void ShowTableMenu()
         {
             products = cosRepos.GetAll() ?? new List<Cosmetic>();
             if (products.Count() != 0)
@@ -75,11 +76,9 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 }
             } while (catcher != TableMenuCommands.TableMenuBack);
         }
-		public override void PrintTable()
+		public void PrintTable()
         {
-            Console.WriteLine("\n\n");
-            Console.WriteLine("ID | expirationDate | Name | storageFormType | Capacity | Amount");
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\nID | expirationDate | Name | storageFormType | Capacity | Amount\n");
             foreach (var it in products)
             {
                 Cosmetic p = it;
@@ -87,29 +86,27 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 {
                     Console.Write(" ->  ");
                 }
-                Console.WriteLine($"{ p.id} | {p.expirationDate} | {p.name}" +
-                    $" | {p.storageTemperature} | {p.capacity} | {p.amount}");
+                Console.WriteLine(it.ToString());
             }
             Console.WriteLine("\n\n");
         }
-        public override void PrintTableForm()
+        public void PrintTableForm()
         {
             Console.Clear();
-            Console.WriteLine("\t\t\t Cosmetic Table \t\t\t \n\n");
             Console.WriteLine(
-                $" {(int)TableMenuCommands.TableMenuBack} : Back |" +
-                $" {(int)TableMenuCommands.Up}" + $" : Up |" +
-                $" {(int)TableMenuCommands.Down} : Down |\n" +
-                $" {(int)TableMenuCommands.SelectCurrentProduct} : Select Current Product |" +
-                $" {(int)TableMenuCommands.SortTableById}: Sort Table By Id | " +
-                $" {(int)TableMenuCommands.OrderCurrentProduct}  : Order current product | " +
-                $" {(int)TableMenuCommands.TableOpenCard} : Table open card | "
-                
+                $"\t\t\t Cosmetic Table \t\t\t \n\n" +
+                $"{(int)TableMenuCommands.TableMenuBack} : Back |" +
+                $"{(int)TableMenuCommands.Up}" + $" : Up |" +
+                $"{(int)TableMenuCommands.Down} : Down |" +
+                $"{(int)TableMenuCommands.SelectCurrentProduct} : Select Current Product \n" +
+                $"{(int)TableMenuCommands.SortTableById}: Sort Table By Id | " +
+                $"{(int)TableMenuCommands.OrderCurrentProduct} : Order current product | " +
+                $"{(int)TableMenuCommands.TableOpenCard} : Table open card"
                 );
             SetState(TableMenuCommands.TableMenuWaiting);
             PrintTable();
         }
-        public override void SortTable()
+        public void SortTable()
         {
             Console.Clear();
 
@@ -122,7 +119,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 products.Sort((y, x) => x.id.CompareTo(y.id));
             }
         }
-        public override void MoveCursorByProductId(int n)
+        public void MoveCursorByProductId(int n)
         {
             if (n == 1)
             {
@@ -171,7 +168,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                     case ProductMenuCommands.ChangeCurrentField:
                     {
                         //
-                        Console.WriteLine("Change this field ? | 0 : No | 1 : Yes");
+                        Console.WriteLine("Change this field ? | 1 : Yes | 0 : No");
                         if (Console.ReadKey().KeyChar == '1')
                         {
                             ChangeCurrentFieldById(currentProductFieldId);
@@ -200,8 +197,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                     product = it;
                 }
             }
-            Console.WriteLine("\n\n");
-            Console.WriteLine($"Id : { product.id} \n\n");
+            Console.WriteLine($"\nId : { product.id}\n");
 
             if (currentProductFieldId == 1) { Console.Write(" ->  "); }
             Console.WriteLine($"Expiration Date : {product.expirationDate}");
@@ -216,20 +212,18 @@ namespace MyPharmacy.PL.UserMenu.Impl
             Console.WriteLine($"Capacity : {product.capacity}");
 
             if (currentProductFieldId == 5) { Console.Write(" ->  "); }
-            Console.WriteLine($"Amount : {product.amount}");
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine($"Amount : {product.amount}\n\n");
         }
         public void PrintProductForm()
         {
             Console.Clear();
-            Console.WriteLine("\t\t\t Cosmetic Product \t\t\t \n\n");
             Console.WriteLine
                 (
+                $"\t\t\t Cosmetic Product \t\t\t \n\n" +
                 $"{(int)ProductMenuCommands.ProductMenuBack} : Back | " +
                 $"{(int)ProductMenuCommands.ProductFieldUp} : Move Up | " +
                 $"{(int)ProductMenuCommands.ProductFieldDown} : Move Down | " +
-                $"{(int)ProductMenuCommands.ChangeCurrentField}  : ChangeCurrentField "
+                $"{(int)ProductMenuCommands.ChangeCurrentField}  : ChangeCurrentField"
                 );
             SetState(ProductMenuCommands.ProductMenuWaiting);
             PrintProduct();
@@ -239,32 +233,32 @@ namespace MyPharmacy.PL.UserMenu.Impl
             Cosmetic product = new Cosmetic();
             string str; int k;
 
-            Console.WriteLine("Id (Example : 9999) : ");
+            Console.Write("Id (Example : 9999) : ");
             k = int.Parse(Console.ReadLine());
             product.id = k;
             Console.WriteLine();
 
-            Console.WriteLine("Expiration Date (Example : 12.12.2012) : ");
+            Console.Write("Expiration Date (Example : 12.12.2012) : ");
             str = Console.ReadLine();
             product.expirationDate = str;
             Console.WriteLine();
 
-            Console.WriteLine("Name (Example : Kfehjvre) : ");
+            Console.Write("Name (Example : Kfehjvre) : ");
             str = Console.ReadLine();
             product.name = str;
             Console.WriteLine();
 
-            Console.WriteLine("Storage Temperature (Example : 23) : ");
+            Console.Write("Storage Temperature (Example : 23) : ");
             k = int.Parse(Console.ReadLine());
             product.storageTemperature = k;
             Console.WriteLine();
 
-            Console.WriteLine("Capacity (Example : 44) ");
+            Console.Write("Capacity (Example : 44) ");
             k = int.Parse(Console.ReadLine());
             product.capacity = k;
             Console.WriteLine();
 
-            Console.WriteLine("Amount (Example : 44) : ");
+            Console.Write("Amount (Example : 44) : ");
             k = int.Parse(Console.ReadLine());
             product.amount = k;
             Console.WriteLine();
@@ -312,7 +306,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
 
         public void OrderProduct() 
         {
-            Console.WriteLine("\n\n choose amount: ");
+            Console.WriteLine("\n\nChoose amount: ");
             int amount = int.Parse(Console.ReadLine());
             CartEntity cartProduct = TakeAmountFromCurrentProduct(amount);
 
@@ -330,9 +324,9 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 cart.Create(factory.GetCartFlyweight(cartProduct, amount));
             }
 
-            Console.WriteLine("\n product successfully added to cart");
-            Console.WriteLine("1 : back to table | 2 : open cart");
-
+            Console.WriteLine("\nProduct successfully added to cart!\n" +
+                "1 : Back to table | 2 : Open cart"
+                );
             bool w = true;
             while (w)
             {
@@ -357,12 +351,14 @@ namespace MyPharmacy.PL.UserMenu.Impl
             while (w)
             {
                 PrintTableForm();
-                Console.WriteLine("\t\t\t My Cart");
-                Console.WriteLine("Product Id || Name || Amount \n\n");
+                Console.WriteLine("\t\t\tMy Cart\n" +
+                    "Product Id | Name | Amount\n\n"
+                    );
                 if (cart.GetAll() == null)
                 {
-                    Console.WriteLine("||  Cart is Emply");
-                    Console.WriteLine("\n\n || 1 : Back ");
+                    Console.WriteLine("\tCart is emply!\n" +
+                        "1 : Back"
+                        );
                 }
                 else
                 {
@@ -377,12 +373,13 @@ namespace MyPharmacy.PL.UserMenu.Impl
                     }
                     if(empty)
                     {
-                        Console.WriteLine("\n\n || 1 : Back | 2 : Clear Cart");
+                        Console.WriteLine("\n\n1 : Back | 2 : Clear cart");
                     }
                     else
                     {
-                        Console.WriteLine("||  Cart is Emply");
-                        Console.WriteLine("\n\n || 1 : Back ");
+                        Console.WriteLine("\tCart is emply\n" +
+                            "1 : Back"
+                            );
                     }
                 }
                 int g = ((int)(Console.ReadKey().KeyChar))-48;
