@@ -42,12 +42,10 @@ namespace MyPharmacy.DAL.Repositories.Impl
             var itemToRemove = entities.Single(r => r.id == id);
             entities.Remove(itemToRemove);
         }
-
         public override Cosmetic GetById(int id)
         {
             return entities.Single(r => r.id == id);
         }
-
         public override List<Cosmetic> GetAll()
         {
             return entities;

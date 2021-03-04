@@ -39,12 +39,10 @@ namespace MyPharmacy.DAL.Repositories.Impl
             var itemToRemove = entities.Single(r => r.id == id);
             entities.Remove(itemToRemove);
         }
-
         public override Medicine GetById(int id)
         {
             return entities.Single(r => r.id == id);
         }
-
         public override List<Medicine> GetAll()
         {
             return entities;

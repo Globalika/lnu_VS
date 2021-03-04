@@ -6,9 +6,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
 {
     public class CartRepository : BaseRepository<Flyweight>,ICartRepositoty
     {
-        public CartRepository()
-        {
-        }
+        public CartRepository() { }
 		public bool IsProductExist(Flyweight product)
 		{
 			var it = entities.Find(x => x.id == product.id);

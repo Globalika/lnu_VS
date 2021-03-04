@@ -32,10 +32,9 @@ namespace MyPharmacy.DAL.Repositories.Impl
         {
             throw new System.NotImplementedException();
         }
-
         public virtual List<T> GetAll()
         {
-            throw new System.NotImplementedException();
+            return entities;
         }
     }
 }
