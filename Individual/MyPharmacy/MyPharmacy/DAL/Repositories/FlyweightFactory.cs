@@ -9,7 +9,7 @@ namespace MyPharmacy.DAL.Repositories
         {
 			foreach (var it in flyweightsArr)
 			{
-				if (it.id == product.id)
+				if (it.Id == product.Id)
 				{
 					return it;
 				}

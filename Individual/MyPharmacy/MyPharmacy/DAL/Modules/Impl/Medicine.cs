@@ -4,7 +4,7 @@ namespace MyPharmacy.DAL.Modules.Impl
 {
     public class Medicine : IEntity
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string name;
         public string expirationDate;
         public int amount;
@@ -12,7 +12,7 @@ namespace MyPharmacy.DAL.Modules.Impl
 
         public override string ToString()
         {
-            return $"{id} | {expirationDate} | {name} | {storageTemperature} | {amount}";
+            return $"{Id} | {expirationDate} | {name} | {storageTemperature} | {amount}";
         }
     }
 }

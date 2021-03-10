@@ -11,7 +11,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
         {
             entities.Add( new Medicine()
             {
-                id = 3444,
+                Id = 3444,
                 name = "wgykue",
                 amount = 43,
                 expirationDate = "21.10.1999",
@@ -19,7 +19,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
             });
             entities.Add( new Medicine()
             {
-                id = 3885,
+                Id = 3885,
                 name = "ftytuur",
                 amount = 22,
                 expirationDate = "18.07.2200",
@@ -27,7 +27,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
             });
             entities.Add( new Medicine()
             {
-                id = 3454,
+                Id = 3454,
                 name = "twferjsr",
                 amount = 3,
                 expirationDate = "01.03.2030",
@@ -36,12 +36,12 @@ namespace MyPharmacy.DAL.Repositories.Impl
         }
         public override void Delete(int id)
         {
-            var itemToRemove = entities.Single(r => r.id == id);
+            var itemToRemove = entities.Single(r => r.Id == id);
             entities.Remove(itemToRemove);
         }
         public override Medicine GetById(int id)
         {
-            return entities.Single(r => r.id == id);
+            return entities.Single(r => r.Id == id);
         }
         public override List<Medicine> GetAll()
         {

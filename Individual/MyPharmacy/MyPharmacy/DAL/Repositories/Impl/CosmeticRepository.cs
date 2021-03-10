@@ -7,11 +7,11 @@ namespace MyPharmacy.DAL.Repositories.Impl
 {
     public class CosmeticRepository : BaseRepository<Cosmetic>, ICosmeticRepository
     {
-        public CosmeticRepository()//
+        public CosmeticRepository()//-----
         {
             entities.Add( new Cosmetic()
             {
-                id = 3444,
+                Id = 3444,
                 name = "wgykue",
                 amount = 43,
                 capacity = 243,
@@ -20,7 +20,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
             });
             entities.Add( new Cosmetic()
             {
-                id = 3885,
+                Id = 3885,
                 name = "ftytuur",
                 amount = 22,
                 capacity = 23,
@@ -29,7 +29,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
             });
             entities.Add( new Cosmetic()
             {
-                id = 3454,
+                Id = 3454,
                 name = "twferjsr",
                 amount = 3,
                 capacity = 98,
@@ -39,12 +39,12 @@ namespace MyPharmacy.DAL.Repositories.Impl
         }//
         public override void Delete(int id)
         {
-            var itemToRemove = entities.Single(r => r.id == id);
+            var itemToRemove = entities.Single(r => r.Id == id);
             entities.Remove(itemToRemove);
         }
         public override Cosmetic GetById(int id)
         {
-            return entities.Single(r => r.id == id);
+            return entities.Single(r => r.Id == id);
         }
         public override List<Cosmetic> GetAll()
         {

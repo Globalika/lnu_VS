@@ -24,7 +24,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
             products = medRepos.GetAll() ?? new List<Medicine>();
             if (products.Count() != 0)
             {
-                this.currentId = products[0].id;
+                this.currentId = products[0].Id;
             }
             PrintTableForm();
             TableMenuCommands catcher;
@@ -82,7 +82,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
             foreach (var it in products)
             {
                 Medicine p = it;
-                if (p.id == this.currentId)
+                if (p.Id == this.currentId)
                 {
                     Console.Write(" ->  ");
                 }
@@ -110,37 +110,37 @@ namespace MyPharmacy.PL.UserMenu.Impl
         {
             Console.Clear();
 
-            if (products[0].id > products[1].id)
+            if (products[0].Id > products[1].Id)
             {
-                products.Sort((x, y) => x.id.CompareTo(y.id));
+                products.Sort((x, y) => x.Id.CompareTo(y.Id));
             }
             else
             {
-                products.Sort((y, x) => x.id.CompareTo(y.id));
+                products.Sort((y, x) => x.Id.CompareTo(y.Id));
             }
         }
         public void MoveCursorByProductId(int n)
         {
             if (n == 1)
             {
-                if (currentId == products[products.Count - 1].id)
+                if (currentId == products[products.Count - 1].Id)
                 {
                     return;
                 }
             }
             else
             {
-                if (currentId == products[0].id)
+                if (currentId == products[0].Id)
                 {
                     return;
                 }
             }
             int i = 0;
-            while (products[i].id != currentId)
+            while (products[i].Id != currentId)
             {
                 i++;
             }
-            currentId = products[i + n].id;
+            currentId = products[i + n].Id;
         }
 
         public void ShowProductMenu(int Id)
@@ -192,12 +192,12 @@ namespace MyPharmacy.PL.UserMenu.Impl
             Medicine product = new Medicine();
             foreach (var it in products)
             {
-                if (it.id == currentId)
+                if (it.Id == currentId)
                 {
                     product = it;
                 }
             }
-            Console.WriteLine($"\nId : { product.id}\n");
+            Console.WriteLine($"\nId : { product.Id}\n");
 
             if (currentProductFieldId == 1) { Console.Write(" ->  "); }
             Console.WriteLine($"Expiration Date : {product.expirationDate}");
@@ -232,7 +232,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
 
             Console.Write("Id (Example : 9999) : ");
             k = int.Parse(Console.ReadLine());
-            product.id = k;
+            product.Id = k;
             Console.WriteLine();
 
             Console.Write("Expiration Date (Example : 12.12.2012) : ");
@@ -378,10 +378,10 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 {
                     foreach (var it in cart.entities)
                     {
-                        ReturnProductAmount(it.id, it.name, it.amount);
+                        ReturnProductAmount(it.Id, it.name, it.amount);
                         //
                         CartEntity c = new CartEntity();
-                        c.id = it.id;
+                        c.Id = it.Id;
                         c.name = it.name;
                         factory.GetCartFlyweight(c, 0).amount = 0;
                         //
@@ -398,9 +398,9 @@ namespace MyPharmacy.PL.UserMenu.Impl
             products = medRepos.GetAll();
             foreach (var it in products)
             {
-                if (it.id == currentId)
+                if (it.Id == currentId)
                 {
-                    p.id = it.id;
+                    p.Id = it.Id;
                     p.name = it.name;
                     it.amount = it.amount - amount;
                 }
@@ -413,7 +413,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
             products = medRepos.GetAll();
             foreach (var it in products)
             {
-                if (it.id == id)
+                if (it.Id == id)
                 {
                     it.amount += amount;
                 }
