@@ -3,25 +3,13 @@ using MyPharmacy.DAL.Repositories.Abstract;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MyPharmacy.DAL.Repositories.Impl
+namespace MyPharmacy.DAL.Repositories.Impl.MemoryImpl
 {
-    //public class MyEnumerator<T> : IEnumerable<T>
-    //{
-    //    public IEnumerator<T> GetEnumerator()
-    //    {
-    //        return new MyInfEnumerator();
-    //    }
-    //    //public Get
-    //}
-    //T[] entitties;
-    //var entTT = entities.GetEnumerator();
-
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : IEntity
     {
         public List<T> entities = new List<T>();
         public virtual void Create(T product) 
         {
-            // Access database
             entities.Add(product);
         }
         public virtual void Update(T product) 
@@ -34,7 +22,7 @@ namespace MyPharmacy.DAL.Repositories.Impl
         }
         public virtual T GetById(int id)
         {
-            throw new System.NotImplementedException();
+            return entities.Single(r => r.Id == id);
         }
         public virtual List<T> GetAll()
         {

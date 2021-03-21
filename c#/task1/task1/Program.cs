@@ -6,24 +6,40 @@ namespace task1
     {
         public static string GetSByteBinaryString(sbyte number)
         {
-            if(number < 0)
-            {
-                sbyte buff = Convert.ToSByte(~number);
-                number = Convert.ToSByte(buff + 1);
-            }
             char[] str = new char[8];
             int pos = 7;
-            for (int i = 0; i < 8; i++)
+            //number = Math.Abs(number);
+            if (number < 0)
             {
-                if ((number & ((sbyte)1 << i)) != 0)
+                for (int i = 0; i < 8; i++)
                 {
-                    str[pos] = '1';
+                    if ((~number++ & ((sbyte)1 << i)) != 0)
+                    {
+                        str[pos] = '1';
+                    }
+                    else
+                    {
+                        str[pos] = '0';
+                    }
+                    pos--;
                 }
-                else
+                //sbyte buff = Convert.ToSByte(~number);
+                //number = Convert.ToSByte(buff + 1);
+            }
+            else
+            {
+                for (int i = 0; i < 8; i++)
                 {
-                    str[pos] = '0';
+                    if ((number & ((sbyte)1 << i)) != 0)
+                    {
+                        str[pos] = '1';
+                    }
+                    else
+                    {
+                        str[pos] = '0';
+                    }
+                    pos--;
                 }
-                pos--;
             }
             return new string(str);
         }
@@ -34,7 +50,7 @@ namespace task1
 
             string result = GetIntegerPartBinaryString(numInt) + '.' + GetPartialPartBinaryString(numFract);
 
-            Console.WriteLine($" Floating Point Standart : {GetFloatingPointStandart(result, number < 0)}");
+            Console.WriteLine($" Floating Point Binary Representation : {GetFloatingPointStandart(result, number < 0)}");
 
             return result;
         }
@@ -162,7 +178,7 @@ namespace task1
         static void Main(string[] args)
         {
 
-            Console.Write("Choose : 1 for SByte | 2 : for Float");
+            Console.Write("Choose || 1 : SByte | 2 : Float");
             int getch = Console.ReadKey(true).KeyChar-48;
             Console.WriteLine();
             if (getch == 1)
@@ -187,20 +203,20 @@ namespace task1
                     }
                     catch (OverflowException ex)
                     {
-                        Console.Write(ex.GetType() + " | " + "Try again ");
+                        Console.Write(ex.GetType() + " | " + "Try again : ");
                         state = true;
                     }
                     catch (DivideByZeroException ex)
                     {
-                        Console.Write(ex.GetType() + " | " + "Try again ");
+                        Console.Write(ex.GetType() + " | " + "Try again : ");
                     }
                     catch (FormatException ex )
                     {
-                        Console.Write(ex.GetType() + " | " + "Try again ");
+                        Console.Write(ex.GetType() + " | " + "Try again : ");
                     }
                     catch (Exception ex)
                     {
-                        Console.Write("NaN Exception" + " | " + "Try again ");
+                        Console.Write("NaN Exception" + " | " + "Try again : ");
                     }
                 }
                 string str = Binary.GetSByteBinaryString(k);

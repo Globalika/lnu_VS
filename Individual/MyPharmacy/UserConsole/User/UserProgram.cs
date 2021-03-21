@@ -1,7 +1,8 @@
-﻿using MyPharmacy.PL.UserMenu.Impl;
+﻿using MyPharmacy.PL.AdminMenu.Impl;
 
-namespace UserConsole.Admin
+namespace UserConsole.User
 {
+
     class UserProgram
     {
         static void Main(string[] args)

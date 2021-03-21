@@ -7,13 +7,13 @@ namespace MyPharmacy.DAL.Modules.Impl
 		public int Id { get; set; }
 		public string name;
 		public int amount;
+
 		public Flyweight(CartEntity flyw, int amount) 
 		{
 			this.amount = amount;
 			this.Id = flyw.Id;
 			this.name = flyw.name;
 		}
-		Flyweight() { }
 		public Flyweight(Flyweight other)
         {
 			this.Id = other.Id;

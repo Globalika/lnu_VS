@@ -2,9 +2,9 @@
 using MyPharmacy.DAL.Modules.Impl;
 using System.Collections.Generic;
 
-namespace MyPharmacy.DAL.Repositories.Impl
+namespace MyPharmacy.DAL.Repositories.Impl.MemoryImpl
 {
-    public class CartRepository : BaseRepository<Flyweight>,ICartRepositoty
+	public class CartRepository : BaseRepository<Flyweight>,ICartRepositoty
     {
         public CartRepository() { }
 		public bool IsProductExist(Flyweight product)

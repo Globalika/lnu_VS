@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyPharmacy.DAL.Factories.Impl;
 using MyPharmacy.DAL.Modules.Impl;
-using MyPharmacy.DAL.Repositories.Impl;
-using System.Linq;
+using MyPharmacy.DAL.Repositories.Abstract;
 using MyPharmacy.PL.AdminMenu.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyPharmacy.PL.AdminMenu.Impl
 {
-    public class CosmeticMenu : BaseMenu<CosmeticRepository, Cosmetic>, ICosmeticMenu
+    public class CosmeticMenu : BaseMenu<ICosmeticRepository, Cosmetic>, ICosmeticMenu
     {
         public CosmeticMenu()
         {
-            cosRepos = new CosmeticRepository()
-            { };
+            FactoryProvider prov = new FactoryProvider();
+            cosRepos = prov.GetCosmeticFactory().GetCosmeticRepository();
         }
-        CosmeticRepository cosRepos;
+        ICosmeticRepository cosRepos;
         public void ShowTableMenu()
         {
             products = cosRepos.GetAll() ?? new List<Cosmetic>();
@@ -150,7 +151,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
             {
                 i++;
             }
-            currentId = products[i+n].Id;
+            currentId = products[i + n].Id;
         }
 
         public void ShowProductMenu(int Id)
@@ -164,32 +165,32 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                 switch (command)
                 {
                     case ProductMenuCommands.ProductFieldUp:
-                    {
-                        if (currentProductFieldId != 1) { currentProductFieldId--; }
-                        break;
-                    }
-                    case ProductMenuCommands.ProductFieldDown:
-                    {
-                        if (currentProductFieldId != 5) { currentProductFieldId++; }
-                        break;
-                    }
-                    case ProductMenuCommands.ChangeCurrentField:
-                    {
-                        //
-                        Console.WriteLine("Change this field ? | 1 : Yes | 0 : No");
-                        if (Console.ReadKey().KeyChar == '1')
                         {
-                            ChangeCurrentFieldById(currentProductFieldId);
-                            products = cosRepos.GetAll();
+                            if (currentProductFieldId != 1) { currentProductFieldId--; }
+                            break;
                         }
-                        //
-                        currentProductFieldId = 1;
-                        break;
-                    }
+                    case ProductMenuCommands.ProductFieldDown:
+                        {
+                            if (currentProductFieldId != 5) { currentProductFieldId++; }
+                            break;
+                        }
+                    case ProductMenuCommands.ChangeCurrentField:
+                        {
+                            //
+                            Console.WriteLine("Change this field ? | 1 : Yes | 0 : No");
+                            if (Console.ReadKey().KeyChar == '1')
+                            {
+                                cosRepos.Update(ChangeCurrentFieldById(currentProductFieldId));
+                                products = cosRepos.GetAll();
+                            }
+                            //
+                            currentProductFieldId = 1;
+                            break;
+                        }
                     default:
-                    {
-                        continue;
-                    }
+                        {
+                            continue;
+                        }
                 }
                 PrintProductForm();
             } while (command != ProductMenuCommands.ProductMenuBack);
@@ -280,34 +281,34 @@ namespace MyPharmacy.PL.AdminMenu.Impl
             switch (Id)
             {
                 case 1:
-                {
-                    product.expirationDate = CreateNewDate();
-                    break;
-                }
+                    {
+                        product.expirationDate = CreateNewDate();
+                        break;
+                    }
                 case 2:
-                {
-                    product.name = CreateNewString();
-                    break;
-                }
+                    {
+                        product.name = CreateNewString();
+                        break;
+                    }
                 case 3:
-                {
-                    product.storageTemperature = Convert.ToInt32(CreateNewInt());
-                    break;
-                }
+                    {
+                        product.storageTemperature = Convert.ToInt32(CreateNewInt());
+                        break;
+                    }
                 case 4:
-                {
-                    product.capacity = Convert.ToInt32(CreateNewInt());
-                    break;
-                }
+                    {
+                        product.capacity = Convert.ToInt32(CreateNewInt());
+                        break;
+                    }
                 case 5:
-                {
-                    product.amount = Convert.ToInt32(CreateNewInt());
-                    break;
-                }
+                    {
+                        product.amount = Convert.ToInt32(CreateNewInt());
+                        break;
+                    }
                 default:
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
             }
             return product;
         }

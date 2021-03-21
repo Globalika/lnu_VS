@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyPharmacy.DAL.Factories.Impl;
 using MyPharmacy.DAL.Modules.Impl;
-using MyPharmacy.DAL.Repositories.Impl;
-using System.Linq;
 using MyPharmacy.DAL.Repositories;
+using MyPharmacy.DAL.Repositories.Abstract;
+using MyPharmacy.DAL.Repositories.Impl.FileImpl;
 using MyPharmacy.PL.UserMenu.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyPharmacy.PL.UserMenu.Impl
 {
-    public class MedicineMenu : BaseMenu<MedicineRepository, Medicine>, IMedicineMenu
+    public class MedicineMenu : BaseMenu<IMedicineRepository, Medicine>, IMedicineMenu
     {
         public MedicineMenu()
         {
-            cart = new CartRepository();
-            medRepos = new MedicineRepository();
+            cart = new CartFileRepository();
+            FactoryProvider prov = new FactoryProvider();
+            medRepos = prov.GetMedicineFactory().GetMedicineRepository();
             factory = new FlyweightFactory();
         }
-        MedicineRepository medRepos;
-        CartRepository cart;
+        IMedicineRepository medRepos;
+        CartFileRepository cart;
         FlyweightFactory factory;
         public void ShowTableMenu()
         {
@@ -171,7 +174,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                             Console.WriteLine("Change this field ? | 1 : Yes | 0 : No");
                             if (Console.ReadKey().KeyChar == '1')
                             {
-                                ChangeCurrentFieldById(currentProductFieldId);
+                                medRepos.Update(ChangeCurrentFieldById(currentProductFieldId));
                                 products = medRepos.GetAll();
                             }
                             //
@@ -297,9 +300,12 @@ namespace MyPharmacy.PL.UserMenu.Impl
             int amount = int.Parse(Console.ReadLine());
             CartEntity cartProduct = TakeAmountFromCurrentProduct(amount);
 
+            cart.Save();//
+
             if (cart.IsProductExist(factory.GetCartFlyweight(cartProduct, amount)))
             {
                 factory.GetCartFlyweight(cartProduct, amount).amount += amount;
+                cart.Update(factory.GetCartFlyweight(cartProduct, amount));
             }
             else if ((factory.GetCartFlyweight(cartProduct, amount)).amount == 0)
             {
@@ -385,7 +391,11 @@ namespace MyPharmacy.PL.UserMenu.Impl
                         c.name = it.name;
                         factory.GetCartFlyweight(c, 0).amount = 0;
                         //
+
                     }
+                    ////clear
+                    cart.DeleteAll();
+
                     PrintTableForm();
                     w = false;
                 }

@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MyPharmacy.DAL.Factories.Impl;
 using MyPharmacy.DAL.Modules.Impl;
-using MyPharmacy.DAL.Repositories.Impl;
-using System.Linq;
+using MyPharmacy.DAL.Repositories.Abstract;
 using MyPharmacy.PL.AdminMenu.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyPharmacy.PL.AdminMenu.Impl
 {
-    public class MedicineMenu : BaseMenu<MedicineRepository, Medicine>, IMedicineMenu
+    public class MedicineMenu : BaseMenu<IMedicineRepository, Medicine>, IMedicineMenu
     {
         public MedicineMenu()
         {
-            medRepos = new MedicineRepository()
-            { };
+            FactoryProvider prov = new FactoryProvider();
+            medRepos = prov.GetMedicineFactory().GetMedicineRepository();
+
         }
-        MedicineRepository medRepos;
+        IMedicineRepository medRepos;
         public void ShowTableMenu()
         {
             products = medRepos.GetAll() ?? new List<Medicine>();
@@ -179,7 +181,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
                             Console.WriteLine("Change this field ? | 1 : Yes | 0 : No");
                             if (Console.ReadKey().KeyChar == '1')
                             {
-                                ChangeCurrentFieldById(currentProductFieldId);
+                                medRepos.Update(ChangeCurrentFieldById(currentProductFieldId));
                                 products = medRepos.GetAll();
                             }
                             //

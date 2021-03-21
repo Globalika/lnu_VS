@@ -9,29 +9,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="App.config" />
     <None Remove="appsettings.json" />
-    <None Remove="DAL\Files\cartTable.txt" />
-    <None Remove="DAL\Files\cosmeticTable.txt" />
-    <None Remove="DAL\Files\medicineTable.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="appsettings.json">
+    <Content Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DAL\Files\cartTable.txt">
+    </Content>
+    <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DAL\Files\cosmeticTable.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DAL\Files\medicineTable.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DAL\Files\medicineTable.txt" />
     <Resource Include="Startup.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

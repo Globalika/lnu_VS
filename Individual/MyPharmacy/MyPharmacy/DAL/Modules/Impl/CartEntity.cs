@@ -4,6 +4,12 @@ namespace MyPharmacy.DAL.Modules.Impl
 {
     public class CartEntity : IEntity
     {
+        public CartEntity() { }
+        public CartEntity(int Id, string name)
+        {
+            this.Id = Id;
+            this.name = name;
+        }
         public int Id { get; set; }
         public string name;
         public override string ToString()
