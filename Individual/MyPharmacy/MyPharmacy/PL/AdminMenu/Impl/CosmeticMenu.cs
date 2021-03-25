@@ -242,7 +242,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
             Cosmetic product = new Cosmetic();
             string str; int k;
 
-            Console.Write("Id (Example : 9999) : ");
+            Console.Write("Id (Example : 99999) : ");
             k = int.Parse(Console.ReadLine());
             product.Id = k;
             Console.WriteLine();

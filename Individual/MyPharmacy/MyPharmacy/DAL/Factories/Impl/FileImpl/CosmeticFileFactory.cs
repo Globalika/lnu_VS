@@ -2,7 +2,7 @@
 using MyPharmacy.DAL.Repositories.Abstract;
 using MyPharmacy.DAL.Repositories.Impl.FileImpl;
 
-namespace MyPharmacy.DAL.Factories.Impl
+namespace MyPharmacy.DAL.Factories.Impl.FileImpl
 {
     class CosmeticFileFactory : ICosmeticFactory
     {

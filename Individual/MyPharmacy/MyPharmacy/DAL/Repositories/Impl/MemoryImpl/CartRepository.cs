@@ -23,5 +23,13 @@ namespace MyPharmacy.DAL.Repositories.Impl.MemoryImpl
         {
 			return entities;
 		}
-	}
+
+        public void Save()
+        {
+        }
+
+        public void DeleteAll()
+        {
+        }
+    }
 }

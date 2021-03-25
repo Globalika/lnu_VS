@@ -240,7 +240,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
             Medicine product = new Medicine();
             string str; int k;
 
-            Console.Write("Id (Example : 9999) : ");
+            Console.Write("Id (Example : 99999) : ");
             k = int.Parse(Console.ReadLine());
             product.Id = k;
             Console.WriteLine();

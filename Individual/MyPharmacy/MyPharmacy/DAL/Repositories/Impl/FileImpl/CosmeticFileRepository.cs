@@ -11,8 +11,8 @@ namespace MyPharmacy.DAL.Repositories.Impl.FileImpl
         protected readonly char delim;
         public CosmeticFileRepository()
         {
-            //filePath = @"C:\Users\volod\source\Lnu_VS\Individual\MyPharmacy\MyPharmacy\DAL\Files\cosmeticTable.txt";
-            filePath = $"{Directory.GetCurrentDirectory()}\\DAL\\Files\\cosmeticTable.txt";
+            filePath = @"C:\Users\volod\source\Lnu_VS\Individual\MyPharmacy\MyPharmacy\DAL\Files\cosmeticTable.txt";
+            //filePath = $"{Directory.GetCurrentDirectory()}\\DAL\\Files\\cosmeticTable.txt";
             delim = ',';
             ReadItemsFromFile();
         }

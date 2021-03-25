@@ -12,7 +12,7 @@ float SumSquare(float** matrixU, int i);
 float SumMultiply(float** matrix, int i, int j);
 float SumY(float** matrix, int i, float* vectorY);
 float SumX(float** matrix, int i, int dimension, float* vectorX);
-std::pair<float**, float**> GetUTU(float** matrixA, int dimension);
+std::tuple<float**, float**,bool> GetUTU(float** matrixA, int dimension);
 float* GetVectorY(float** matrixU, int dimension, float* vectorB);
 float* GetVectorX(float** matrixU_T, int dimension, float* vectorY);
 void PrintMatrix(float**& matrix, int dimension, std::string str = "");

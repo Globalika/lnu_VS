@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MyPharmacy.DAL.Factories.Abstract;
+using MyPharmacy.DAL.Factories.Impl.FileImpl;
+using MyPharmacy.DAL.Factories.Impl.MemoryImpl;
+using System;
 using System.IO;
 
 namespace MyPharmacy.DAL.Factories.Impl
@@ -24,8 +27,10 @@ namespace MyPharmacy.DAL.Factories.Impl
             {
                 case "file":
                     return new CosmeticFileFactory();
-                default:
+                case "memory":
                     return new CosmeticFactory();
+                default:
+                    throw new Exception("Wrong type!");
             }
         }
         public IMedicineFactory GetMedicineFactory()
@@ -37,21 +42,27 @@ namespace MyPharmacy.DAL.Factories.Impl
             {
                 case "file":
                     return new MedicineFileFactory();
-                default:
+                case "memory":
                     return new MedicineFactory();
+                default:
+                    throw new Exception("Wrong type!");
             }
         }
-    }
-}
 
+        public ICartFactory GetCartFactory()
+        {
+            var configuration = this.Configuration.GetSection("DatabaseConfiguration");
+            var factoryType = configuration.GetSection("factoryType").Value;
 
-
-
-namespace MyPharmacy
-{
-    public class Startup
-    {
-
-
+            switch (factoryType)
+            {
+                case "file":
+                    return new CartFileFactory();
+                case "memory":
+                    return new CartFactory();
+                default:
+                    throw new Exception("Wrong type!");
+            }
+        }
     }
 }

@@ -174,19 +174,20 @@ float SumX(float** matrix, int i, int dimension, float* vectorX)
 	float sum = 0;
 	for (int k = i + 1; k < dimension; k++)
 	{
-		if (isNearlyEqualZero(matrix[k][i] * vectorX[k]))
+		if (isNearlyEqualZero(matrix[i][k] * vectorX[k]))
 		{
 			sum += 0;
 		}
 		else
 		{
-			sum += matrix[k][i] * vectorX[k];
+			sum += matrix[i][k] * vectorX[k];
 		}
 	}
 	return sum;
 }
-std::pair<float**, float**> GetUTU(float** matrixA, int dimension)
+std::tuple<float**, float**, bool> GetUTU(float** matrixA, int dimension)
 {
+	bool state = false;
 	//U
 	float** matrixU = new float* [dimension];
 	for (int i = 0; i < dimension; i++)
@@ -203,18 +204,12 @@ std::pair<float**, float**> GetUTU(float** matrixA, int dimension)
 	//
 	for (int i = 0; i < dimension; i++)
 	{
+		if ((matrixA[i][i] - SumSquare(matrixU, i) < 0) || isNearlyEqualZero(matrixU[i][i]))
+			state = true;
 		matrixU[i][i] = sqrt(matrixA[i][i] - SumSquare(matrixU, i));
-		//if (isNearlyEqualZero(matrixU[i][i]))
-		//{
-		//	matrixU[i][i] = 0;//abs(round(matrixU[i][i]));
-		//}
 		for (int j = i; j < dimension; j++)
 		{
 			matrixU[i][j] = (matrixA[i][j] - SumMultiply(matrixU, i, j)) / matrixU[i][i];
-			/*if (isNearlyEqualZero(matrixU[i][j]))
-			{
-				matrixU[i][j] = 0;
-			}*/
 		}
 	}
 	//U_T
@@ -231,25 +226,25 @@ std::pair<float**, float**> GetUTU(float** matrixA, int dimension)
 		}
 	}
 	
-	return std::make_pair(matrixU, matrixU_T);
+	return std::make_tuple(matrixU, matrixU_T, state);
 }
-float* GetVectorY(float** matrixU, int dimension, float* vectorB)
+float* GetVectorY(float** matrixU_T, int dimension, float* vectorB)
 {
 	float* vectorY = new float[dimension];
 
 	for (int i = 0; i < dimension; i++)
 	{
-		vectorY[i] = (1/ matrixU[i][i]) * (vectorB[i] - SumY(matrixU, i, vectorY));
+		vectorY[i] = (1/ matrixU_T[i][i]) * (vectorB[i] - SumY(matrixU_T, i, vectorY));
 	}
 	return vectorY;
 }
-float* GetVectorX(float** matrixU_T, int dimension, float* vectorY)
+float* GetVectorX(float** matrixU, int dimension, float* vectorY)
 {
 	float* vectorX = new float[dimension];
 
 	for (int i = dimension - 1; i >= 0; i--)
 	{
-		vectorX[i] = (1 / matrixU_T[i][i]) * (vectorY[i] - SumX(matrixU_T, i, dimension, vectorX));
+		vectorX[i] = (1 / matrixU[i][i]) * (vectorY[i] - SumX(matrixU, i, dimension, vectorX));
 	}
 	return vectorX;
 }
@@ -336,13 +331,13 @@ float* MultiplyMatrixOnVector(float** matrix, float* vector, int dimension)
 	{
 		for (size_t j = 0; j < dimension; j++)
 		{
-			if (isNearlyEqualZero(matrix[j][i] * vector[j]))
+			if (isNearlyEqualZero(matrix[i][j] * vector[j]))
 			{
 				resultVector[i] += 0;
 			}
 			else
 			{
-				resultVector[i] += matrix[j][i] * vector[j];
+				resultVector[i] += matrix[i][j] * vector[j];
 			}
 		}
 	}
@@ -360,6 +355,20 @@ void SquareRootMethod(std::string path)
 	PrintMatrix(matrixA, dimension, "matrix A :");
 	PrintVector(vectorB, dimension, "vector B :");
 
+	//check determinant
+	std::cout << "Degenerate check (A):";
+	if (CheckIfMatrixdDegenerateRecursive(matrixA, dimension) == true)
+	{
+		std::cout << "\nDeterminant = " << FindDeterminantRecursive(matrixA, dimension);
+		std::cout << "\nMatrix is degenerate\n";
+		return;
+	}
+	else
+	{
+		std::cout << "\nDeterminant = " << FindDeterminantRecursive(matrixA, dimension);
+		std::cout << "\nMatrix is not degenerate\n";
+	}
+
 	//check symmetry
 	std::cout << "\nSymmetry check :";
 	if (CheckIfMatrixSymmetric(matrixA, dimension) == false)
@@ -376,13 +385,24 @@ void SquareRootMethod(std::string path)
 	auto matrixies = GetUTU(matrixA, dimension);
 	float** matrixU = std::get<0>(matrixies);
 	float** matrixU_T = std::get<1>(matrixies);
+	//check root
+	std::cout << "Root from negative check (UTU):";
+	if (std::get<2>(matrixies))
+	{
+		std::cout << "\nRoot from negative number error\n";
+		return;
+	}
+	else
+	{
+		std::cout << "\nNo erors\n";
+	}
 
 	//print U and U_T
 	PrintMatrix(matrixU, dimension, "matrix U :");
 	PrintMatrix(matrixU_T, dimension, "matrix U_T :");
 	
 	//check determinant
-	std::cout << "Degenerate check :";
+	std::cout << "Degenerate check (UTU):";
 	if (CheckIfMatrixdDegenerateUTU(matrixU, dimension) == true)
 	{
 		std::cout << "\nDeterminant = " << FindDeterminantUTU(matrixU, dimension);
@@ -399,19 +419,19 @@ void SquareRootMethod(std::string path)
 	float** UTUMultiply = MultiplyMatrix(matrixU_T, matrixU, dimension);
 	PrintMatrix(UTUMultiply, dimension, "U_T * U :");
 
-	//U * y = b
+	//U_T * y = b
 	float* vectorY = GetVectorY(matrixU, dimension, vectorB);
 	PrintVector(vectorY, dimension, "vector Y :");
 	//check 
-	float* vecBCheck = MultiplyMatrixOnVector(matrixU,vectorY, dimension);
-	PrintVector(vecBCheck,dimension, "vector B check (U * y = b):");
+	float* vecBCheck = MultiplyMatrixOnVector(matrixU_T,vectorY, dimension);
+	PrintVector(vecBCheck,dimension, "vector B check (U_T * y = b):");
 
-	//U_T * x = y
-	float* vectorX = GetVectorX(matrixU_T, dimension, vectorY);
+	//U * x = y
+	float* vectorX = GetVectorX(matrixU, dimension, vectorY);
 	PrintVector(vectorX, dimension, "vector X :");
 	//check
-	float* vecYCheck = MultiplyMatrixOnVector(matrixU_T, vectorX, dimension);
-	PrintVector(vecYCheck, dimension, "vector Y check (U_T * x = y):");
+	float* vecYCheck = MultiplyMatrixOnVector(matrixU, vectorX, dimension);
+	PrintVector(vecYCheck, dimension, "vector Y check (U * x = y):");
 
 	//check A*x = b
 	float* vecABCheck = MultiplyMatrixOnVector(matrixA, vectorX, dimension);

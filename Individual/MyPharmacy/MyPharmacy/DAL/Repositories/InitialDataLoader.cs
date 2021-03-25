@@ -10,26 +10,34 @@ namespace MyPharmacy.DAL.Repositories
             List<Medicine> entities = new List<Medicine>();
             entities.Add(new Medicine()
             {
-                Id = 3444,
-                name = "wgykue",
+                Id = 65366,
+                name = "Ibuprofen",
                 amount = 43,
-                expirationDate = "21.10.1999",
+                expirationDate = "21.12.2030",
                 storageTemperature = 42
             });
             entities.Add(new Medicine()
             {
-                Id = 3885,
-                name = "ftytuur",
+                Id = 12344,
+                name = "Xanax",
                 amount = 22,
-                expirationDate = "18.07.2200",
+                expirationDate = "01.04.2023",
                 storageTemperature = 453
             });
             entities.Add(new Medicine()
             {
-                Id = 3454,
-                name = "twferjsr",
+                Id = 63250,
+                name = "Naproxen",
+                amount = 34,
+                expirationDate = "14.03.2023",
+                storageTemperature = 1
+            });
+            entities.Add(new Medicine()
+            {
+                Id = 36544,
+                name = "Ciprofloxacin",
                 amount = 3,
-                expirationDate = "01.03.2030",
+                expirationDate = "30.03.2150",
                 storageTemperature = 12
             });
             return entities;
@@ -39,30 +47,39 @@ namespace MyPharmacy.DAL.Repositories
             List<Cosmetic> entities = new List<Cosmetic>();
             entities.Add(new Cosmetic()
             {
-                Id = 3444,
-                name = "wgykue",
+                Id = 13356,
+                name = "Jardiance",
                 amount = 43,
                 capacity = 243,
-                expirationDate = "21.10.1999",
+                expirationDate = "04.12.2023",
                 storageTemperature = 42
             });
             entities.Add(new Cosmetic()
             {
-                Id = 3885,
-                name = "ftytuur",
+                Id = 34556,
+                name = "Onpattro",
                 amount = 22,
                 capacity = 23,
-                expirationDate = "18.07.2200",
+                expirationDate = "05.03.2040",
                 storageTemperature = 453
             });
             entities.Add(new Cosmetic()
             {
-                Id = 3454,
-                name = "twferjsr",
+                Id = 65536,
+                name = "Januvia",
                 amount = 3,
                 capacity = 98,
-                expirationDate = "01.03.2030",
+                expirationDate = "21.11.2099",
                 storageTemperature = 12
+            });
+            entities.Add(new Cosmetic()
+            {
+                Id = 64350,
+                name = "Caudalie",
+                amount = 33,
+                capacity = 21,
+                expirationDate = "14.03.2025",
+                storageTemperature = 88
             });
             return entities;
         }

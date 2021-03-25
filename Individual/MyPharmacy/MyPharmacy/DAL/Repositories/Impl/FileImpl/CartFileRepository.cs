@@ -1,18 +1,19 @@
 ﻿using MyPharmacy.DAL.Modules.Impl;
+using MyPharmacy.DAL.Repositories.Abstract;
 using System;
 using System.IO;
 
 namespace MyPharmacy.DAL.Repositories.Impl.FileImpl
 {
-    public class CartFileRepository : BaseFileRepository<Flyweight>
+    public class CartFileRepository : BaseFileRepository<Flyweight>, ICartRepositoty
     {
         readonly private string filePath;
         readonly private char delim;
         public CartFileRepository()
         {
             Directory.GetCurrentDirectory();
-            //filePath = @"C:\Users\volod\source\Lnu_VS\Individual\MyPharmacy\MyPharmacy\DAL\Files\cartTable.txt";
-            filePath = $"{Directory.GetCurrentDirectory()}\\DAL\\Files\\cartTable.txt";
+            filePath = @"C:\Users\volod\source\Lnu_VS\Individual\MyPharmacy\MyPharmacy\DAL\Files\cartTable.txt";
+            //filePath = $"{Directory.GetCurrentDirectory()}\\DAL\\Files\\cartTable.txt";
             delim = ',';
             ReadItemsFromFile();
         }

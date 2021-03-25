@@ -31,13 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DAL\Files\medicineTable.txt" />
-    <Resource Include="Startup.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="BLL\" />
   </ItemGroup>
 

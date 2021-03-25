@@ -11,8 +11,8 @@ namespace MyPharmacy.DAL.Repositories.Impl.FileImpl
         protected readonly char delim;
         public MedicineFileRepository()
         {
-            //filePath = @"C:\Users\volod\source\Lnu_VS\Individual\MyPharmacy\MyPharmacy\DAL\Files\medicineTable.txt";
-            filePath = $"{Directory.GetCurrentDirectory()}\\DAL\\Files\\medicineTable.txt";
+            filePath = @"C:\Users\volod\source\Lnu_VS\Individual\MyPharmacy\MyPharmacy\DAL\Files\medicineTable.txt";
+            //filePath = $"{Directory.GetCurrentDirectory()}\\DAL\\Files\\medicineTable.txt";
             delim = ',';
             ReadItemsFromFile();
         }

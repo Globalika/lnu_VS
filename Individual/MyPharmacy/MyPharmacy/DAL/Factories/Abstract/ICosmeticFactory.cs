@@ -1,5 +1,4 @@
-﻿using MyPharmacy.DAL.Modules.Impl;
-using MyPharmacy.DAL.Repositories.Abstract;
+﻿using MyPharmacy.DAL.Repositories.Abstract;
 
 namespace MyPharmacy.DAL.Factories.Abstract
 {

@@ -2,7 +2,6 @@
 using MyPharmacy.DAL.Modules.Impl;
 using MyPharmacy.DAL.Repositories;
 using MyPharmacy.DAL.Repositories.Abstract;
-using MyPharmacy.DAL.Repositories.Impl.FileImpl;
 using MyPharmacy.PL.UserMenu.Abstract;
 using System;
 using System.Collections.Generic;
@@ -14,12 +13,14 @@ namespace MyPharmacy.PL.UserMenu.Impl
     {
         public CosmeticMenu()
         {
-            cart = new CartFileRepository();
             FactoryProvider prov = new FactoryProvider();
             cosRepos = prov.GetCosmeticFactory().GetCosmeticRepository();
+            cart = prov.GetCartFactory().GetCartRepository();
+            //cart.
+            //cart = new CartFileRepository();
             factory = new FlyweightFactory();
         }
-        CartFileRepository cart;
+        ICartRepositoty cart;
         ICosmeticRepository cosRepos;
         FlyweightFactory factory;
         public void ShowTableMenu()
@@ -236,7 +237,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
             Cosmetic product = new Cosmetic();
             string str; int k;
 
-            Console.Write("Id (Example : 9999) : ");
+            Console.Write("Id (Example : 99999) : ");
             k = int.Parse(Console.ReadLine());
             product.Id = k;
             Console.WriteLine();
@@ -369,7 +370,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 else
                 {
                     bool empty = false;
-                    foreach (var it in cart.entities)
+                    foreach (var it in cart.GetAll()/*entities*/)
                     {
                         if (it.amount != 0)
                         {
@@ -395,7 +396,7 @@ namespace MyPharmacy.PL.UserMenu.Impl
                 }
                 else if (g == 2)
                 {
-                    foreach (var it in cart.entities)
+                    foreach (var it in cart.GetAll()/*entities*/)
                     {
                         ReturnProductAmount(it.Id, it.name, it.amount);
                         //

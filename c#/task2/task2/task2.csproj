@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HDF.PInvoke, Version=1.10.6.1, Culture=neutral, PublicKeyToken=18793c1fcffe58a3, processorArchitecture=MSIL">
@@ -59,7 +61,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="file\matrix.txt" />
+    <Compile Include="file\matrix.h5">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Content Include="file\matrixA.txt" />
+    <Content Include="file\matrixB.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\HDF.PInvoke.1.10.6.1\build\HDF.PInvoke.targets" Condition="Exists('..\packages\HDF.PInvoke.1.10.6.1\build\HDF.PInvoke.targets')" />
