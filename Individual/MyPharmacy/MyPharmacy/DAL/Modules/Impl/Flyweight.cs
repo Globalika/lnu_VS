@@ -5,8 +5,8 @@ namespace MyPharmacy.DAL.Modules.Impl
     public class Flyweight : IEntity
     {
 		public int Id { get; set; }
-		public string name;
-		public int amount;
+		public string name { get; set; }
+		public int amount { get; set; }
 
 		public Flyweight(CartEntity flyw, int amount) 
 		{

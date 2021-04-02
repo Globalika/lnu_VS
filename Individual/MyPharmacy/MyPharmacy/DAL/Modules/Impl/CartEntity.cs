@@ -11,7 +11,7 @@ namespace MyPharmacy.DAL.Modules.Impl
             this.name = name;
         }
         public int Id { get; set; }
-        public string name;
+        public string name { get; set; }
         public override string ToString()
         {
             return $"{Id} | {name}";

@@ -61,9 +61,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="file\matrix.h5">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Content Include="file\matrixA.txt" />
     <Content Include="file\matrixB.txt" />
   </ItemGroup>

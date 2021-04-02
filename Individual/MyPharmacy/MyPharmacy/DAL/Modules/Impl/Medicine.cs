@@ -14,10 +14,10 @@ namespace MyPharmacy.DAL.Modules.Impl
             this.storageTemperature = storageTemperature;
         }
         public int Id { get; set; }
-        public string name;
-        public string expirationDate;
-        public int amount;
-        public int storageTemperature;
+        public string name { get; set; }
+        public string expirationDate { get; set; }
+        public int amount { get; set; }
+        public int storageTemperature { get; set; }
 
         public override string ToString()
         {

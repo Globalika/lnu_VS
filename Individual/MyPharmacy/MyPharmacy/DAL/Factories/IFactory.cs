@@ -2,8 +2,10 @@
 
 namespace MyPharmacy.DAL.Factories.Abstract
 {
-    public interface IMedicineFactory
+    public interface IFactory
     {
+        ICartRepositoty GetCartRepository();
+        ICosmeticRepository GetCosmeticRepository();
         IMedicineRepository GetMedicineRepository();
     }
 }

@@ -13,7 +13,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
         public MedicineMenu()
         {
             FactoryProvider prov = new FactoryProvider();
-            medRepos = prov.GetMedicineFactory().GetMedicineRepository();
+            medRepos = prov.GetFactory().GetMedicineRepository();
 
         }
         IMedicineRepository medRepos;

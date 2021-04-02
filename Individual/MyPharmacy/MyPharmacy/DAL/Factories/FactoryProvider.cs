@@ -18,7 +18,7 @@ namespace MyPharmacy.DAL.Factories.Impl
         }
 
         public IConfiguration Configuration { get; }
-        public ICosmeticFactory GetCosmeticFactory()
+        public IFactory GetFactory()
         {
             var configuration = this.Configuration.GetSection("DatabaseConfiguration");
             var factoryType = configuration.GetSection("factoryType").Value;
@@ -26,40 +26,9 @@ namespace MyPharmacy.DAL.Factories.Impl
             switch (factoryType)
             {
                 case "file":
-                    return new CosmeticFileFactory();
+                    return new FileFactory();
                 case "memory":
-                    return new CosmeticFactory();
-                default:
-                    throw new Exception("Wrong type!");
-            }
-        }
-        public IMedicineFactory GetMedicineFactory()
-        {
-            var configuration = this.Configuration.GetSection("DatabaseConfiguration");
-            var factoryType = configuration.GetSection("factoryType").Value;
-
-            switch (factoryType)
-            {
-                case "file":
-                    return new MedicineFileFactory();
-                case "memory":
-                    return new MedicineFactory();
-                default:
-                    throw new Exception("Wrong type!");
-            }
-        }
-
-        public ICartFactory GetCartFactory()
-        {
-            var configuration = this.Configuration.GetSection("DatabaseConfiguration");
-            var factoryType = configuration.GetSection("factoryType").Value;
-
-            switch (factoryType)
-            {
-                case "file":
-                    return new CartFileFactory();
-                case "memory":
-                    return new CartFactory();
+                    return new MemoryFactory();
                 default:
                     throw new Exception("Wrong type!");
             }

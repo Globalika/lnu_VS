@@ -4,11 +4,21 @@ using MyPharmacy.DAL.Repositories.Impl.FileImpl;
 
 namespace MyPharmacy.DAL.Factories.Impl.FileImpl
 {
-    class CosmeticFileFactory : ICosmeticFactory
+    class FileFactory : IFactory
     {
+        public ICartRepositoty GetCartRepository()
+        {
+            return new CartFileRepository();
+        }
+
         public ICosmeticRepository GetCosmeticRepository()
         {
             return new CosmeticFileRepository();
+        }
+
+        public IMedicineRepository GetMedicineRepository()
+        {
+            return new MedicineFileRepository();
         }
     }
 }

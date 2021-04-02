@@ -13,7 +13,7 @@ namespace MyPharmacy.PL.AdminMenu.Impl
         public CosmeticMenu()
         {
             FactoryProvider prov = new FactoryProvider();
-            cosRepos = prov.GetCosmeticFactory().GetCosmeticRepository();
+            cosRepos = prov.GetFactory().GetCosmeticRepository();
         }
         ICosmeticRepository cosRepos;
         public void ShowTableMenu()

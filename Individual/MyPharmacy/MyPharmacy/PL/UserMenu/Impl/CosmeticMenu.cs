@@ -14,8 +14,8 @@ namespace MyPharmacy.PL.UserMenu.Impl
         public CosmeticMenu()
         {
             FactoryProvider prov = new FactoryProvider();
-            cosRepos = prov.GetCosmeticFactory().GetCosmeticRepository();
-            cart = prov.GetCartFactory().GetCartRepository();
+            cosRepos = prov.GetFactory().GetCosmeticRepository();
+            cart = prov.GetFactory().GetCartRepository();
             //cart.
             //cart = new CartFileRepository();
             factory = new FlyweightFactory();

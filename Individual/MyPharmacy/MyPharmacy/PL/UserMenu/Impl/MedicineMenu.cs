@@ -14,9 +14,9 @@ namespace MyPharmacy.PL.UserMenu.Impl
         public MedicineMenu()
         {
             FactoryProvider prov = new FactoryProvider();
-            medRepos = prov.GetMedicineFactory().GetMedicineRepository();
+            medRepos = prov.GetFactory().GetMedicineRepository();
 
-            cart = prov.GetCartFactory().GetCartRepository();
+            cart = prov.GetFactory().GetCartRepository();
             //cart = new CartFileRepository();
 
             factory = new FlyweightFactory();
