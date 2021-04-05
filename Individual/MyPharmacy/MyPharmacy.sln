@@ -9,10 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserConsole", "UserConsole\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPharmacy", "MyPharmacy\MyPharmacy.csproj", "{8FDCF921-0ECB-48FE-87C5-B03C5F624AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsAdmin", "WindowsFormsAdmin\WindowsFormsAdmin.csproj", "{E43668A4-30E1-4CEC-A385-3CB889762DAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsFormsAdmin", "WindowsFormsAdmin\WindowsFormsAdmin.csproj", "{E43668A4-30E1-4CEC-A385-3CB889762DAC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8FDCF921-0ECB-48FE-87C5-B03C5F624AFF} = {8FDCF921-0ECB-48FE-87C5-B03C5F624AFF}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsUser", "WindowsFormsUser\WindowsFormsUser.csproj", "{8959F103-0F6E-46E9-85CB-7E92AE65FB8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{E43668A4-30E1-4CEC-A385-3CB889762DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E43668A4-30E1-4CEC-A385-3CB889762DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E43668A4-30E1-4CEC-A385-3CB889762DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8959F103-0F6E-46E9-85CB-7E92AE65FB8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8959F103-0F6E-46E9-85CB-7E92AE65FB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8959F103-0F6E-46E9-85CB-7E92AE65FB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8959F103-0F6E-46E9-85CB-7E92AE65FB8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 ﻿
 namespace WindowsFormsAdmin
 {
-    partial class Form1
+    partial class AppForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -39,7 +39,6 @@ namespace WindowsFormsAdmin
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.med_sort = new System.Windows.Forms.Button();
             this.med_delete = new System.Windows.Forms.Button();
             this.med_create = new System.Windows.Forms.Button();
             this.med_storageTemperature = new System.Windows.Forms.TextBox();
@@ -55,7 +54,6 @@ namespace WindowsFormsAdmin
             this.label12 = new System.Windows.Forms.Label();
             this.cos_refresh = new System.Windows.Forms.Button();
             this.cos_details = new System.Windows.Forms.Button();
-            this.cos_sort = new System.Windows.Forms.Button();
             this.cos_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -96,8 +94,9 @@ namespace WindowsFormsAdmin
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.tabPage1.Size = new System.Drawing.Size(1180, 715);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "MedicineTable";
@@ -112,7 +111,6 @@ namespace WindowsFormsAdmin
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.med_sort);
             this.panel2.Controls.Add(this.med_delete);
             this.panel2.Controls.Add(this.med_create);
             this.panel2.Controls.Add(this.med_storageTemperature);
@@ -129,7 +127,7 @@ namespace WindowsFormsAdmin
             // med_refresh
             // 
             this.med_refresh.BackColor = System.Drawing.Color.Chocolate;
-            this.med_refresh.Location = new System.Drawing.Point(968, 136);
+            this.med_refresh.Location = new System.Drawing.Point(940, 115);
             this.med_refresh.Name = "med_refresh";
             this.med_refresh.Size = new System.Drawing.Size(137, 34);
             this.med_refresh.TabIndex = 18;
@@ -140,7 +138,7 @@ namespace WindowsFormsAdmin
             // med_details
             // 
             this.med_details.BackColor = System.Drawing.Color.Chocolate;
-            this.med_details.Location = new System.Drawing.Point(540, 136);
+            this.med_details.Location = new System.Drawing.Point(20, 115);
             this.med_details.Name = "med_details";
             this.med_details.Size = new System.Drawing.Size(223, 34);
             this.med_details.TabIndex = 17;
@@ -193,21 +191,10 @@ namespace WindowsFormsAdmin
             this.label6.TabIndex = 12;
             this.label6.Text = "Id :";
             // 
-            // med_sort
-            // 
-            this.med_sort.BackColor = System.Drawing.Color.Chocolate;
-            this.med_sort.Location = new System.Drawing.Point(55, 136);
-            this.med_sort.Name = "med_sort";
-            this.med_sort.Size = new System.Drawing.Size(154, 34);
-            this.med_sort.TabIndex = 11;
-            this.med_sort.Text = "Sort Table By Id";
-            this.med_sort.UseVisualStyleBackColor = false;
-            this.med_sort.Click += new System.EventHandler(this.Med_Sort_Table_Click);
-            // 
             // med_delete
             // 
             this.med_delete.BackColor = System.Drawing.Color.Chocolate;
-            this.med_delete.Location = new System.Drawing.Point(256, 136);
+            this.med_delete.Location = new System.Drawing.Point(267, 115);
             this.med_delete.Name = "med_delete";
             this.med_delete.Size = new System.Drawing.Size(239, 34);
             this.med_delete.TabIndex = 10;
@@ -219,7 +206,7 @@ namespace WindowsFormsAdmin
             // 
             this.med_create.BackColor = System.Drawing.Color.Chocolate;
             this.med_create.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.med_create.Location = new System.Drawing.Point(942, 18);
+            this.med_create.Location = new System.Drawing.Point(923, 13);
             this.med_create.Name = "med_create";
             this.med_create.Size = new System.Drawing.Size(154, 34);
             this.med_create.TabIndex = 9;
@@ -278,9 +265,10 @@ namespace WindowsFormsAdmin
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(32, 205);
+            this.dataGridView1.Location = new System.Drawing.Point(32, 259);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 33;
@@ -289,6 +277,7 @@ namespace WindowsFormsAdmin
             // 
             // tabPage2
             // 
+            this.tabPage2.AutoScrollMargin = new System.Drawing.Size(10, 10);
             this.tabPage2.BackColor = System.Drawing.Color.LightSeaGreen;
             this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Controls.Add(this.dataGridView2);
@@ -306,7 +295,6 @@ namespace WindowsFormsAdmin
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.cos_refresh);
             this.panel1.Controls.Add(this.cos_details);
-            this.panel1.Controls.Add(this.cos_sort);
             this.panel1.Controls.Add(this.cos_delete);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label4);
@@ -319,15 +307,16 @@ namespace WindowsFormsAdmin
             this.panel1.Controls.Add(this.cos_expirationDate);
             this.panel1.Controls.Add(this.cos_name);
             this.panel1.Controls.Add(this.cos_Id);
-            this.panel1.Location = new System.Drawing.Point(27, 28);
+            this.panel1.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.panel1.Location = new System.Drawing.Point(27, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1115, 158);
+            this.panel1.Size = new System.Drawing.Size(1115, 166);
             this.panel1.TabIndex = 1;
             // 
             // cos_storageTemperature
             // 
             this.cos_storageTemperature.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cos_storageTemperature.Location = new System.Drawing.Point(876, 23);
+            this.cos_storageTemperature.Location = new System.Drawing.Point(876, 13);
             this.cos_storageTemperature.Name = "cos_storageTemperature";
             this.cos_storageTemperature.Size = new System.Drawing.Size(57, 31);
             this.cos_storageTemperature.TabIndex = 33;
@@ -335,7 +324,7 @@ namespace WindowsFormsAdmin
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(784, 26);
+            this.label12.Location = new System.Drawing.Point(784, 16);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(86, 25);
             this.label12.TabIndex = 32;
@@ -344,7 +333,7 @@ namespace WindowsFormsAdmin
             // cos_refresh
             // 
             this.cos_refresh.BackColor = System.Drawing.Color.Teal;
-            this.cos_refresh.Location = new System.Drawing.Point(978, 124);
+            this.cos_refresh.Location = new System.Drawing.Point(967, 118);
             this.cos_refresh.Name = "cos_refresh";
             this.cos_refresh.Size = new System.Drawing.Size(137, 34);
             this.cos_refresh.TabIndex = 31;
@@ -355,7 +344,7 @@ namespace WindowsFormsAdmin
             // cos_details
             // 
             this.cos_details.BackColor = System.Drawing.Color.Teal;
-            this.cos_details.Location = new System.Drawing.Point(600, 124);
+            this.cos_details.Location = new System.Drawing.Point(14, 118);
             this.cos_details.Name = "cos_details";
             this.cos_details.Size = new System.Drawing.Size(223, 34);
             this.cos_details.TabIndex = 30;
@@ -363,21 +352,10 @@ namespace WindowsFormsAdmin
             this.cos_details.UseVisualStyleBackColor = false;
             this.cos_details.Click += new System.EventHandler(this.Cos_Product_Details_Click);
             // 
-            // cos_sort
-            // 
-            this.cos_sort.BackColor = System.Drawing.Color.Teal;
-            this.cos_sort.Location = new System.Drawing.Point(42, 124);
-            this.cos_sort.Name = "cos_sort";
-            this.cos_sort.Size = new System.Drawing.Size(154, 34);
-            this.cos_sort.TabIndex = 29;
-            this.cos_sort.Text = "Sort Table By Id";
-            this.cos_sort.UseVisualStyleBackColor = false;
-            this.cos_sort.Click += new System.EventHandler(this.Cos_Sort_Table_Click);
-            // 
             // cos_delete
             // 
             this.cos_delete.BackColor = System.Drawing.Color.Teal;
-            this.cos_delete.Location = new System.Drawing.Point(261, 124);
+            this.cos_delete.Location = new System.Drawing.Point(259, 118);
             this.cos_delete.Name = "cos_delete";
             this.cos_delete.Size = new System.Drawing.Size(239, 34);
             this.cos_delete.TabIndex = 28;
@@ -388,7 +366,7 @@ namespace WindowsFormsAdmin
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(636, 26);
+            this.label1.Location = new System.Drawing.Point(636, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 25);
             this.label1.TabIndex = 27;
@@ -397,7 +375,7 @@ namespace WindowsFormsAdmin
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(488, 26);
+            this.label4.Location = new System.Drawing.Point(488, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 25);
             this.label4.TabIndex = 26;
@@ -406,7 +384,7 @@ namespace WindowsFormsAdmin
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(291, 26);
+            this.label5.Location = new System.Drawing.Point(291, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 25);
             this.label5.TabIndex = 25;
@@ -415,7 +393,7 @@ namespace WindowsFormsAdmin
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(126, 26);
+            this.label10.Location = new System.Drawing.Point(126, 16);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(70, 25);
             this.label10.TabIndex = 24;
@@ -424,7 +402,7 @@ namespace WindowsFormsAdmin
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(14, 26);
+            this.label11.Location = new System.Drawing.Point(14, 16);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(37, 25);
             this.label11.TabIndex = 23;
@@ -434,7 +412,7 @@ namespace WindowsFormsAdmin
             // 
             this.cos_create.BackColor = System.Drawing.Color.Teal;
             this.cos_create.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.cos_create.Location = new System.Drawing.Point(950, 21);
+            this.cos_create.Location = new System.Drawing.Point(950, 11);
             this.cos_create.Name = "cos_create";
             this.cos_create.Size = new System.Drawing.Size(154, 34);
             this.cos_create.TabIndex = 22;
@@ -445,7 +423,7 @@ namespace WindowsFormsAdmin
             // cos_capacity
             // 
             this.cos_capacity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cos_capacity.Location = new System.Drawing.Point(728, 23);
+            this.cos_capacity.Location = new System.Drawing.Point(728, 13);
             this.cos_capacity.Name = "cos_capacity";
             this.cos_capacity.Size = new System.Drawing.Size(50, 31);
             this.cos_capacity.TabIndex = 21;
@@ -453,7 +431,7 @@ namespace WindowsFormsAdmin
             // cos_amount
             // 
             this.cos_amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cos_amount.Location = new System.Drawing.Point(583, 23);
+            this.cos_amount.Location = new System.Drawing.Point(583, 13);
             this.cos_amount.Name = "cos_amount";
             this.cos_amount.Size = new System.Drawing.Size(47, 31);
             this.cos_amount.TabIndex = 20;
@@ -461,7 +439,7 @@ namespace WindowsFormsAdmin
             // cos_expirationDate
             // 
             this.cos_expirationDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cos_expirationDate.Location = new System.Drawing.Point(395, 23);
+            this.cos_expirationDate.Location = new System.Drawing.Point(395, 13);
             this.cos_expirationDate.Name = "cos_expirationDate";
             this.cos_expirationDate.Size = new System.Drawing.Size(87, 31);
             this.cos_expirationDate.TabIndex = 19;
@@ -469,7 +447,7 @@ namespace WindowsFormsAdmin
             // cos_name
             // 
             this.cos_name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cos_name.Location = new System.Drawing.Point(202, 23);
+            this.cos_name.Location = new System.Drawing.Point(202, 13);
             this.cos_name.Name = "cos_name";
             this.cos_name.Size = new System.Drawing.Size(83, 31);
             this.cos_name.TabIndex = 18;
@@ -477,13 +455,14 @@ namespace WindowsFormsAdmin
             // cos_Id
             // 
             this.cos_Id.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cos_Id.Location = new System.Drawing.Point(57, 23);
+            this.cos_Id.Location = new System.Drawing.Point(57, 13);
             this.cos_Id.Name = "cos_Id";
             this.cos_Id.Size = new System.Drawing.Size(63, 31);
             this.cos_Id.TabIndex = 17;
             // 
             // dataGridView2
             // 
+            this.dataGridView2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(27, 208);
@@ -527,7 +506,6 @@ namespace WindowsFormsAdmin
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button med_sort;
         private System.Windows.Forms.Button med_delete;
         private System.Windows.Forms.Button med_create;
         private System.Windows.Forms.TextBox med_storageTemperature;
@@ -555,7 +533,6 @@ namespace WindowsFormsAdmin
         private System.Windows.Forms.TextBox cos_Id;
         private System.Windows.Forms.Button cos_refresh;
         private System.Windows.Forms.Button cos_details;
-        private System.Windows.Forms.Button cos_sort;
         private System.Windows.Forms.Button cos_delete;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox cos_storageTemperature;
