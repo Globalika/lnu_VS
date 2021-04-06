@@ -140,9 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\TridiagonalMatrixAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="file\matrix.txt" />
+    <Text Include="src\file\matrix.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\TridiagonalMatrixAlgorithm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

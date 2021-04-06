@@ -1,7 +1,7 @@
 ﻿
 namespace WindowsFormsUser
 {
-    partial class AppForm
+    partial class AppFormUser
     {
         /// <summary>
         ///  Required designer variable.
@@ -47,6 +47,7 @@ namespace WindowsFormsUser
             this.cos_add_to_cart = new System.Windows.Forms.Button();
             this.cos_amount = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -60,10 +61,10 @@ namespace WindowsFormsUser
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(-1, 1);
+            this.tabControl1.Location = new System.Drawing.Point(-1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1191, 718);
+            this.tabControl1.Size = new System.Drawing.Size(1191, 719);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -76,7 +77,7 @@ namespace WindowsFormsUser
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1183, 680);
+            this.tabPage1.Size = new System.Drawing.Size(1183, 681);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "MedicineTable";
             // 
@@ -91,7 +92,7 @@ namespace WindowsFormsUser
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(32, 17);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1106, 171);
+            this.panel2.Size = new System.Drawing.Size(457, 171);
             this.panel2.TabIndex = 1;
             // 
             // med_refresh
@@ -175,7 +176,7 @@ namespace WindowsFormsUser
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1183, 680);
+            this.tabPage2.Size = new System.Drawing.Size(1183, 681);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "CosmeticTable";
             // 
@@ -190,7 +191,7 @@ namespace WindowsFormsUser
             this.panel1.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(27, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1115, 166);
+            this.panel1.Size = new System.Drawing.Size(449, 166);
             this.panel1.TabIndex = 1;
             // 
             // cos_refresh
@@ -256,11 +257,26 @@ namespace WindowsFormsUser
             this.dataGridView2.Size = new System.Drawing.Size(1115, 384);
             this.dataGridView2.TabIndex = 0;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label13.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(523, 0);
+            this.label13.Margin = new System.Windows.Forms.Padding(0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(151, 28);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "My Pharmacy";
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1186, 638);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.tabControl1);
             this.Name = "AppForm";
             this.Text = "WinAppUser";
@@ -275,6 +291,7 @@ namespace WindowsFormsUser
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -298,6 +315,7 @@ namespace WindowsFormsUser
         private System.Windows.Forms.Button cos_add_to_cart;
         private System.Windows.Forms.TextBox cos_amount;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label label13;
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿
 namespace WindowsFormsAdmin
 {
-    partial class AppForm
+    partial class AppFormAdmin
     {
         /// <summary>
         ///  Required designer variable.
@@ -67,6 +67,7 @@ namespace WindowsFormsAdmin
             this.cos_name = new System.Windows.Forms.TextBox();
             this.cos_Id = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,16 +81,17 @@ namespace WindowsFormsAdmin
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(-1, -3);
+            this.tabControl1.Location = new System.Drawing.Point(-1, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1188, 753);
+            this.tabControl1.Size = new System.Drawing.Size(1188, 750);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.Form_Load);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.SandyBrown;
+            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -97,7 +99,7 @@ namespace WindowsFormsAdmin
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1180, 715);
+            this.tabPage1.Size = new System.Drawing.Size(1180, 712);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "MedicineTable";
             // 
@@ -207,6 +209,7 @@ namespace WindowsFormsAdmin
             this.med_create.BackColor = System.Drawing.Color.Chocolate;
             this.med_create.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.med_create.Location = new System.Drawing.Point(923, 13);
+            this.med_create.Margin = new System.Windows.Forms.Padding(0);
             this.med_create.Name = "med_create";
             this.med_create.Size = new System.Drawing.Size(154, 34);
             this.med_create.TabIndex = 9;
@@ -268,7 +271,7 @@ namespace WindowsFormsAdmin
             this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(32, 259);
+            this.dataGridView1.Location = new System.Drawing.Point(32, 215);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 33;
@@ -284,7 +287,7 @@ namespace WindowsFormsAdmin
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1180, 715);
+            this.tabPage2.Size = new System.Drawing.Size(1180, 712);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "CosmeticTable";
             // 
@@ -472,15 +475,29 @@ namespace WindowsFormsAdmin
             this.dataGridView2.Size = new System.Drawing.Size(1115, 480);
             this.dataGridView2.TabIndex = 0;
             // 
-            // Form1
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label13.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(548, 0);
+            this.label13.Margin = new System.Windows.Forms.Padding(0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(151, 28);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "My Pharmacy";
+            // 
+            // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1178, 744);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.Name = "Form1";
+            this.Name = "AppForm";
             this.Text = "WinAppAdmin";
             this.Load += new System.EventHandler(this.Form_Load);
             this.tabControl1.ResumeLayout(false);
@@ -493,6 +510,7 @@ namespace WindowsFormsAdmin
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -538,6 +556,7 @@ namespace WindowsFormsAdmin
         private System.Windows.Forms.TextBox cos_storageTemperature;
         private System.Windows.Forms.TextBox cos;
         private System.Windows.Forms.TextBox cos_capacity;
+        private System.Windows.Forms.Label label13;
     }
 }
 

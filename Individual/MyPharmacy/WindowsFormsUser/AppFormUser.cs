@@ -8,34 +8,35 @@ using WindowsFormsUser.CartForms;
 
 namespace WindowsFormsUser
 {
-    public partial class AppForm : Form
+    public partial class AppFormUser : Form
     {
-        readonly IMedicineRepository medRepos;
-        readonly ICosmeticRepository cosRepos;
-        readonly ICartRepositoty cartRepos;
+        IMedicineRepository medRepos;
+        ICosmeticRepository cosRepos;
+        ICartRepositoty cartRepos;
+        FactoryProvider prov;
         FlyweightFactory factory;
-        public AppForm()
+        public AppFormUser()
         {
             factory = new FlyweightFactory();
-            FactoryProvider prov = new FactoryProvider();
+            prov = new FactoryProvider();
             medRepos = prov.GetFactory().GetMedicineRepository();
             cosRepos = prov.GetFactory().GetCosmeticRepository();
             cartRepos = prov.GetFactory().GetCartRepository();
             InitializeComponent();
+            //
+            Load_Med_Columns();
+            Load_Cos_Columns();
         }
         private void Clear_Table(DataGridView dataGridView)
         {
             dataGridView.DataSource = null;
             dataGridView.Rows.Clear();
-            dataGridView.Columns.Clear();
+            //dataGridView.Columns.Clear();
+            medRepos = prov.GetFactory().GetMedicineRepository();
+            cosRepos = prov.GetFactory().GetCosmeticRepository();
         }
         private void Load_Med_Table(DataGridView dataGridView)
         {
-            dataGridView.Columns.Add("", "Id");
-            dataGridView.Columns.Add("", "Name");
-            dataGridView.Columns.Add("", "Expir. Date");
-            dataGridView.Columns.Add("", "Amount");
-            dataGridView.Columns.Add("", "Temperature");
             foreach (var it in medRepos.GetAll())
             {
                 dataGridView.Rows.Add(it.Id, it.name, it.expirationDate, it.amount, it.storageTemperature);
@@ -43,16 +44,27 @@ namespace WindowsFormsUser
         }
         private void Load_Cos_Table(DataGridView dataGridView)
         {
-            dataGridView.Columns.Add("", "Id");
-            dataGridView.Columns.Add("", "Name");
-            dataGridView.Columns.Add("", "Expir. Date");
-            dataGridView.Columns.Add("", "Amount");
-            dataGridView.Columns.Add("", "Capacity");
-            dataGridView.Columns.Add("", "Temperature");
             foreach (var it in cosRepos.GetAll())
             {
                 dataGridView.Rows.Add(it.Id, it.name, it.expirationDate, it.amount, it.capacity, it.storageTemperature);
             }
+        }
+        private void Load_Med_Columns()
+        {
+            dataGridView1.Columns.Add("", "Id");
+            dataGridView1.Columns.Add("", "Name");
+            dataGridView1.Columns.Add("", "Expir. Date");
+            dataGridView1.Columns.Add("", "Amount");
+            dataGridView1.Columns.Add("", "Temperature");
+        }
+        private void Load_Cos_Columns()
+        {
+            dataGridView2.Columns.Add("", "Id");
+            dataGridView2.Columns.Add("", "Name");
+            dataGridView2.Columns.Add("", "Expir. Date");
+            dataGridView2.Columns.Add("", "Amount");
+            dataGridView2.Columns.Add("", "Capacity");
+            dataGridView2.Columns.Add("", "Temperature");
         }
         private void Form1_Load(object sender, EventArgs e)
         {
