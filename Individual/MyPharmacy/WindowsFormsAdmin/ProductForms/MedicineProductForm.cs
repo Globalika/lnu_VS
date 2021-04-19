@@ -7,14 +7,17 @@ namespace WindowsFormsAdmin
 {
     public partial class MedicineProductForm : Form
     {
-        Medicine medProduct;
+        Medicine medProduct = null;
         public MedicineProductForm(Medicine product)
         {
             medProduct = product;
             InitializeComponent();
         }
 
-
+        public Medicine GetProductBack()
+        {
+             return this.medProduct;
+        }
 
         private void ProductForm_Load(object sender, EventArgs e)
         {

@@ -9,5 +9,10 @@ namespace MyPharmacy.DAL.Repositories.Impl.MemoryImpl
         {
             this.entities = InitialDataLoader.InitializeMedicineRepository();
         }
+
+        public void Save()
+        {
+            
+        }
     }
 }

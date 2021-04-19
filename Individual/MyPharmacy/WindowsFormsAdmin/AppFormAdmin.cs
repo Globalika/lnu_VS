@@ -12,6 +12,9 @@ namespace WindowsFormsAdmin
         IMedicineRepository medRepos;
         ICosmeticRepository cosRepos;
         FactoryProvider prov;
+        MedicineProductForm medSecondForm;
+        CosmeticProductFrom cosSecondForm;
+        bool mState = false, cState = false;
         public AppFormAdmin()
         {
             prov = new FactoryProvider();
@@ -108,14 +111,18 @@ namespace WindowsFormsAdmin
 
         private void Med_Product_Details_Click(object sender, EventArgs e)
         {
-            MedicineProductForm secondForm = new MedicineProductForm(medRepos.GetById((int)dataGridView1.CurrentCell.Value));
-            secondForm.Show();
+            medSecondForm = new MedicineProductForm(medRepos.GetById((int)dataGridView1.CurrentCell.Value));
+            medSecondForm.Show();
+            mState = true;
         }
 
         private void Med_Refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView1);
+            if(mState)
+            this.medRepos.Update(medSecondForm.GetProductBack());
             Load_Med_Table(this.dataGridView1);
+            mState = false;
             //dataGridView1.DataSource = medRepos.GetAll();
             //var m = dataGridView1.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);
             //m.Invoke(dataGridView1, new object[] { EventArgs.Empty });
@@ -158,13 +165,17 @@ namespace WindowsFormsAdmin
 
         private void Cos_Product_Details_Click(object sender, EventArgs e)
         {
-            CosmeticProductFrom secondForm = new CosmeticProductFrom(cosRepos.GetById((int)dataGridView2.CurrentCell.Value));
-            secondForm.Show();
+            cosSecondForm = new CosmeticProductFrom(cosRepos.GetById((int)dataGridView2.CurrentCell.Value));
+            cosSecondForm.Show();
+            cState = true;
         }
 
         private void Cos_Refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView2);
+            if(cState)
+            this.cosRepos.Update(cosSecondForm.GetProductBack());
+            cState = false;
             Load_Cos_Table(this.dataGridView2);
             //dataGridView2.DataSource = cosRepos.GetAll();
             //var m = dataGridView2.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);

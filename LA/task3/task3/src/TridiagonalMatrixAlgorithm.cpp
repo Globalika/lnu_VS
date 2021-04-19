@@ -36,7 +36,7 @@ std::tuple<float*, float*, float*, float*, int> GetInfoFromFile(std::string file
 		float* vectorB = new float[dimension-1];
 		float* vectorC = new float[dimension];
 		float* vectorF = new float[dimension];
-		int temp;
+		float temp;
 		while (!fin.eof())
 		{
 			for (int i = 0; i < dimension-1; i++)
@@ -103,6 +103,7 @@ void PrintVector(float* vector, int dimension, std::string str)
 {
 	if (str != "")
 	{
+		//cout << str << endl;
 		std::cout << "\t\t" + str + "\t\t\n";
 	}
 	for (int i = 0; i < dimension; i++)
@@ -119,7 +120,7 @@ std::tuple<float*, float*, float*, float*, int> InitializeVectorsByAlgorithm(int
 	float* vectorC = new float[n];
 	float* vectorF = new float[n];
 
-	int h = 1 / n;
+	float h = 1 / (float)(n-1);
 	vectorA[n - 2] = 0;
 	for (int i = 0; i < n - 2 ; i++)
 	{
@@ -187,10 +188,6 @@ float* MultiplyMatrixOnVector(float** matrix, float* vector, int dimension)
 		for (size_t j = 0; j < dimension; j++)
 		{
 			resultVector[i] += matrix[i][j] * vector[j];
-			if (isNearlyEqualZero(resultVector[i]))
-			{
-				resultVector[i] = 0;
-			}
 		}
 	}
 	//
@@ -219,12 +216,12 @@ void PrintMatrix(float**& matrix, int dimension, std::string str)
 	}
 	return;
 }
-
 bool CorrectnessCheck(float* vecA, float* vecB, float* vecC, int dimension)
 {
-	//C_i > 0
+	
 	bool stateC_i = true, stateA_i = true, stateB_i = true,
 		stateC_B_i = true, stateC_A_B_i = true, stateC_A_i = true;
+	//C_i > 0
 	for (int i = 0; i < dimension; i++)
 	{
 		if (!(std::abs(vecC[i]) > 0))
@@ -242,6 +239,7 @@ bool CorrectnessCheck(float* vecA, float* vecB, float* vecC, int dimension)
 		if (!(std::abs(vecB[i]) > 0))
 			stateB_i = false;
 	}
+
 	//C_0 >= B_0
 	if (!std::abs(vecC[0]) >= std::abs(vecB[0]))
 		stateC_B_i = false;
@@ -256,13 +254,12 @@ bool CorrectnessCheck(float* vecA, float* vecB, float* vecC, int dimension)
 	if (!(std::abs(vecC[dimension-1]) >= std::abs(vecA[dimension-2])))
 		stateC_A_i = false;
 
-	return(stateC_i && stateA_i && stateB_i && stateC_A_B_i && stateC_A_i && stateC_B_i);
+	return((stateC_i && stateA_i && stateB_i) && (stateC_A_B_i || stateC_A_i || stateC_B_i));
 }
-
 float FindNormY(float* vecY, int n)
 {
 	float* vecYY = new float[n];
-	int h = 1 / n;
+	float h = 1 / (float)(n-1);
 	for (int i = 0; i < n; i++)
 	{
 		vecYY[i] = (2 * pow(i,2) * pow(h,2)) + 1;
@@ -273,14 +270,12 @@ float FindNormY(float* vecY, int n)
 	{
 		norma += pow((vecY[i] - vecYY[i]), 2);
 	}
-	norma = sqrt(norma);
-	return norma;
+	return  sqrt(norma);
 }
-
 void TridiagonalAlgorithm(string path)
 {
-	auto info = GetInfoFromFile(path);
-	//auto info = InitializeVectorsByAlgorithm(6);
+	//auto info = GetInfoFromFile(path);
+	auto info = InitializeVectorsByAlgorithm(6);
 
 	float* vectorA = std::get<0>(info);
 	float* vectorB = std::get<1>(info);
@@ -292,9 +287,8 @@ void TridiagonalAlgorithm(string path)
 	PrintVector(vectorC, dimension, "C");
 	PrintVector(vectorF, dimension, "F");
 	//
-	//std::cout << CorrectnessCheck(vectorA, vectorB, vectorC, dimension);
-
-
+	
+	cout << endl << (CorrectnessCheck(vectorA, vectorB, vectorC, dimension) ? "The matrix is correct!" : "Tre matrix is not correct!") << endl << endl;
 
 
 	//
@@ -310,12 +304,7 @@ void TridiagonalAlgorithm(string path)
 	PrintVector(resultVector, dimension, "check");
 	//
 
-	cout << FindNormY(vecY, dimension) << endl;
-
-
-
-
-
+	cout << endl << "Rate of difference :" << FindNormY(vecY, dimension)<< endl;
 
 	return;
 }

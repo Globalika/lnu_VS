@@ -78,6 +78,7 @@ namespace WindowsFormsUser
         private void med_refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView1);
+            medRepos = prov.GetFactory().GetMedicineRepository();
             Load_Med_Table(this.dataGridView1);
         }
 
@@ -101,6 +102,7 @@ namespace WindowsFormsUser
                 }
             }
             //add amount to cart
+            medRepos.Save();
             cartRepos.Save();//
             if (cartRepos .IsProductExist(factory.GetCartFlyweight(p, int.Parse(med_amount.Text))))///////////////////////////////////
             {
@@ -132,6 +134,7 @@ namespace WindowsFormsUser
                 }
             }
             //add amount to cart
+            cosRepos.Save();
             cartRepos.Save();//
             if (cartRepos.IsProductExist(factory.GetCartFlyweight(p, int.Parse(cos_amount.Text))))///////////////////////////////////
             {
@@ -158,6 +161,7 @@ namespace WindowsFormsUser
         private void cos_refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView2);
+            cosRepos = prov.GetFactory().GetCosmeticRepository();
             Load_Cos_Table(this.dataGridView2);
         }
     }

@@ -12,6 +12,10 @@ namespace WindowsFormsAdmin
             cosProduct = product;
             InitializeComponent();
         }
+        public Cosmetic GetProductBack()
+        {
+            return this.cosProduct;
+        }
         private void CosmeticProductFrom_Load(object sender, EventArgs e)
         {
             textBox1.Text = cosProduct.Id.ToString();

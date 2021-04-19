@@ -10,5 +10,10 @@ namespace MyPharmacy.DAL.Repositories.Impl.MemoryImpl
         {
             this.entities = InitialDataLoader.InitializeCosmeticRepository();
         }//
+
+        public void Save()
+        {
+
+        }
     }
 }
