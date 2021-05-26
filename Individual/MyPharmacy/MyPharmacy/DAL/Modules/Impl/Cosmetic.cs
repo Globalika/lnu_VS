@@ -25,5 +25,17 @@ namespace MyPharmacy.DAL.Modules.Impl
         {
             return $"{Id} | {expirationDate} | {name} | {storageTemperature} | {capacity} | {amount}";
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Cosmetic;//(Cosmetic)obj;
+            return this.Id == other?.Id 
+                && this.name == other.name
+                && this.storageTemperature == other.storageTemperature
+                && this.expirationDate == other.expirationDate
+                && this.capacity == other.capacity
+                && this.amount == other.amount
+                ;
+        }
     }
 }

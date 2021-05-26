@@ -1,4 +1,5 @@
 ﻿using MyPharmacy.DAL.Modules.Impl;
+using MyPharmacy.DAL.Repositories.Abstract;
 using System;
 using System.Windows.Forms;
 
@@ -7,8 +8,10 @@ namespace WindowsFormsAdmin
     public partial class CosmeticProductFrom : Form
     {
         Cosmetic cosProduct;
-        public CosmeticProductFrom(Cosmetic product)
+        ICosmeticRepository cosRepos;
+        public CosmeticProductFrom(ICosmeticRepository cosRepos, Cosmetic product)
         {
+            this.cosRepos = cosRepos;
             cosProduct = product;
             InitializeComponent();
         }
@@ -28,26 +31,31 @@ namespace WindowsFormsAdmin
         private void button1_Click(object sender, EventArgs e)
         {
             cosProduct.name = textBox2.Text;
+            cosRepos.Update(cosProduct);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             cosProduct.expirationDate = textBox3.Text;
+            cosRepos.Update(cosProduct);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             cosProduct.amount = int.Parse(textBox4.Text);
+            cosRepos.Update(cosProduct);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             cosProduct.storageTemperature = int.Parse(textBox5.Text);
+            cosRepos.Update(cosProduct);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             cosProduct.amount = int.Parse(textBox6.Text);
+            cosRepos.Update(cosProduct);
         }
 
 

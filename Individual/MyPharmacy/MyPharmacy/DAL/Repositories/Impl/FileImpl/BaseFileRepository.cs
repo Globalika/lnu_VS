@@ -45,6 +45,6 @@ namespace MyPharmacy.DAL.Repositories.Impl.FileImpl
         public abstract void Save();
         protected abstract void ReadItemsFromFile();
         protected abstract void ReadItemsFromStream(StreamReader streamReader);
-        protected abstract T ConvertToObject(string [] strObjItems);
+        public abstract T ConvertToObject(string [] strObjItems);
     }
 }

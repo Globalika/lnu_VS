@@ -82,7 +82,6 @@ namespace WindowsFormsAdmin
             this.tabPage1.Size = new System.Drawing.Size(560, 327);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Medicine Product";
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // button4
             // 
@@ -223,7 +222,7 @@ namespace WindowsFormsAdmin
             this.label1.TabIndex = 0;
             this.label1.Text = "Id :";
             // 
-            // ProductForm
+            // MedicineProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,7 +230,7 @@ namespace WindowsFormsAdmin
             this.ClientSize = new System.Drawing.Size(565, 362);
             this.Controls.Add(this.tabControl1);
             this.Location = new System.Drawing.Point(100, 200);
-            this.Name = "ProductForm";
+            this.Name = "MedicineProductForm";
             this.Text = "ProductForm";
             this.Load += new System.EventHandler(this.ProductForm_Load);
             this.tabControl1.ResumeLayout(false);

@@ -24,5 +24,13 @@ namespace MyPharmacy.DAL.Modules.Impl
 		{
 			return $"{Id} | {name} | {amount}";
 		}
+		public override bool Equals(object obj)
+		{
+			var other = obj as Flyweight;
+			return this.Id == other?.Id
+				&& this.name == other.name
+				&& this.amount == other.amount
+				;
+		}
 	}
 }

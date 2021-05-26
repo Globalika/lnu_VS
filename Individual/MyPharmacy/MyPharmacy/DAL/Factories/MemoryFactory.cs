@@ -4,7 +4,7 @@ using MyPharmacy.DAL.Repositories.Impl.MemoryImpl;
 
 namespace MyPharmacy.DAL.Factories.Impl.MemoryImpl
 {
-    class MemoryFactory : IFactory
+    public class MemoryFactory : IFactory
     {
         public ICartRepositoty GetCartRepository()
         {

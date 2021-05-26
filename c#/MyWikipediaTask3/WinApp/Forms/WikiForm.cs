@@ -43,7 +43,7 @@ namespace WinApp
         {
             foreach (var it in articleRepos.GetAll())
             {
-                string name = authorRepos.GetById(it.FK_author_Id).name;
+                string name = authorRepos.GetById(it.FkAuthorId).name;
                 dataGridView1.Rows.Add(it.Id, name, it.title, it.genre);
             }
         }

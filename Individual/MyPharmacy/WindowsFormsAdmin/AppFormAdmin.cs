@@ -2,7 +2,6 @@
 using MyPharmacy.DAL.Modules.Impl;
 using MyPharmacy.DAL.Repositories.Abstract;
 using System;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace WindowsFormsAdmin
@@ -14,13 +13,12 @@ namespace WindowsFormsAdmin
         FactoryProvider prov;
         MedicineProductForm medSecondForm;
         CosmeticProductFrom cosSecondForm;
-        bool mState = false, cState = false;
         public AppFormAdmin()
         {
             prov = new FactoryProvider();
             medRepos = prov.GetFactory().GetMedicineRepository();
             cosRepos = prov.GetFactory().GetCosmeticRepository();
-            
+
             InitializeComponent();
             //
             Load_Med_Columns();
@@ -30,7 +28,6 @@ namespace WindowsFormsAdmin
         {
             dataGridView.DataSource = null;
             dataGridView.Rows.Clear();
-            //dataGridView.Columns.Clear();
             medRepos = prov.GetFactory().GetMedicineRepository();
             cosRepos = prov.GetFactory().GetCosmeticRepository();
         }
@@ -91,8 +88,6 @@ namespace WindowsFormsAdmin
 
                 Clear_Table(this.dataGridView1);
                 Load_Med_Table(this.dataGridView1);
-                //var m = dataGridView1.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);
-                //m.Invoke(dataGridView1, new object[] { EventArgs.Empty });
             }
             catch (Exception ex)
             {
@@ -105,27 +100,19 @@ namespace WindowsFormsAdmin
             medRepos.Delete((int)dataGridView1.CurrentCell.Value);
             Clear_Table(this.dataGridView1);
             Load_Med_Table(this.dataGridView1);
-            //var m = dataGridView1.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);
-            //m.Invoke(dataGridView1, new object[] { EventArgs.Empty });
         }
 
         private void Med_Product_Details_Click(object sender, EventArgs e)
         {
-            medSecondForm = new MedicineProductForm(medRepos.GetById((int)dataGridView1.CurrentCell.Value));
+            medSecondForm = new MedicineProductForm(medRepos, medRepos.GetById((int)dataGridView1.CurrentCell.Value));
             medSecondForm.Show();
-            mState = true;
         }
 
         private void Med_Refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView1);
-            if(mState)
-            this.medRepos.Update(medSecondForm.GetProductBack());
+            //this.medRepos.Update(medSecondForm.GetProductBack());
             Load_Med_Table(this.dataGridView1);
-            mState = false;
-            //dataGridView1.DataSource = medRepos.GetAll();
-            //var m = dataGridView1.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);
-            //m.Invoke(dataGridView1, new object[] { EventArgs.Empty });
         }
 
         private void Cos_Create_Click(object sender, EventArgs e)
@@ -142,11 +129,8 @@ namespace WindowsFormsAdmin
                     storageTemperature = int.Parse(cos_storageTemperature.Text)
                 });
                 MessageBox.Show("Created successfully!", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //dataGridView1.Refresh();
                 Clear_Table(this.dataGridView2);
                 Load_Cos_Table(this.dataGridView2);
-                //var m = dataGridView2.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);
-                //m.Invoke(dataGridView2, new object[] { EventArgs.Empty });
             }
             catch (Exception ex)
             {
@@ -159,27 +143,19 @@ namespace WindowsFormsAdmin
             cosRepos.Delete((int)dataGridView2.CurrentCell.Value);
             Clear_Table(this.dataGridView2);
             Load_Cos_Table(this.dataGridView2);
-            //var m = dataGridView2.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);
-            //m.Invoke(dataGridView2, new object[] { EventArgs.Empty });
         }
 
         private void Cos_Product_Details_Click(object sender, EventArgs e)
         {
-            cosSecondForm = new CosmeticProductFrom(cosRepos.GetById((int)dataGridView2.CurrentCell.Value));
+            cosSecondForm = new CosmeticProductFrom(cosRepos, cosRepos.GetById((int)dataGridView2.CurrentCell.Value));
             cosSecondForm.Show();
-            cState = true;
         }
 
         private void Cos_Refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView2);
-            if(cState)
-            this.cosRepos.Update(cosSecondForm.GetProductBack());
-            cState = false;
+            //this.cosRepos.Update(cosSecondForm.GetProductBack());
             Load_Cos_Table(this.dataGridView2);
-            //dataGridView2.DataSource = cosRepos.GetAll();
-            //var m = dataGridView2.GetType().GetMethod("OnDataSourceChanged", BindingFlags.NonPublic | BindingFlags.Instance);
-            //m.Invoke(dataGridView2, new object[] { EventArgs.Empty });
         }
     }
 }

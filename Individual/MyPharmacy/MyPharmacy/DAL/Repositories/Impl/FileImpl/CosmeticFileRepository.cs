@@ -23,7 +23,7 @@ namespace MyPharmacy.DAL.Repositories.Impl.FileImpl
                 ReadItemsFromStream(streamReader);
             }
         }
-        protected override Cosmetic ConvertToObject(string [] strObjItems)
+        public override Cosmetic ConvertToObject(string [] strObjItems)
         {
             int fieldsCount = 6;
             if (strObjItems.Length != fieldsCount)

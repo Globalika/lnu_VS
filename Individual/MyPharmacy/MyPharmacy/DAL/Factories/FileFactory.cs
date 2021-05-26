@@ -4,7 +4,7 @@ using MyPharmacy.DAL.Repositories.Impl.FileImpl;
 
 namespace MyPharmacy.DAL.Factories.Impl.FileImpl
 {
-    class FileFactory : IFactory
+    public class FileFactory : IFactory
     {
         public ICartRepositoty GetCartRepository()
         {

@@ -43,6 +43,8 @@ namespace WindowsFormsUser.CartForms
                     }
                 }
             }
+            medRepos.Save();
+            cosRepos.Save();
             cartRepos.DeleteAll();
         }
 

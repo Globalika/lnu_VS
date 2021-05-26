@@ -1,4 +1,5 @@
 ﻿using MyPharmacy.DAL.Modules.Impl;
+using MyPharmacy.DAL.Repositories.Abstract;
 using System;
 using System.Windows.Forms;
 
@@ -7,9 +8,11 @@ namespace WindowsFormsAdmin
 {
     public partial class MedicineProductForm : Form
     {
-        Medicine medProduct = null;
-        public MedicineProductForm(Medicine product)
+        Medicine medProduct;
+        IMedicineRepository medRepos;
+        public MedicineProductForm(IMedicineRepository medRepos, Medicine product)
         {
+            this.medRepos = medRepos;
             medProduct = product;
             InitializeComponent();
         }
@@ -26,37 +29,30 @@ namespace WindowsFormsAdmin
             textBox3.Text = medProduct.expirationDate;
             textBox4.Text = medProduct.amount.ToString();
             textBox5.Text = medProduct.storageTemperature.ToString();
-            //dataGridView1.Rows.Add("Id", medProduct.Id);
-            //dataGridView1.Rows.Add("name", medProduct.name);
-            //dataGridView1.Rows.Add("expirationDate", medProduct.expirationDate);
-            //dataGridView1.Rows.Add("amount", medProduct.amount);
-            //dataGridView1.Rows.Add("storageTemperature", medProduct.storageTemperature);
-            //dataGridView1.DataSource = ;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             medProduct.name = textBox2.Text;
+            medRepos.Update(this.medProduct);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             medProduct.expirationDate = textBox3.Text;
+            medRepos.Update(this.medProduct);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             medProduct.amount = int.Parse(textBox4.Text);
+            medRepos.Update(this.medProduct);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             medProduct.storageTemperature = int.Parse(textBox5.Text);
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
+            medRepos.Update(this.medProduct);
         }
     }
 }

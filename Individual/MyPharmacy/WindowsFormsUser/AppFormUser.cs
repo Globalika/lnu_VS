@@ -31,7 +31,6 @@ namespace WindowsFormsUser
         {
             dataGridView.DataSource = null;
             dataGridView.Rows.Clear();
-            //dataGridView.Columns.Clear();
             medRepos = prov.GetFactory().GetMedicineRepository();
             cosRepos = prov.GetFactory().GetCosmeticRepository();
         }
@@ -78,7 +77,7 @@ namespace WindowsFormsUser
         private void med_refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView1);
-            medRepos = prov.GetFactory().GetMedicineRepository();
+            //medRepos = prov.GetFactory().GetMedicineRepository();
             Load_Med_Table(this.dataGridView1);
         }
 
@@ -161,7 +160,7 @@ namespace WindowsFormsUser
         private void cos_refresh_Click(object sender, EventArgs e)
         {
             Clear_Table(this.dataGridView2);
-            cosRepos = prov.GetFactory().GetCosmeticRepository();
+            //cosRepos = prov.GetFactory().GetCosmeticRepository();
             Load_Cos_Table(this.dataGridView2);
         }
     }

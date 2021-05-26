@@ -20,7 +20,7 @@ namespace MyWikipediaTask3.Repository.Impl
 
         public bool AuthorIdCheck(int id)
         {
-            return entities.Any(r => r.FK_author_Id == id);
+            return entities.Any(r => r.FkAuthorId == id);
         }
 
         public override void Save()
@@ -30,7 +30,7 @@ namespace MyWikipediaTask3.Repository.Impl
             {
                 string[] str = new string[4];
                 str[0] = it.Id.ToString();
-                str[1] = it.FK_author_Id.ToString();
+                str[1] = it.FkAuthorId.ToString();
                 str[2] = it.title;
                 str[3] = it.genre;
                 list.Add(str);

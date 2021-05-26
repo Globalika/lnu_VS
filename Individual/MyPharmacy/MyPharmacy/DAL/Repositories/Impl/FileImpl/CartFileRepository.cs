@@ -45,7 +45,7 @@ namespace MyPharmacy.DAL.Repositories.Impl.FileImpl
                 return true;
             }
         }
-        protected override Flyweight ConvertToObject(string [] strObjItems)
+        public override Flyweight ConvertToObject(string [] strObjItems)
         {
             int fieldsCount = 3;
             if (strObjItems.Length != fieldsCount)
