@@ -14,6 +14,7 @@ GLint	 tt = 0;			// Активна площина: 0 - XY, 1 - XZ
 GLint spin1 = 0;    // Кут поворту лампи навколо осі X 
 GLint spin2 = 0;    // Кут поворту лампи навколо осі Y
 GLfloat light0_position[] = { 0.0, 0.0, 2.5, 1.0 }; // Позиція лампи
+GLfloat light1_position[] = { -2.5, 0.0, 2.5, 1.0 };
 
 int mx, my;				// Координати миші
 bool ldown = false;		// Нажата ліва клавіша миші?
@@ -31,8 +32,21 @@ void Init()				// Ініціалізація OpenGL
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_LINE_SMOOTH);
+	//glClearColor(0.9, 0.9, 0.6, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_DEPTH_TEST);
 
-	glClearColor(0.9, 0.9, 0.6, 1);
+
+	GLfloat lightOneColor[] = {0.5, 0.2, 0.9, 1.0};
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightOneColor);
+
+
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightOneColor);
+
+	//glDisable(GL_LIGHTING);
 
 }
 
@@ -43,9 +57,9 @@ void MySolid()
 	glBegin(GL_QUADS);
 	glNormal3f(0, 0, -1);
 	glVertex3f(-1.5, 0.0, -1.5);
-	glVertex3f(-1.5, -1.0, -1.5);
-	glVertex3f(1.5, -1.0, -1.5);
 	glVertex3f(1.5, 0.0, -1.5);
+	glVertex3f(1.5, -1.0, -1.5);
+	glVertex3f(-1.5, -1.0, -1.5);
 	glEnd();
 
 	glColor3f(0.0, 1.0, 1.0);
@@ -229,17 +243,17 @@ void MySolid()
 	glColor3f(0.8, 0.4, 0.0);
 	glBegin(GL_TRIANGLES);
 	glNormal3f(-0.5, 0.75, 0);
-	glVertex3f(-0.5, 1.0, -0.5);
-	glVertex3f(0.0, -0.5, 0.0);
 	glVertex3f(-0.5, 1.0, 0.5);
+	glVertex3f(0.0, -0.5, 0.0);
+	glVertex3f(-0.5, 1.0, -0.5);
 	glEnd();
 
 	glColor3f(0.3, 0.9, 0.0);
 	glBegin(GL_TRIANGLES);
 	glNormal3f(0.5, 0.75, 0);
-	glVertex3f(0.5, 1.0, 0.5);
-	glVertex3f(0.0, -0.5, 0.0);
 	glVertex3f(0.5, 1.0, -0.5);
+	glVertex3f(0.0, -0.5, 0.0);
+	glVertex3f(0.5, 1.0, 0.5);
 	glEnd();
 	
 	glColor3f(0.3, 0.1, 0.4);
@@ -261,12 +275,10 @@ void MySolid()
 void Display()			// Зміст екрану
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//	glPolygonMode(GL_FRONT, GL_FILL);
-	//	glPolygonMode(GL_BACK, GL_LINE);
-
+		glPolygonMode(GL_BACK, GL_LINE);
 
 	glPushMatrix();
 	glTranslatef(tx, ty, tz);		//Зміщення об'єкта
@@ -301,10 +313,15 @@ void Display()			// Зміст екрану
 	MySolid();
 
 	glPopMatrix();
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+	glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
+
 
 	glPushMatrix();
 	glRotated((GLdouble)spin1, 1.0, 0.0, 1.0);
 	glRotated((GLdouble)spin2, 0.0, 1.0, 0.0);
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+
 	glTranslated(light0_position[0], light0_position[1], -light0_position[2]);
 	glColor3f(0.2, 0.5, 0.5);
 	glutWireCube(0.04);
