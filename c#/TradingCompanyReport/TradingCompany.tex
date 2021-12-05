@@ -1,0 +1,438 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,ukrainian]{babel}
+\usepackage{amssymb,amsfonts,amsmath,cite,enumerate,float,indentfirst}
+\usepackage[dvips]{graphicx} 
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{subcaption}
+
+\usepackage[titles]{tocloft}% http://ctan.org/pkg/tocloft
+\usepackage{xparse}% http://ctan.org/pkg/xparse
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
+\usepackage{letltxmacro}% http://ctan.org/pkg/letltxmacro
+\newcommand{\highpriorityname}{List of High Priority Sections}
+\newlistof{hpsection}{hps}{\highpriorityname}
+\graphicspath{{images/}}
+\makeatletter
+
+\renewcommand{\@biblabel}[1]{#1.} 
+\makeatother
+\usepackage{geometry}
+\geometry{left=2cm}
+\geometry{right=1.5cm}
+\geometry{top=1cm}
+
+\geometry{bottom=2cm}
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\arabic{enumi}}
+\renewcommand{\theenumii}{.\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+
+\begin{document}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\newpage
+		
+		\begin{center}
+			Львівський національний університет імені Івана Франка \\
+		\end{center}
+		
+		\vspace{2em}
+		
+		\begin{center}
+			\includegraphics[width=0.2\paperwidth]{images/ami.png}
+		\end{center}
+		
+		\vspace{2em}
+		
+		\begin{center}
+			\Large Факультет прикладної математики та інформатики \\ 
+		\end{center}
+		
+		\vspace{2em}
+		
+		\begin{center}
+			\textsc{\textbf{Звіт до курсової роботи \linebreak з дисципліни "Програмне забезпечення"}}
+		\end{center}
+		
+		\vspace{12em}
+		
+		
+		\newbox{\lbox}
+		\newlength{\maxl}
+		\setlength{\maxl}{\wd\lbox}
+		\hfill\parbox{8cm}{
+			\hspace*{5cm}\hspace*{-5cm}Виконав:		\hbox to\maxl{Середович Володимир\hfill}\\
+			\hspace*{5cm}\hspace*{-5cm}Група:		\hbox to\maxl{ПМП-31}\\
+		}
+		
+		
+		\vspace{\fill}
+		
+		\begin{center}
+			2021.12.05
+		\end{center}
+		\tableofcontents
+		
+	\end{titlepage}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\chapter{Постановка задачі}
+		
+		\section{Завдання}
+		
+		
+		\label{sec:intro}
+		Роль Фінансовий менеджер – логується, попадає на стартову сторінку з можливістю перейти на сторінку своєї ролі за допомогою меню. Доступний перехід на сторінку з відображенням списку всіх товарів, які були замовлені в постачальників або продані. Може виконувати пошук та сортування. Може сформувати звіт за вибраний період та відобразити сумарний прибуток. Може розлогуватися. Реалізувати названий функціонал. 
+		
+		\section{Поставлені задачі}
+		
+		
+		\label{sec:asdw}
+		Реалізувати завдання на мові C\# з використанням Microsoft SQL Server, трьома різними способами:
+		\begin{enumerate}
+			\item Console Application
+			\item Windows Forms Application
+			\item WPF Application
+		\end{enumerate}
+		
+	\end{titlepage}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\chapter{База даних}
+		
+		\section{Опис бази даних}
+		
+		
+		\label{sec:intro}
+		Для виконання завдання була створена MSSQL база даних яка складлється з таблиць для ролей, користовачів, постачальників, замовлень, продуктів та ще декілька для встановлення відношень між продуктами та замовленнями, та між постачальниками та продуктами які вони надають. 
+		
+		
+		\section{Таблиці та відношення між ними}
+		
+		
+		\label{sec:asdw}
+		\begin{center}
+			\includegraphics[width=0.9\paperwidth]{images/dbDiagram.png}
+		\end{center}
+		
+		
+		\section{Опис таблиць}
+		
+		\texttt{
+			DDL\newline
+			CREATE TABLE tblRoles(\newline
+			Id bigint IDENTITY(1,1) PRIMARY KEY not null ,\newline
+			Name nvarchar(50) not null\newline
+			RowInsertTime datetime2(7) default getutcdate(),\newline
+			RowUpdateTime datetime2(7) default getutcdate()\newline
+			);\newline\newline
+			CREATE TABLE tblProducts(\newline
+			Id bigint IDENTITY(1,1) PRIMARY KEY not null,\newline
+			Name nvarchar(50) not null,\newline
+			Brand nvarchar(50) not null,\newline
+			ProducingCountry nvarchar(50) not null,\newline
+			Price int not null\newline
+			RowInsertTime datetime2(7) default getutcdate(),\newline
+			RowUpdateTime datetime2(7) default getutcdate()\newline
+			);\newline\newline
+			CREATE TABLE tblSuppliers(\newline
+			Id bigint IDENTITY(1,1) PRIMARY KEY not null,\newline
+			Name nvarchar(50) not null\newline
+			RowInsertTime datetime2(7) default getutcdate(),\newline
+			RowUpdateTime datetime2(7) default getutcdate()\newline
+			);\newline\newline
+			CREATE TABLE tblUsers(\newline
+			Id bigint not null IDENTITY(1,1) PRIMARY KEY,\newline
+			FirstName nvarchar(50) not null,\newline
+			LastName nvarchar(50) not null,\newline
+			Email nvarchar(50) not null,\newline
+			HashPassword varchar(256) not null,\newline
+			RoleId bigint not null\newline
+			RowInsertTime datetime2(7) default getutcdate(),\newline
+			RowUpdateTime datetime2(7) default getutcdate()\newline
+			);\newline\newline
+			ALTER TABLE tblUsers\newline
+			ADD CONSTRAINT FK\_Users\_Roles FOREIGN KEY (RoleId)\newline
+			REFERENCES tblRoles (Id)\newline
+			ON DELETE CASCADE\newline
+			ON UPDATE CASCADE\newline
+			;\newline\newline
+			CREATE TABLE tblOrders(\newline
+			Id bigint not null IDENTITY(1,1) PRIMARY KEY,\newline
+			UserId bigint not null, \newline
+			Destination nvarchar(50) not null,\newline
+			OrderDate DateTime not null\newline
+			RowInsertTime datetime2(7) default getutcdate(),\newline
+			RowUpdateTime datetime2(7) default getutcdate()\newline
+			);\newline\newline
+			ALTER TABLE tblOrders\newline
+			ADD CONSTRAINT FK\_Orders\_Users FOREIGN KEY (UserId)\newline
+			REFERENCES tblUsers (Id)\newline
+			ON DELETE CASCADE\newline
+			ON UPDATE CASCADE\newline
+			;\newline\newline
+			CREATE TABLE tblOrdersToProducts(\newline
+			OrderId bigint not null,\newline
+			ProductId bigint not null,\newline
+			Quantity int not null\newline
+			RowInsertTime datetime2(7) default getutcdate(),\newline
+			RowUpdateTime datetime2(7) default getutcdate()\newline
+			);\newline\newline
+			ALTER TABLE tblOrdersToProducts\newline
+			ADD CONSTRAINT FK\_OrdersToProducts\_Orders FOREIGN KEY (OrderId)\newline
+			REFERENCES tblOrders (Id)\newline
+			ON DELETE CASCADE\newline
+			ON UPDATE CASCADE\newline
+			;\newline\newline
+			ALTER TABLE tblOrdersToProducts\newline
+			ADD CONSTRAINT FK\_OrdersToProducts\_Products FOREIGN KEY (ProductId)\newline
+			REFERENCES tblProducts (Id)\newline
+			ON DELETE CASCADE\newline
+			ON UPDATE CASCADE\newline
+			; \newline\newline
+			CREATE TABLE tblSuppliersToProducts(\newline
+			Id bigint not null IDENTITY(1,1) PRIMARY KEY,\newline
+			SupplierId bigint not null,\newline
+			ProductId bigint not null \newline
+			RowInsertTime datetime2(7) default getutcdate(),\newline
+			RowUpdateTime datetime2(7) default getutcdate()\newline
+			);\newline\newline
+			ALTER TABLE tblSuppliersToProducts\newline
+			ADD CONSTRAINT FK\_SuppliersToProducts\_Suppliers FOREIGN KEY (SupplierId)\newline
+			REFERENCES tblSuppliers (Id)\newline
+			ON DELETE CASCADE\newline
+			ON UPDATE CASCADE\newline
+			;\newline\newline
+			ALTER TABLE tblSuppliersToProducts\newline
+			ADD CONSTRAINT FK\_SuppliersToProducts\_Products FOREIGN KEY (ProductId)\newline
+			REFERENCES tblProducts (Id)\newline
+			ON DELETE CASCADE\newline
+			ON UPDATE CASCADE\newline
+			;\newline
+		}
+	\end{titlepage}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\chapter{Трирівнева архітектура програми}
+		
+		\section{Опис}
+		
+		
+		\label{sec:intro}
+		Вся архітектура програми складається з трьох шарів: Data Access Layer, Business Logic та UI.
+		DAL відповідає за передачу даних із бази даних до програми або навпаки. BLL обробляє дані отримані через DAL та готує їх для подальшого представлення на UI. Також BLL приймає запити від інтерфейса користовача та виконує їх. UI відповідає за роботу користовача із програмою.  В мене UI написана трьома різними способами: WindowsForms application, WPF application та Console application. Але вони всі використовують однакові рівні доступа до даних та бізнес логіки.
+		
+		\section{DAL}
+		
+		
+		\label{sec:dal}
+		Рівень доступу до бази був написаний використовуючи ADO.NET. Під час написання були вокористані модулі AutoMapper та Unity Container для реаліщації патерна Dependency Injection. Для уникнення дублювання коду був написаний базовий клас репозиторіїв від якого наслідували всі інші. Для побудови SQL запитів до бази використовувались SQL параметри для захисту від SQL ін'єкцій.
+		
+		\subsection{Entity}
+		
+		Entity - це сутність, яка відповідає формату даних із таблиці бази. 
+		Приклад:
+		
+		\begin{verbatim}
+			public class Order : IBaseEntity
+			{
+				public ulong Id { get; set; }
+				
+				public ulong UserId { get; set; }
+				
+				public string Destination { get; set; }
+				
+				public DateTime OrderDate { get; set; }
+				
+				public override string ToString()
+				{
+					return string.Format("Id: {0} \nUserId: {1} \nDestination: {2} \nOrderDate: {3}\n",
+					Id, UserId, Destination, OrderDate);
+				}
+			}
+		\end{verbatim}
+		
+		
+		\subsection{Структура DAL}
+		\includegraphics[width=0.4\paperwidth]{images/dal.png}
+		\includegraphics[width=0.4\paperwidth]{images/dalEF.png}
+		\section{BLL}
+		
+		
+		\label{sec:bll}
+		У бізнес логці були написані сервіси які відповідають за додавання/редагування/видалення даних з бази шляхом доступу до dal рівня. Також існуюсть Veiw Model які виконують роль представлення даних з бази на інтерфейс користовача. Для хешування пароля із сіллю написаний клас який виконує керування та перевірку пароля.
+		
+		\subsection{Структура BLL}
+		\includegraphics[width=0.4\paperwidth]{images/bll.png}
+		
+		
+		\section{UI}
+		
+		
+		\label{sec:ui}
+		Для інтерфейсу користовача були написані три проекти: Console, WindowsForms та WPF User Interface. Останній з них (WPF) був написаний з використанням MVVM патерну.
+		
+		
+	\end{titlepage}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\chapter{Console Application}
+		
+		\section{Menu}
+		
+		
+		\label{sec:asd}
+		У реалізації консольного меню заради уникнення повторень був написаний базовий загальний класс меню від якого наслідують всі інші.
+		
+		\begin{verbatim}
+			public abstract class BaseMenu<TRepository, TEntity, TFilter> : IMenu<TRepository, TEntity> 
+			where TEntity : IBaseEntity, new()
+			where TFilter : IFilterable, new()
+			where TRepository : IRepository<TEntity, TFilter>, new()
+			public void Add()
+			{
+				TRepository repository;
+				public BaseMenu()
+				{
+					repository = new TRepository();
+				}
+				{
+					TEntity entity = InputValues();
+					repository.Create(entity);
+				}
+				public void Delete(ulong id)
+				{
+					repository.Delete(new TFilter() { Id = id});
+				}
+				public void Update(ulong id)
+				{
+					TEntity entity = InputValues();
+					repository.Update(entity, new TFilter() { Id = id });
+				}
+				public IEnumerable<TEntity> GetAll()
+				{
+					return repository.GetAll();
+				}
+				public void OutputValues()
+				{
+					foreach (var entity in GetAll())
+					{
+						Console.WriteLine(entity);
+					}
+				}
+				protected virtual TEntity InputValues()
+				{
+					return new TEntity();
+				}
+			}
+		\end{verbatim}
+		
+		Приклад меню для замовленюь OrderMenu
+		
+		\begin{verbatim}
+			class OrderMenu : BaseMenu<OrdersRepository, Order, OrderFilter>
+			{
+				protected override Order InputValues()
+				{
+					Order order = new Order();
+					Console.Write("Destination: ");
+					order.UserId = Convert.ToUInt64(Console.ReadLine().ToString());
+					Console.Write("OrderDate: ");
+					order.OrderDate = Convert.ToDateTime(Console.ReadLine().ToString());
+					
+					return order;
+				}
+			}
+		\end{verbatim}
+		
+		\label{sec:intro}
+		
+		\section{Вигляд}
+		
+		Приклади роботи:
+		\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=0.3\paperwidth]{images/console-sort.png}
+				\caption{Sort orders}
+				\label{fig:sub1}
+			\end{subfigure}%
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=0.3\paperwidth]{images/console-report.png}
+				\caption{Make a report}
+				\label{fig:sub2}
+			\end{subfigure}
+		\end{figure}
+		
+		\includegraphics[width=0.3\paperwidth]{images/console-select-order.png}	
+		Report by ID
+		
+	\end{titlepage}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\chapter{Windows Forms Application}
+		
+		\section{Вигляд та опис програми}
+		\label
+		У WindowsForms проекті була реалізована CRUD логіка для таблиць бази даних. Є можливість залогінитись під існуючим акаунтом або створити новий.
+		Для зручної роботи з інформацією був створений пошук по полям таблиць.
+		Приклади роботи:
+		\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=0.5\paperwidth]{images/forms-customers.png}
+				\caption{Customers}
+				\label{fig:sub1}
+			\end{subfigure}%
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=0.5\paperwidth]{images/forms-orders.png}
+				\caption{Orders}
+				\label{fig:sub2}
+			\end{subfigure}
+		\end{figure}
+		
+		\includegraphics[width=0.45\paperwidth]{images/forms-login.png}	
+		Login
+		
+	\end{titlepage}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\chapter{WPF Application}
+		
+		\section{Вигляд та опис програми}
+		
+		\label
+		У WPF проекті було реалізовано логування та керування таблицею замовлень. Для роботи з таблицею був використаний патерн MVVM для динамічного оновлення таблиці. Є можливість фільтрувати та сортувати дані з таблиці.
+		Приклади роботи:
+		
+		\includegraphics[width=0.7\paperwidth]{images/wpf-creaate.png}	
+		
+		\includegraphics[width=0.7\paperwidth]{images/wpf-orders.png}
+		
+	\end{titlepage}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{titlepage}
+		\chapter{Висновок}
+		
+		\section{Висновок}
+		
+		\label{sec:res}
+		За час написання програми я покращив свої знання в роботі з MsSql базою даних, навчився будувати трирівневу архітектуру. Дізнався як хешувати інформацію та працювати з нею. Також навчився працювати х модулями AutoMapper та UnityContainer і з патернами DependencyInjection та MVVM. Окрім цього отривав багато досвіду у роботі з WPF, WindowsForms.
+		
+	\end{titlepage}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

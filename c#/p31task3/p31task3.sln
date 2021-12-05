@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nuinittests", "nuinittests\nuinittests.csproj", "{66D9DA70-135F-433D-99C6-5EC6ACEEE9EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pmp31task3", "pmp31task3\pmp31task3.csproj", "{2A0ADD80-2110-4F9E-B9AD-A857214D3C15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66D9DA70-135F-433D-99C6-5EC6ACEEE9EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D9DA70-135F-433D-99C6-5EC6ACEEE9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D9DA70-135F-433D-99C6-5EC6ACEEE9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D9DA70-135F-433D-99C6-5EC6ACEEE9EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A0ADD80-2110-4F9E-B9AD-A857214D3C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A0ADD80-2110-4F9E-B9AD-A857214D3C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A0ADD80-2110-4F9E-B9AD-A857214D3C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A0ADD80-2110-4F9E-B9AD-A857214D3C15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F87F70C9-581A-4A23-911C-23B2A467DC95}
+	EndGlobalSection
+EndGlobal

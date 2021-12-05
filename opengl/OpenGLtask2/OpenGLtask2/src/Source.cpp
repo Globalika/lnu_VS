@@ -1,28 +1,27 @@
-#include <gl\glut.h>
+п»ї#include <gl\glut.h>
 
 using namespace std;
 
-int WinWidth = 640;		// Ширина вікна
-int WinHeight = 640;		// Висота вікна
+int WinWidth = 640;		// ГГЁГ°ГЁГ­Г  ГўВіГЄГ­Г 
+int WinHeight = 640;		// Г‚ГЁГ±Г®ГІГ  ГўВіГЄГ­Г 
 
-GLfloat  rx = 0;			// Кут поворту сцени навколо осі X
-GLfloat  ry = 0;			// Кут поворту сцени навколо осі Y
-GLfloat  tx = 0;			// Зсув по осі X
-GLfloat	 ty = 0;		// Зсув по осі Y
-GLfloat	 tz = 0;		// Зсув по осі Z
-GLint	 tt = 0;			// Активна площина: 0 - XY, 1 - XZ
-GLint spin1 = 0;    // Кут поворту лампи навколо осі X 
-GLint spin2 = 0;    // Кут поворту лампи навколо осі Y
-GLfloat light0_position[] = { 0.0, 0.0, 2.5, 1.0 }; // Позиція лампи
-GLfloat light1_position[] = { -2.5, 0.0, 2.5, 1.0 };
+GLfloat  rx = 0;			// ГЉГіГІ ГЇГ®ГўГ®Г°ГІГі Г±Г¶ГҐГ­ГЁ Г­Г ГўГЄГ®Г«Г® Г®Г±Ві X
+GLfloat  ry = 0;			// ГЉГіГІ ГЇГ®ГўГ®Г°ГІГі Г±Г¶ГҐГ­ГЁ Г­Г ГўГЄГ®Г«Г® Г®Г±Ві Y
+GLfloat  tx = 0;			// Г‡Г±ГіГў ГЇГ® Г®Г±Ві X
+GLfloat	 ty = 0;		// Г‡Г±ГіГў ГЇГ® Г®Г±Ві Y
+GLfloat	 tz = 0;		// Г‡Г±ГіГў ГЇГ® Г®Г±Ві Z
+GLint	 tt = 0;			// ГЂГЄГІГЁГўГ­Г  ГЇГ«Г®Г№ГЁГ­Г : 0 - XY, 1 - XZ
+GLint spin1 = 0;    // ГЉГіГІ ГЇГ®ГўГ®Г°ГІГі Г«Г Г¬ГЇГЁ Г­Г ГўГЄГ®Г«Г® Г®Г±Ві X 
+GLint spin2 = 0;    // ГЉГіГІ ГЇГ®ГўГ®Г°ГІГі Г«Г Г¬ГЇГЁ Г­Г ГўГЄГ®Г«Г® Г®Г±Ві Y
+GLfloat light0_position[] = { 0.0, 0.0, 2.5, 1.0 }; // ГЏГ®Г§ГЁГ¶ВіГї Г«Г Г¬ГЇГЁ
 
-int mx, my;				// Координати миші
-bool ldown = false;		// Нажата ліва клавіша миші?
-bool rdown = false;		// Нажата права клавіша миші?
+int mx, my;				// ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГЁ Г¬ГЁГёВі
+bool ldown = false;		// ГЌГ Г¦Г ГІГ  Г«ВіГўГ  ГЄГ«Г ГўВіГёГ  Г¬ГЁГёВі?
+bool rdown = false;		// ГЌГ Г¦Г ГІГ  ГЇГ°Г ГўГ  ГЄГ«Г ГўВіГёГ  Г¬ГЁГёВі?
 
 GLuint list = 0;
 
-void Init()				// Ініціалізація OpenGL
+void Init()				// ВІГ­ВіГ¶ВіГ Г«ВіГ§Г Г¶ВіГї OpenGL
 {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -32,26 +31,24 @@ void Init()				// Ініціалізація OpenGL
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_LINE_SMOOTH);
-	//glClearColor(0.9, 0.9, 0.6, 1.0);
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHT1);
-	glEnable(GL_DEPTH_TEST);
 
+	glEnable(GL_STENCIL_TEST);
 
-	GLfloat lightOneColor[] = {0.5, 0.2, 0.9, 1.0};
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightOneColor);
+	glEnable(GL_CULL_FACE);
 
-
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightOneColor);
-
-	//glDisable(GL_LIGHTING);
+	glClearColor(0.9, 0.9, 0.6, 1);
 
 }
 
+//int angle = 0;
 void MySolid()
 {
+	glColor3f(0, 0, 0);
+	glPushMatrix();
+	glTranslatef(0.3, -0.5, 0.5);
+	glRotatef(100, 1, 1, 0);
+	glutSolidCube(0.35);
+	glPopMatrix();
 	//boxside+
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_QUADS);
@@ -61,8 +58,33 @@ void MySolid()
 	glVertex3f(1.5, -1.0, -1.5);
 	glVertex3f(-1.5, -1.0, -1.5);
 	glEnd();
+	///////////////////////////////////////////////////////////////////
+	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+	glDepthMask(GL_FALSE);
+	//glCullFace(GL_FRONT_AND_BACK);
+	////trafa
+	glStencilFunc(GL_ALWAYS, 1, ~0);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-	glColor3f(0.0, 1.0, 1.0);
+	glColor3f(1.0, 0.0, 1.0);
+	glBegin(GL_QUADS);
+	glNormal3f(0, 0, 1);
+	glVertex3f(-1.1, -0.8, 1.5);
+	glVertex3f(1.1, -0.8, 1.5);
+	glVertex3f(1.1, -0.2, 1.5);
+	glVertex3f(-1.1, -0.2, 1.5);
+	glEnd();
+	//glCullFace(GL_FRONT);
+	glCullFace(GL_BACK);
+	//////
+	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+	glDepthMask(GL_TRUE);
+
+	////side
+	glStencilFunc(GL_NOTEQUAL, 1, ~0);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
 	glNormal3f(0, 0, 1);
 	glVertex3f(-1.5, -1.0, 1.5);
@@ -70,7 +92,52 @@ void MySolid()
 	glVertex3f(1.5, 0.0, 1.5);
 	glVertex3f(-1.5, 0.0, 1.5);
 	glEnd();
+	// 
+	// 
+	// 
+	// 
+	// 
+	///////////////////////////////////////////////////////////////////////////////////
+	////444
+	//glColor3f(1.0, 1.0, 1.0);
+	//glBegin(GL_QUADS);
+	//glNormal3f(0, 0, 1);
+	//glVertex3f(-1.5, -1.0, 1.5);
+	//glVertex3f(-1.1, -1.0, 1.5);
+	//glVertex3f(-1.1, 0.0, 1.5);
+	//glVertex3f(-1.5, 0.0, 1.5);
+	//glEnd();
 
+	//glColor3f(1.0, 1.0, 1.0);
+	//glBegin(GL_QUADS);
+	//glNormal3f(0, 0, 1);
+	//glVertex3f(1.1, -1.0, 1.5);
+	//glVertex3f(1.5, -1.0, 1.5);
+	//glVertex3f(1.5, 0.0, 1.5);
+	//glVertex3f(1.1, 0.0, 1.5);
+	//glEnd();
+
+	//glColor3f(1.0, 1.0, 1.0);
+	//glBegin(GL_QUADS);
+	//glNormal3f(0, 0, 1);
+	//glVertex3f(-1.1, -1.0, 1.5);
+	//glVertex3f(1.1, -1.0, 1.5);
+	//glVertex3f(1.1, -0.8, 1.5);
+	//glVertex3f(-1.1, -0.8, 1.5);
+	//glEnd();
+
+	//glColor3f(1.0, 1.0, 1.0);
+	//glBegin(GL_QUADS);
+	//glNormal3f(0, 0, 1);
+	//glVertex3f(-1.1, -0.2, 1.5);
+	//glVertex3f(1.1, -0.2, 1.5);
+	//glVertex3f(1.1, 0.0, 1.5);
+	//glVertex3f(-1.1, 0.0, 1.5);
+	//glEnd();
+
+	//glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+	//glDepthMask(GL_FALSE);
+	//////////////////////////////////////////////////////////////////////////
 	glColor3f(1.0, 0.0, 1.0);
 	glBegin(GL_QUADS);
 	glNormal3f(0, -1, 0);
@@ -255,7 +322,7 @@ void MySolid()
 	glVertex3f(0.0, -0.5, 0.0);
 	glVertex3f(0.5, 1.0, 0.5);
 	glEnd();
-	
+
 	glColor3f(0.3, 0.1, 0.4);
 	glBegin(GL_TRIANGLES);
 	glNormal3f(0, 0.75, -0.5);
@@ -272,22 +339,24 @@ void MySolid()
 	glVertex3f(0.5, 1.0, -0.5);
 	glEnd();
 }
-void Display()			// Зміст екрану
+void Display()			// Г‡Г¬ВіГ±ГІ ГҐГЄГ°Г Г­Гі
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT| GL_STENCIL_BUFFER_BIT);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//	glPolygonMode(GL_FRONT, GL_FILL);
-		glPolygonMode(GL_BACK, GL_LINE);
+	//	glPolygonMode(GL_BACK, GL_LINE);
+
 
 	glPushMatrix();
-	glTranslatef(tx, ty, tz);		//Зміщення об'єкта
-	glRotatef(rx, 1, 0, 0);         //Поворот об'єкта
+	glTranslatef(tx, ty, tz);		//Г‡Г¬ВіГ№ГҐГ­Г­Гї Г®ГЎ'ВєГЄГІГ 
+	glRotatef(rx, 1, 0, 0);         //ГЏГ®ГўГ®Г°Г®ГІ Г®ГЎ'ВєГЄГІГ 
 	glRotatef(ry, 0, 1, 0);
 
-	//Вивід об'єкта на екран
+	//Г‚ГЁГўВіГ¤ Г®ГЎ'ВєГЄГІГ  Г­Г  ГҐГЄГ°Г Г­
 
-// Колір осі X
+// ГЉГ®Г«ВіГ° Г®Г±Ві X
 	glColor3f(1.0, 0.0, 0.0);
 	glLineWidth(2);
 	glBegin(GL_LINES);
@@ -296,14 +365,14 @@ void Display()			// Зміст екрану
 	glVertex3f(3.0, 0.0, 0.0);
 	glEnd();
 
-	// Колір осі Y
+	// ГЉГ®Г«ВіГ° Г®Г±Ві Y
 	glColor3f(0.0, 0.8, 0.0);
 	glBegin(GL_LINES);
 	glVertex3f(0.0, 1.0, 0.0);
 	glVertex3f(0.0, 3.0, 0.0);
 	glEnd();
 
-	// Колір осі Z
+	// ГЉГ®Г«ВіГ° Г®Г±Ві Z
 	glColor3f(0.0, 0.0, 1.0);
 	glBegin(GL_LINES);
 	glVertex3f(0.0, 0.0, 1.0);
@@ -313,27 +382,23 @@ void Display()			// Зміст екрану
 	MySolid();
 
 	glPopMatrix();
-	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
-	glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
-
 
 	glPushMatrix();
 	glRotated((GLdouble)spin1, 1.0, 0.0, 1.0);
 	glRotated((GLdouble)spin2, 0.0, 1.0, 0.0);
-	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
-
 	glTranslated(light0_position[0], light0_position[1], -light0_position[2]);
 	glColor3f(0.2, 0.5, 0.5);
-	glutWireCube(0.04);
+	//glutWireCube(0.04);
+	glutSolidCube(0.2);
 	glPopMatrix();
 	glutSwapBuffers();
 }
 
-void Keyboard(unsigned char key, int x, int y)			//Обробка повідомлень від клавіатури
+void Keyboard(unsigned char key, int x, int y)			//ГЋГЎГ°Г®ГЎГЄГ  ГЇГ®ГўВіГ¤Г®Г¬Г«ГҐГ­Гј ГўВіГ¤ ГЄГ«Г ГўВіГ ГІГіГ°ГЁ
 {
 	switch (key)
 	{
-	case VK_ESCAPE:		//Якщо нажата клавіша ESC - вихід
+	case VK_ESCAPE:		//ГџГЄГ№Г® Г­Г Г¦Г ГІГ  ГЄГ«Г ГўВіГёГ  ESC - ГўГЁГµВіГ¤
 		exit(0);
 		break;
 	}
@@ -359,18 +424,18 @@ void KeyboardSpecial(int key, int x, int y)
 	{spin2 = (spin2 + 10) % 360;
 	glutPostRedisplay(); }
 	break;
-	case GLUT_KEY_F1:	//Якщо нажата клавіша F1
+	case GLUT_KEY_F1:	//ГџГЄГ№Г® Г­Г Г¦Г ГІГ  ГЄГ«Г ГўВіГёГ  F1
 	{
-		tt = (tt + 1) % 2;	//Зміна площини зміщення
+		tt = (tt + 1) % 2;	//Г‡Г¬ВіГ­Г  ГЇГ«Г®Г№ГЁГ­ГЁ Г§Г¬ВіГ№ГҐГ­Г­Гї
 	}
 
 	}
 }
 
-void Reshape(int Width, int Height)		//Обробка зміни розмірів вікна
+void Reshape(int Width, int Height)		//ГЋГЎГ°Г®ГЎГЄГ  Г§Г¬ВіГ­ГЁ Г°Г®Г§Г¬ВіГ°ВіГў ГўВіГЄГ­Г 
 {
 	glViewport(0, 0, Width, Height);
-	WinWidth = Width;					//Запамятати нові розміри
+	WinWidth = Width;					//Г‡Г ГЇГ Г¬ГїГІГ ГІГЁ Г­Г®ГўВі Г°Г®Г§Г¬ВіГ°ГЁ
 	WinHeight = Height;
 
 	glMatrixMode(GL_PROJECTION);
@@ -385,15 +450,15 @@ void Reshape(int Width, int Height)		//Обробка зміни розмірів вікна
 	glutPostRedisplay();
 }
 
-void Mouse(int button, int state, int x, int y)		//Обробка повідомлень від  миші
+void Mouse(int button, int state, int x, int y)		//ГЋГЎГ°Г®ГЎГЄГ  ГЇГ®ГўВіГ¤Г®Г¬Г«ГҐГ­Гј ГўВіГ¤  Г¬ГЁГёВі
 {
-	if (button == GLUT_LEFT_BUTTON)		//Ліва кнопка
+	if (button == GLUT_LEFT_BUTTON)		//Г‹ВіГўГ  ГЄГ­Г®ГЇГЄГ 
 	{
 		switch (state)
 		{
-		case GLUT_DOWN:		//Якщо нажата
-			ldown = true;		    //Встановити флаг
-			mx = x;			        //Запамятати координати
+		case GLUT_DOWN:		//ГџГЄГ№Г® Г­Г Г¦Г ГІГ 
+			ldown = true;		    //Г‚Г±ГІГ Г­Г®ГўГЁГІГЁ ГґГ«Г ГЈ
+			mx = x;			        //Г‡Г ГЇГ Г¬ГїГІГ ГІГЁ ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГЁ
 			my = y;
 			break;
 		case GLUT_UP:
@@ -401,13 +466,13 @@ void Mouse(int button, int state, int x, int y)		//Обробка повідомлень від  миші
 			break;
 		}
 	}
-	if (button == GLUT_RIGHT_BUTTON)	//Права кнопка
+	if (button == GLUT_RIGHT_BUTTON)	//ГЏГ°Г ГўГ  ГЄГ­Г®ГЇГЄГ 
 	{
 		switch (state)
 		{
-		case GLUT_DOWN:    //Якщо нажата
-			rdown = true;         //Встановити флаг
-			mx = x;                 //Запамятати координати
+		case GLUT_DOWN:    //ГџГЄГ№Г® Г­Г Г¦Г ГІГ 
+			rdown = true;         //Г‚Г±ГІГ Г­Г®ГўГЁГІГЁ ГґГ«Г ГЈ
+			mx = x;                 //Г‡Г ГЇГ Г¬ГїГІГ ГІГЁ ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГЁ
 			my = y;
 			break;
 		case GLUT_UP:
@@ -417,26 +482,26 @@ void Mouse(int button, int state, int x, int y)		//Обробка повідомлень від  миші
 	}
 }
 
-void MouseMotion(int x, int y)	//Переміщення миші
+void MouseMotion(int x, int y)	//ГЏГҐГ°ГҐГ¬ВіГ№ГҐГ­Г­Гї Г¬ГЁГёВі
 {
-	if (ldown)		//Ліва кнопка
+	if (ldown)		//Г‹ВіГўГ  ГЄГ­Г®ГЇГЄГ 
 	{
-		rx += 0.5 * (y - my);	//Зміна кута повороту
+		rx += 0.5 * (y - my);	//Г‡Г¬ВіГ­Г  ГЄГіГІГ  ГЇГ®ГўГ®Г°Г®ГІГі
 		ry += 0.5 * (x - mx);
 		mx = x;
 		my = y;
-		glutPostRedisplay();	//Перерисувати екран
+		glutPostRedisplay();	//ГЏГҐГ°ГҐГ°ГЁГ±ГіГўГ ГІГЁ ГҐГЄГ°Г Г­
 	}
-	if (rdown)	    //Права кнопка
+	if (rdown)	    //ГЏГ°Г ГўГ  ГЄГ­Г®ГЇГЄГ 
 	{
-		tx += 0.01 * (x - mx);	//Переміщення вздовж активної площини
+		tx += 0.01 * (x - mx);	//ГЏГҐГ°ГҐГ¬ВіГ№ГҐГ­Г­Гї ГўГ§Г¤Г®ГўГ¦ Г ГЄГІГЁГўГ­Г®Вї ГЇГ«Г®Г№ГЁГ­ГЁ
 		if (tt)
 			tz += 0.01 * (y - my);
 		else
 			ty += 0.01 * (my - y);
 		mx = x;
 		my = y;
-		glutPostRedisplay();      //Перерисувати екран
+		glutPostRedisplay();      //ГЏГҐГ°ГҐГ°ГЁГ±ГіГўГ ГІГЁ ГҐГЄГ°Г Г­
 	}
 }
 
